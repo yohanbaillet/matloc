@@ -1,14 +1,10 @@
-import createMiddleware from 'next-intl/middleware'
+import { NextResponse } from 'next/server'
 
-export default createMiddleware({
-  locales: ['fr', 'en', 'de', 'es', 'nl', 'zh'],
-  defaultLocale: 'fr',
-  localePrefix: 'always',
-  localeDetection: false,
-})
+// Minimal middleware — locale redirect is handled by app/page.tsx
+export function middleware() {
+  return NextResponse.next()
+}
 
 export const config = {
-  matcher: [
-    '/((?!api|_next|_vercel|.*\\..*).*)',
-  ],
+  matcher: [],
 }

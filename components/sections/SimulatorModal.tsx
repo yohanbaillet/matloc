@@ -22,6 +22,7 @@ function SliderRow({
   label: string; value: number; onChange: (v: number) => void
   min: number; max: number; step: number; unit: string; decimals?: number
 }) {
+  const pct = ((value - min) / (max - min)) * 100
   return (
     <div>
       <div className="flex justify-between text-sm mb-1.5">
@@ -33,7 +34,8 @@ function SliderRow({
       <input
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer accent-[var(--amber)]"
+        className="w-full h-1.5 rounded-full cursor-pointer"
+        style={{ background: `linear-gradient(to right, var(--amber) ${pct}%, #e5e7eb ${pct}%)` }}
       />
     </div>
   )

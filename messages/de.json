@@ -165,6 +165,11 @@
     "results_total": "Jahresgesamtkosten",
     "results_roi_section": "Kapitalrendite",
     "results_paid_back": "Amortisiert in",
-    "results_prices_note": "In dieser Simulation verwendete Preise: Gas {gasPrice} €/kWh · Strom {elecPrice} €/kWh"
+    "results_prices_note": "In dieser Simulation verwendete Preise: Gas {gasPrice} €/kWh · Strom {elecPrice} €/kWh",
+    "cabin_investment": "Investition endothermische Kabine",
+    "roi_over_time": "Entwicklung im Zeitverlauf",
+    "cumulative": "kumuliert",
+    "net_benefit_label": "Nettovorteil",
+    "years_unit": "Jahre"
   }
 }

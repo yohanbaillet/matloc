@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
-import { Calculator, ArrowRight, TrendingDown, Clock, Leaf, Trees, Flame, Zap, X, ChevronDown, ChevronUp } from 'lucide-react'
+import { Calculator, ArrowRight, TrendingDown, TrendingUp, Leaf, Trees, Flame, Zap, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 
 // Technical constants from MatLoc Indus documentation
@@ -58,6 +58,7 @@ export default function SimulatorModal() {
   const [phase, setPhase] = useState<'sliders' | 'form' | 'results'>('sliders')
   const [firstName, setFirstName] = useState('')
   const [showPriceSliders, setShowPriceSliders] = useState(false)
+  const [viewYears, setViewYears] = useState(5)
 
   // Form state
   const [name, setName] = useState('')
@@ -106,6 +107,16 @@ export default function SimulatorModal() {
     : r.roiMonths < 24 ? t('roi_months', { months: r.roiMonths })
     : t('roi_years', { years: r.roiYears.toFixed(1).replace('.', ',') })
 
+  // ROI-over-time calculations for the years slider
+  const gasCumulative = r.gasTotal * viewYears
+  const endoCumulative = r.endoTotal * viewYears + priceDiff
+  const netBenefit = gasCumulative - endoCumulative
+  const isProfit = netBenefit >= 0
+  const cumulativeMax = Math.max(gasCumulative, endoCumulative)
+  const gasBarPct = Math.round((gasCumulative / cumulativeMax) * 100)
+  const endoBarPct = Math.round((endoCumulative / cumulativeMax) * 100)
+  const yearsPct = ((viewYears - 1) / (15 - 1)) * 100
+
   const validateForm = () => {
     const e: Record<string, string> = {}
     if (!name.trim()) e.name = t('form_required')
@@ -143,7 +154,7 @@ export default function SimulatorModal() {
 
   const handleOpenChange = (next: boolean) => {
     setOpen(next)
-    if (!next) setTimeout(() => { setPhase('sliders'); setShowPriceSliders(false) }, 300)
+    if (!next) setTimeout(() => { setPhase('sliders'); setShowPriceSliders(false); setViewYears(5) }, 300)
   }
 
   const fieldClass = (f: string) =>
@@ -211,7 +222,7 @@ export default function SimulatorModal() {
                 </div>
 
                 <button onClick={() => setPhase('form')}
-                  className="w-full flex items-center justify-center gap-2 rounded-lg bg-[var(--amber)] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-105 mt-2">
+                  className="w-full flex items-center justify-center gap-2 rounded-lg bg-[var(--amber)] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-105">
                   {t('reveal_cta')} <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
@@ -253,9 +264,19 @@ export default function SimulatorModal() {
             {phase === 'results' && (
               <div className="p-6 space-y-4">
 
-                {/* Comparison table */}
+                {/* 1 — Cabin investment banner */}
+                <div className="rounded-xl border border-[var(--amber)]/30 bg-[var(--amber)]/5 px-5 py-3.5 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <Zap size={15} className="text-[var(--amber)] shrink-0" />
+                    <p className="text-sm font-semibold text-midnight">{t('cabin_investment')}</p>
+                  </div>
+                  <p className="text-xl font-black tabular-nums text-midnight">
+                    {priceDiff.toLocaleString('fr-FR')} €
+                  </p>
+                </div>
+
+                {/* 2 — Annual cost comparison table */}
                 <div className="rounded-xl overflow-hidden border border-border">
-                  {/* Table header */}
                   <div className="grid grid-cols-3 bg-gray-50 px-4 py-2.5 border-b border-border">
                     <div />
                     <div className="text-center flex items-center justify-center gap-1 text-xs font-semibold text-foreground/60 uppercase tracking-wide">
@@ -265,7 +286,6 @@ export default function SimulatorModal() {
                       <Zap size={11} /> {t('endo_label')}
                     </div>
                   </div>
-                  {/* Energy row */}
                   <div className="grid grid-cols-3 px-4 py-3 border-b border-border items-center">
                     <div className="text-xs text-foreground/50">{t('results_energy')}</div>
                     <div className="text-center font-semibold tabular-nums text-sm text-midnight">
@@ -275,7 +295,6 @@ export default function SimulatorModal() {
                       {r.endoEnergyCost.toLocaleString('fr-FR')} €
                     </div>
                   </div>
-                  {/* Subscription row */}
                   <div className="grid grid-cols-3 px-4 py-3 border-b border-border items-center bg-gray-50/50">
                     <div className="text-xs text-foreground/50">{t('results_subscription')}</div>
                     <div className="text-center font-semibold tabular-nums text-sm text-midnight">
@@ -285,7 +304,6 @@ export default function SimulatorModal() {
                       {r.endoSubscription.toLocaleString('fr-FR')} €
                     </div>
                   </div>
-                  {/* Total row */}
                   <div className="grid grid-cols-3 px-4 py-3.5 items-center">
                     <div className="text-xs font-bold text-midnight">{t('results_total')}</div>
                     <div className="text-center font-black tabular-nums text-base text-midnight">
@@ -297,38 +315,94 @@ export default function SimulatorModal() {
                   </div>
                 </div>
 
-                {/* Annual savings */}
-                <div className="rounded-xl bg-emerald-50 border border-emerald-200 px-5 py-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <TrendingDown size={16} className="text-emerald-600" />
-                    <p className="text-sm font-semibold text-emerald-800">{t('saving_label')}</p>
+                {/* 3 — ROI over time slider */}
+                <div className="rounded-xl border border-border p-4 space-y-4">
+                  {/* Section header + years slider */}
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-xs font-semibold text-foreground/40 uppercase tracking-wider">
+                        {t('roi_over_time')}
+                      </p>
+                      <span className="text-sm font-black text-midnight tabular-nums">
+                        {viewYears} {t('years_unit')}
+                      </span>
+                    </div>
+                    <input
+                      type="range" min={1} max={15} step={1} value={viewYears}
+                      onChange={(e) => setViewYears(Number(e.target.value))}
+                      className="w-full h-1.5 rounded-full cursor-pointer"
+                      style={{ background: `linear-gradient(to right, var(--amber) ${yearsPct}%, #e5e7eb ${yearsPct}%)` }}
+                    />
+                    <div className="flex justify-between text-[10px] text-foreground/30 mt-1">
+                      <span>1</span><span>15</span>
+                    </div>
                   </div>
-                  <p className="text-2xl font-black tabular-nums text-emerald-700">
-                    {r.annualSavings.toLocaleString('fr-FR')} €
-                  </p>
-                </div>
 
-                {/* ROI section */}
-                <div className="rounded-xl bg-midnight px-5 py-4 space-y-2">
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-white/40">
-                    {t('results_roi_section')}
-                  </p>
-                  <div className="flex items-center justify-between gap-4">
+                  {/* Cumulative cost bars */}
+                  <div className="space-y-3">
+                    {/* Gas bar */}
                     <div>
-                      <p className="text-white/50 text-xs">{t('price_diff_label')}</p>
-                      <p className="text-white font-bold tabular-nums text-lg">
-                        {priceDiff.toLocaleString('fr-FR')} €
+                      <div className="flex justify-between text-xs mb-1.5">
+                        <span className="flex items-center gap-1 text-foreground/60">
+                          <Flame size={11} /> {t('gas_label')} ({t('cumulative')})
+                        </span>
+                        <span className="font-bold text-midnight tabular-nums">
+                          {gasCumulative.toLocaleString('fr-FR')} €
+                        </span>
+                      </div>
+                      <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-red-300 rounded-full transition-all duration-300"
+                          style={{ width: `${gasBarPct}%` }}
+                        />
+                      </div>
+                    </div>
+                    {/* Endo bar */}
+                    <div>
+                      <div className="flex justify-between text-xs mb-1.5">
+                        <span className="flex items-center gap-1 text-emerald-600">
+                          <Zap size={11} /> {t('endo_label')} ({t('cumulative')})
+                        </span>
+                        <span className="font-bold text-emerald-600 tabular-nums">
+                          {endoCumulative.toLocaleString('fr-FR')} €
+                        </span>
+                      </div>
+                      <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-emerald-400 rounded-full transition-all duration-300"
+                          style={{ width: `${endoBarPct}%` }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Net benefit card */}
+                  <div className={`rounded-lg px-4 py-3 flex items-center justify-between transition-colors ${
+                    isProfit
+                      ? 'bg-emerald-50 border border-emerald-200'
+                      : 'bg-amber-50 border border-amber-200'
+                  }`}>
+                    <div className="flex items-center gap-2">
+                      {isProfit
+                        ? <TrendingDown size={15} className="text-emerald-600" />
+                        : <TrendingUp size={15} className="text-amber-600" />
+                      }
+                      <p className={`text-sm font-semibold ${isProfit ? 'text-emerald-800' : 'text-amber-800'}`}>
+                        {t('net_benefit_label')}
                       </p>
                     </div>
-                    <ArrowRight size={18} className="text-white/20 shrink-0" />
-                    <div className="text-right">
-                      <p className="text-white/50 text-xs">{t('results_paid_back')}</p>
-                      <p className="text-[var(--amber)] font-black text-2xl tabular-nums">{roiLabel}</p>
-                    </div>
+                    <p className={`text-xl font-black tabular-nums ${isProfit ? 'text-emerald-700' : 'text-amber-700'}`}>
+                      {isProfit ? '+' : ''}{netBenefit.toLocaleString('fr-FR')} €
+                    </p>
                   </div>
+
+                  {/* Breakeven note */}
+                  <p className="text-[11px] text-foreground/40 text-center">
+                    {t('results_paid_back')} : <span className="font-semibold text-foreground/60">{roiLabel}</span>
+                  </p>
                 </div>
 
-                {/* CO2 + Trees */}
+                {/* 4 — CO2 + Trees */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-xl bg-gray-50 p-4">
                     <div className="mb-1 text-foreground/40"><Leaf size={14} /></div>
@@ -346,7 +420,7 @@ export default function SimulatorModal() {
                   </div>
                 </div>
 
-                {/* Disclaimer */}
+                {/* 5 — Disclaimer */}
                 <p className="text-[10px] text-foreground/40 text-center leading-relaxed">
                   {t('disclaimer')}
                   <br />

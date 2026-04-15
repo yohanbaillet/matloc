@@ -165,6 +165,11 @@
     "results_total": "Jaarlijks totaal",
     "results_roi_section": "Terugverdientijd",
     "results_paid_back": "Terugverdiend in",
-    "results_prices_note": "Gebruikte prijzen in deze simulatie: gas {gasPrice} €/kWh · elektriciteit {elecPrice} €/kWh"
+    "results_prices_note": "Gebruikte prijzen in deze simulatie: gas {gasPrice} €/kWh · elektriciteit {elecPrice} €/kWh",
+    "cabin_investment": "Investering endothermische cabine",
+    "roi_over_time": "Evolutie in de tijd",
+    "cumulative": "cumulatief",
+    "net_benefit_label": "Nettobesparing",
+    "years_unit": "jaar"
   }
 }

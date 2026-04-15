@@ -165,6 +165,11 @@
     "results_total": "Total annuel",
     "results_roi_section": "Retour sur investissement",
     "results_paid_back": "Remboursé en",
-    "results_prices_note": "Tarifs utilisés dans cette simulation : gaz {gasPrice} €/kWh · électricité {elecPrice} €/kWh"
+    "results_prices_note": "Tarifs utilisés dans cette simulation : gaz {gasPrice} €/kWh · électricité {elecPrice} €/kWh",
+    "cabin_investment": "Investissement cabine endothermique",
+    "roi_over_time": "Évolution dans le temps",
+    "cumulative": "cumulé",
+    "net_benefit_label": "Bénéfice net",
+    "years_unit": "ans"
   }
 }

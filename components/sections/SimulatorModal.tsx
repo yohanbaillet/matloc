@@ -12,11 +12,10 @@ const GAS_ELEC_KWH_PER_CYCLE = 30.4
 const ENDO_ELEC_KWH_PER_CYCLE = 21.9
 const GAS_CO2_FACTOR = 0.227
 const ELEC_CO2_FACTOR = 0.147
-const GAS_SUBSCRIPTION = 1000      // gas network subscription €/year
-const ELEC_SUBSCRIPTION_GAS = 400  // electricity subscription for gas booth €/year
-const ELEC_SUBSCRIPTION_ENDO = 2650 // electricity subscription for endo booth €/year
+const GAS_SUBSCRIPTION = 1000
+const ELEC_SUBSCRIPTION_GAS = 400
+const ELEC_SUBSCRIPTION_ENDO = 2650
 
-// Average energy prices by locale (€/kWh, commercial/industrial rates)
 const LOCALE_PRICES: Record<string, { gasPrice: number; elecPrice: number }> = {
   fr: { gasPrice: 0.06, elecPrice: 0.15 },
   en: { gasPrice: 0.08, elecPrice: 0.24 },
@@ -35,7 +34,7 @@ function SliderRow({
   const pct = ((value - min) / (max - min)) * 100
   return (
     <div>
-      <div className="flex justify-between text-sm mb-1.5">
+      <div className="flex justify-between mb-1.5">
         <span className="text-foreground/60 text-sm">{label}</span>
         <span className="font-semibold text-midnight text-sm tabular-nums">
           {decimals > 0 ? value.toFixed(decimals) : value.toLocaleString('fr-FR')} {unit}
@@ -58,21 +57,23 @@ export default function SimulatorModal() {
   const [phase, setPhase] = useState<'sliders' | 'form' | 'results'>('sliders')
   const [firstName, setFirstName] = useState('')
   const [showPriceSliders, setShowPriceSliders] = useState(false)
+  const [activeTab, setActiveTab] = useState<'gas' | 'endo'>('gas')
   const [viewYears, setViewYears] = useState(5)
 
-  // Form state
   const [name, setName] = useState('')
   const [company, setCompany] = useState('')
   const [email, setEmail] = useState('')
   const [errors, setErrors] = useState<Record<string, string>>({})
 
-  // Slider state — gas/elec default to locale-specific averages
   const defaultPrices = LOCALE_PRICES[locale] ?? LOCALE_PRICES.fr
   const [cyclesPerDay, setCyclesPerDay] = useState(4)
   const [daysPerYear, setDaysPerYear] = useState(250)
   const [gasPrice, setGasPrice] = useState(defaultPrices.gasPrice)
   const [elecPrice, setElecPrice] = useState(defaultPrices.elecPrice)
+  const [gasCabinPrice, setGasCabinPrice] = useState(50000)
   const [priceDiff, setPriceDiff] = useState(10000)
+
+  const endoCabinPrice = gasCabinPrice + priceDiff
 
   const r = useMemo(() => {
     const totalCycles = cyclesPerDay * daysPerYear
@@ -87,7 +88,6 @@ export default function SimulatorModal() {
     const roiMonths = Math.round(roiYears * 12)
     const gasCO2 = (GAS_KWH_PER_CYCLE * GAS_CO2_FACTOR + GAS_ELEC_KWH_PER_CYCLE * ELEC_CO2_FACTOR) * totalCycles / 1000
     const endoCO2 = ENDO_ELEC_KWH_PER_CYCLE * ELEC_CO2_FACTOR * totalCycles / 1000
-    const co2Avoided = gasCO2 - endoCO2
     return {
       gasEnergyCost: Math.round(gasEnergyCost),
       endoEnergyCost: Math.round(endoEnergyCost),
@@ -98,8 +98,8 @@ export default function SimulatorModal() {
       annualSavings: Math.round(annualSavings),
       roiYears,
       roiMonths,
-      co2Avoided: Math.round(co2Avoided * 10) / 10,
-      trees: Math.round((co2Avoided * 1000) / 10.2),
+      co2Avoided: Math.round((gasCO2 - endoCO2) * 10) / 10,
+      trees: Math.round(((gasCO2 - endoCO2) * 1000) / 10.2),
     }
   }, [cyclesPerDay, daysPerYear, gasPrice, elecPrice, priceDiff])
 
@@ -107,14 +107,9 @@ export default function SimulatorModal() {
     : r.roiMonths < 24 ? t('roi_months', { months: r.roiMonths })
     : t('roi_years', { years: r.roiYears.toFixed(1).replace('.', ',') })
 
-  // ROI-over-time calculations for the years slider
-  const gasCumulative = r.gasTotal * viewYears
-  const endoCumulative = r.endoTotal * viewYears + priceDiff
-  const netBenefit = gasCumulative - endoCumulative
+  // Benefits over time
+  const netBenefit = r.annualSavings * viewYears - priceDiff
   const isProfit = netBenefit >= 0
-  const cumulativeMax = Math.max(gasCumulative, endoCumulative)
-  const gasBarPct = Math.round((gasCumulative / cumulativeMax) * 100)
-  const endoBarPct = Math.round((endoCumulative / cumulativeMax) * 100)
   const yearsPct = ((viewYears - 1) / (15 - 1)) * 100
 
   const validateForm = () => {
@@ -154,7 +149,12 @@ export default function SimulatorModal() {
 
   const handleOpenChange = (next: boolean) => {
     setOpen(next)
-    if (!next) setTimeout(() => { setPhase('sliders'); setShowPriceSliders(false); setViewYears(5) }, 300)
+    if (!next) setTimeout(() => {
+      setPhase('sliders')
+      setShowPriceSliders(false)
+      setActiveTab('gas')
+      setViewYears(5)
+    }, 300)
   }
 
   const fieldClass = (f: string) =>
@@ -172,7 +172,6 @@ export default function SimulatorModal() {
         <DialogContent showCloseButton={false}
           className="sm:max-w-lg p-0 gap-0 overflow-hidden max-h-[90dvh] flex flex-col">
 
-          {/* Close */}
           <button onClick={() => setOpen(false)}
             className="absolute top-3 right-3 z-30 flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-foreground/50 transition hover:bg-black/10 hover:text-foreground">
             <X className="h-4 w-4" />
@@ -188,24 +187,22 @@ export default function SimulatorModal() {
             </DialogTitle>
           </div>
 
-          {/* Body */}
           <div className="flex-1 overflow-y-auto">
 
-            {/* Phase 1 — Sliders */}
+            {/* ── Phase 1: Sliders ── */}
             {phase === 'sliders' && (
               <div className="p-6 space-y-6">
                 <p className="text-xs font-semibold text-foreground/40 uppercase tracking-wider">{t('params_label')}</p>
                 <div className="space-y-5">
                   <SliderRow label={t('cycles_label')} value={cyclesPerDay} onChange={setCyclesPerDay} min={1} max={12} step={1} unit={t('unit_cycles')} />
                   <SliderRow label={t('days_label')} value={daysPerYear} onChange={setDaysPerYear} min={100} max={365} step={5} unit={t('unit_days')} />
-                  <SliderRow label={t('price_diff_label')} value={priceDiff} onChange={setPriceDiff} min={0} max={50000} step={1000} unit="€" />
+                  <SliderRow label={t('gas_cabin_price_label')} value={gasCabinPrice} onChange={setGasCabinPrice} min={20000} max={120000} step={1000} unit="€" />
+                  <SliderRow label={t('price_diff_label')} value={priceDiff} onChange={setPriceDiff} min={0} max={40000} step={500} unit="€" />
                 </div>
 
-                {/* Advanced: price sliders (collapsible) */}
+                {/* Advanced energy prices */}
                 <div className="border border-border rounded-lg overflow-hidden">
-                  <button
-                    type="button"
-                    onClick={() => setShowPriceSliders(!showPriceSliders)}
+                  <button type="button" onClick={() => setShowPriceSliders(!showPriceSliders)}
                     className="w-full flex items-center justify-between px-4 py-3 text-xs font-semibold text-foreground/50 uppercase tracking-wider bg-gray-50 hover:bg-gray-100 transition">
                     <span>{t('gas_price_label')} · {t('elec_price_label')}</span>
                     {showPriceSliders ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -228,7 +225,7 @@ export default function SimulatorModal() {
               </div>
             )}
 
-            {/* Phase 2 — Lead form */}
+            {/* ── Phase 2: Lead form ── */}
             {phase === 'form' && (
               <div className="p-6">
                 <div className="mb-5">
@@ -260,70 +257,105 @@ export default function SimulatorModal() {
               </div>
             )}
 
-            {/* Phase 3 — Results */}
+            {/* ── Phase 3: Results ── */}
             {phase === 'results' && (
-              <div className="p-6 space-y-4">
+              <div className="p-6 space-y-5">
 
-                {/* 1 — Cabin investment banner */}
-                <div className="rounded-xl border border-[var(--amber)]/30 bg-[var(--amber)]/5 px-5 py-3.5 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <Zap size={15} className="text-[var(--amber)] shrink-0" />
-                    <p className="text-sm font-semibold text-midnight">{t('cabin_investment')}</p>
-                  </div>
-                  <p className="text-xl font-black tabular-nums text-midnight">
-                    {priceDiff.toLocaleString('fr-FR')} €
-                  </p>
+                {/* Tab toggle */}
+                <div className="flex rounded-xl border border-border overflow-hidden">
+                  <button
+                    onClick={() => setActiveTab('gas')}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold transition ${
+                      activeTab === 'gas'
+                        ? 'bg-midnight text-white'
+                        : 'bg-gray-50 text-foreground/50 hover:text-foreground/80'
+                    }`}>
+                    <Flame size={14} /> {t('gas_label')}
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('endo')}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold transition ${
+                      activeTab === 'endo'
+                        ? 'bg-emerald-600 text-white'
+                        : 'bg-gray-50 text-foreground/50 hover:text-foreground/80'
+                    }`}>
+                    <Zap size={14} /> {t('endo_label')}
+                  </button>
                 </div>
 
-                {/* 2 — Annual cost comparison table */}
-                <div className="rounded-xl overflow-hidden border border-border">
-                  <div className="grid grid-cols-3 bg-gray-50 px-4 py-2.5 border-b border-border">
-                    <div />
-                    <div className="text-center flex items-center justify-center gap-1 text-xs font-semibold text-foreground/60 uppercase tracking-wide">
-                      <Flame size={11} /> {t('gas_label')}
-                    </div>
-                    <div className="text-center flex items-center justify-center gap-1 text-xs font-semibold text-emerald-600 uppercase tracking-wide">
-                      <Zap size={11} /> {t('endo_label')}
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 px-4 py-3 border-b border-border items-center">
-                    <div className="text-xs text-foreground/50">{t('results_energy')}</div>
-                    <div className="text-center font-semibold tabular-nums text-sm text-midnight">
-                      {r.gasEnergyCost.toLocaleString('fr-FR')} €
-                    </div>
-                    <div className="text-center font-semibold tabular-nums text-sm text-emerald-600">
-                      {r.endoEnergyCost.toLocaleString('fr-FR')} €
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 px-4 py-3 border-b border-border items-center bg-gray-50/50">
-                    <div className="text-xs text-foreground/50">{t('results_subscription')}</div>
-                    <div className="text-center font-semibold tabular-nums text-sm text-midnight">
-                      {r.gasSubscription.toLocaleString('fr-FR')} €
-                    </div>
-                    <div className="text-center font-semibold tabular-nums text-sm text-emerald-600">
-                      {r.endoSubscription.toLocaleString('fr-FR')} €
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 px-4 py-3.5 items-center">
-                    <div className="text-xs font-bold text-midnight">{t('results_total')}</div>
-                    <div className="text-center font-black tabular-nums text-base text-midnight">
-                      {r.gasTotal.toLocaleString('fr-FR')} €
-                    </div>
-                    <div className="text-center font-black tabular-nums text-base text-emerald-600">
-                      {r.endoTotal.toLocaleString('fr-FR')} €
-                    </div>
-                  </div>
-                </div>
-
-                {/* 3 — ROI over time slider */}
-                <div className="rounded-xl border border-border p-4 space-y-4">
-                  {/* Section header + years slider */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-xs font-semibold text-foreground/40 uppercase tracking-wider">
-                        {t('roi_over_time')}
+                {/* ── Gas tab ── */}
+                {activeTab === 'gas' && (
+                  <div className="space-y-3">
+                    {/* Cabin price */}
+                    <div className="rounded-xl border border-border px-5 py-4 flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <Flame size={15} className="text-foreground/40" />
+                        <p className="text-sm font-semibold text-midnight">{t('gas_cabin_label')}</p>
+                      </div>
+                      <p className="text-2xl font-black tabular-nums text-midnight">
+                        {gasCabinPrice.toLocaleString('fr-FR')} €
                       </p>
-                      <span className="text-sm font-black text-midnight tabular-nums">
+                    </div>
+                    {/* Annual costs */}
+                    <div className="rounded-xl border border-border overflow-hidden">
+                      <div className="px-4 py-3 border-b border-border flex justify-between items-center">
+                        <span className="text-sm text-foreground/60">{t('results_energy')}</span>
+                        <span className="font-bold tabular-nums text-midnight">{r.gasEnergyCost.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
+                      </div>
+                      <div className="px-4 py-3 border-b border-border flex justify-between items-center bg-gray-50/50">
+                        <span className="text-sm text-foreground/60">{t('results_subscription')}</span>
+                        <span className="font-bold tabular-nums text-midnight">{r.gasSubscription.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
+                      </div>
+                      <div className="px-4 py-4 flex justify-between items-center">
+                        <span className="text-sm font-bold text-midnight">{t('results_total')}</span>
+                        <span className="text-2xl font-black tabular-nums text-midnight">{r.gasTotal.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-sm">{t('per_year')}</span></span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* ── Endo tab ── */}
+                {activeTab === 'endo' && (
+                  <div className="space-y-3">
+                    {/* Cabin price */}
+                    <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <Zap size={15} className="text-emerald-600" />
+                        <p className="text-sm font-semibold text-midnight">{t('endo_cabin_label')}</p>
+                      </div>
+                      <p className="text-2xl font-black tabular-nums text-emerald-700">
+                        {endoCabinPrice.toLocaleString('fr-FR')} €
+                      </p>
+                    </div>
+                    {/* Annual costs */}
+                    <div className="rounded-xl border border-border overflow-hidden">
+                      <div className="px-4 py-3 border-b border-border flex justify-between items-center">
+                        <span className="text-sm text-foreground/60">{t('results_energy')}</span>
+                        <span className="font-bold tabular-nums text-emerald-600">{r.endoEnergyCost.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
+                      </div>
+                      <div className="px-4 py-3 border-b border-border flex justify-between items-center bg-gray-50/50">
+                        <span className="text-sm text-foreground/60">{t('results_subscription')}</span>
+                        <span className="font-bold tabular-nums text-emerald-600">{r.endoSubscription.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
+                      </div>
+                      <div className="px-4 py-4 flex justify-between items-center">
+                        <span className="text-sm font-bold text-midnight">{t('results_total')}</span>
+                        <span className="text-2xl font-black tabular-nums text-emerald-600">{r.endoTotal.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-sm">{t('per_year')}</span></span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* ── Common section: benefits over time ── */}
+                <div className="rounded-xl border border-border p-5 space-y-4 bg-gray-50/40">
+                  <p className="text-xs font-semibold text-foreground/40 uppercase tracking-widest">
+                    {t('endo_benefits_title')}
+                  </p>
+
+                  {/* Years slider */}
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-foreground/60">{t('roi_over_time')}</span>
+                      <span className="text-base font-black text-midnight tabular-nums">
                         {viewYears} {t('years_unit')}
                       </span>
                     </div>
@@ -338,99 +370,54 @@ export default function SimulatorModal() {
                     </div>
                   </div>
 
-                  {/* Cumulative cost bars */}
-                  <div className="space-y-3">
-                    {/* Gas bar */}
-                    <div>
-                      <div className="flex justify-between text-xs mb-1.5">
-                        <span className="flex items-center gap-1 text-foreground/60">
-                          <Flame size={11} /> {t('gas_label')} ({t('cumulative')})
-                        </span>
-                        <span className="font-bold text-midnight tabular-nums">
-                          {gasCumulative.toLocaleString('fr-FR')} €
-                        </span>
-                      </div>
-                      <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-red-300 rounded-full transition-all duration-300"
-                          style={{ width: `${gasBarPct}%` }}
-                        />
-                      </div>
-                    </div>
-                    {/* Endo bar */}
-                    <div>
-                      <div className="flex justify-between text-xs mb-1.5">
-                        <span className="flex items-center gap-1 text-emerald-600">
-                          <Zap size={11} /> {t('endo_label')} ({t('cumulative')})
-                        </span>
-                        <span className="font-bold text-emerald-600 tabular-nums">
-                          {endoCumulative.toLocaleString('fr-FR')} €
-                        </span>
-                      </div>
-                      <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-emerald-400 rounded-full transition-all duration-300"
-                          style={{ width: `${endoBarPct}%` }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Net benefit card */}
-                  <div className={`rounded-lg px-4 py-3 flex items-center justify-between transition-colors ${
+                  {/* Net benefit */}
+                  <div className={`rounded-xl px-5 py-4 flex items-center justify-between transition-colors ${
                     isProfit
                       ? 'bg-emerald-50 border border-emerald-200'
                       : 'bg-amber-50 border border-amber-200'
                   }`}>
-                    <div className="flex items-center gap-2">
+                    <div>
+                      <p className={`text-xs font-semibold mb-0.5 ${isProfit ? 'text-emerald-700' : 'text-amber-700'}`}>
+                        {t('net_benefit_label')} — {viewYears} {t('years_unit')}
+                      </p>
+                      <p className="text-[11px] text-foreground/40">{t('results_paid_back')} : {roiLabel}</p>
+                    </div>
+                    <div className="flex items-center gap-1">
                       {isProfit
-                        ? <TrendingDown size={15} className="text-emerald-600" />
-                        : <TrendingUp size={15} className="text-amber-600" />
+                        ? <TrendingDown size={16} className="text-emerald-600" />
+                        : <TrendingUp size={16} className="text-amber-600" />
                       }
-                      <p className={`text-sm font-semibold ${isProfit ? 'text-emerald-800' : 'text-amber-800'}`}>
-                        {t('net_benefit_label')}
+                      <p className={`text-2xl font-black tabular-nums ${isProfit ? 'text-emerald-700' : 'text-amber-700'}`}>
+                        {isProfit ? '+' : ''}{netBenefit.toLocaleString('fr-FR')} €
                       </p>
                     </div>
-                    <p className={`text-xl font-black tabular-nums ${isProfit ? 'text-emerald-700' : 'text-amber-700'}`}>
-                      {isProfit ? '+' : ''}{netBenefit.toLocaleString('fr-FR')} €
-                    </p>
                   </div>
 
-                  {/* Breakeven note */}
-                  <p className="text-[11px] text-foreground/40 text-center">
-                    {t('results_paid_back')} : <span className="font-semibold text-foreground/60">{roiLabel}</span>
+                  {/* CO2 + Trees */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-xl bg-white border border-border p-3.5">
+                      <Leaf size={13} className="text-foreground/30 mb-1" />
+                      <p className="text-[11px] text-foreground/50">{t('co2_label')}</p>
+                      <p className="text-lg font-black tabular-nums text-midnight">{r.co2Avoided} t{t('per_year')}</p>
+                    </div>
+                    <div className="rounded-xl bg-white border border-border p-3.5">
+                      <Trees size={13} className="text-foreground/30 mb-1" />
+                      <p className="text-[11px] text-foreground/50">{t('trees_label')}</p>
+                      <p className="text-lg font-black tabular-nums text-midnight">{r.trees.toLocaleString('fr-FR')}</p>
+                    </div>
+                  </div>
+
+                  {/* Disclaimer */}
+                  <p className="text-[10px] text-foreground/35 text-center leading-relaxed">
+                    {t('disclaimer')}<br />
+                    {t('results_prices_note', { gasPrice: gasPrice.toFixed(3), elecPrice: elecPrice.toFixed(3) })}
                   </p>
                 </div>
-
-                {/* 4 — CO2 + Trees */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-xl bg-gray-50 p-4">
-                    <div className="mb-1 text-foreground/40"><Leaf size={14} /></div>
-                    <p className="text-[11px] text-foreground/50">{t('co2_label')}</p>
-                    <p className="text-xl font-black tabular-nums text-midnight">
-                      {r.co2Avoided} t{t('per_year')}
-                    </p>
-                  </div>
-                  <div className="rounded-xl bg-gray-50 p-4">
-                    <div className="mb-1 text-foreground/40"><Trees size={14} /></div>
-                    <p className="text-[11px] text-foreground/50">{t('trees_label')}</p>
-                    <p className="text-xl font-black tabular-nums text-midnight">
-                      {r.trees.toLocaleString('fr-FR')}
-                    </p>
-                  </div>
-                </div>
-
-                {/* 5 — Disclaimer */}
-                <p className="text-[10px] text-foreground/40 text-center leading-relaxed">
-                  {t('disclaimer')}
-                  <br />
-                  {t('results_prices_note', { gasPrice: gasPrice.toFixed(3), elecPrice: elecPrice.toFixed(3) })}
-                </p>
               </div>
             )}
           </div>
 
-          {/* Quote CTA — only after results */}
+          {/* Quote CTA */}
           {phase === 'results' && (
             <div className="border-t border-border p-5 bg-surface/50 shrink-0">
               <p className="text-xs text-foreground/50 mb-3 text-center">{t('quote_teaser')}</p>

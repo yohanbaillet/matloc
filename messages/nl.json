@@ -170,6 +170,10 @@
     "roi_over_time": "Evolutie in de tijd",
     "cumulative": "cumulatief",
     "net_benefit_label": "Nettobesparing",
-    "years_unit": "jaar"
+    "years_unit": "jaar",
+    "gas_cabin_price_label": "Prijs gascabine",
+    "gas_cabin_label": "Gascabine",
+    "endo_cabin_label": "Endothermische cabine",
+    "endo_benefits_title": "Voordelen van endothermisch in de tijd"
   }
 }

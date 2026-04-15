@@ -170,6 +170,10 @@
     "roi_over_time": "随时间的变化趋势",
     "cumulative": "累计",
     "net_benefit_label": "净收益",
-    "years_unit": "年"
+    "years_unit": "年",
+    "gas_cabin_price_label": "燃气烤漆房价格",
+    "gas_cabin_label": "燃气烤漆房",
+    "endo_cabin_label": "内热式烤漆房",
+    "endo_benefits_title": "内热式烤漆房的长期优势"
   }
 }

@@ -170,6 +170,10 @@
     "roi_over_time": "Cost over time",
     "cumulative": "cumulative",
     "net_benefit_label": "Net benefit",
-    "years_unit": "years"
+    "years_unit": "years",
+    "gas_cabin_price_label": "Gas cabin price",
+    "gas_cabin_label": "Gas Cabin",
+    "endo_cabin_label": "Endothermic Cabin",
+    "endo_benefits_title": "Endothermic benefits over the years"
   }
 }

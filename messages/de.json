@@ -170,6 +170,10 @@
     "roi_over_time": "Entwicklung im Zeitverlauf",
     "cumulative": "kumuliert",
     "net_benefit_label": "Nettovorteil",
-    "years_unit": "Jahre"
+    "years_unit": "Jahre",
+    "gas_cabin_price_label": "Preis Gaskabine",
+    "gas_cabin_label": "Gaskabine",
+    "endo_cabin_label": "Endothermische Kabine",
+    "endo_benefits_title": "Vorteile der endothermischen Kabine im Zeitverlauf"
   }
 }

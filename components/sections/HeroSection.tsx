@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 import { ArrowRight, ChevronRight } from 'lucide-react'
-import { buttonVariants } from '@/components/ui/button'
+import SimulatorModal from '@/components/sections/SimulatorModal'
 
 export default function HeroSection() {
   const t = useTranslations('home')
@@ -68,13 +68,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <Link
-              href={`${base}/devis`}
-              className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-8 py-3 text-base font-semibold text-white shadow-amber transition-all hover:bg-amber-400 hover:shadow-amber-hover hover:-translate-y-0.5"
-            >
-              {t('hero_cta_primary')}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <SimulatorModal />
             <Link
               href={`${base}/realisations`}
               className="inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/5 px-8 py-3 text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10"

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useTranslations } from 'next-intl'
 import { TrendingDown, Clock, Leaf, Trees, Flame, Zap } from 'lucide-react'
 
 // Technical constants from MatLoc Indus documentation
@@ -128,6 +129,7 @@ function MetricCard({
 }
 
 export default function EnergySimulator() {
+  const t = useTranslations('simulator')
   const [cyclesPerDay, setCyclesPerDay] = useState(4)
   const [daysPerYear, setDaysPerYear] = useState(250)
   const [gasPrice, setGasPrice] = useState(0.06)
@@ -177,70 +179,69 @@ export default function EnergySimulator() {
     r.roiYears === Infinity
       ? '—'
       : r.roiMonths < 24
-      ? `${r.roiMonths} mois`
-      : `${(r.roiYears).toFixed(1).replace('.', ',')} ans`
+      ? t('roi_months', { months: r.roiMonths })
+      : t('roi_years', { years: r.roiYears.toFixed(1).replace('.', ',') })
 
   return (
     <section className="section-padding bg-surface">
       <div className="container-site">
         <div className="text-center mb-12">
           <p className="text-[var(--amber)] font-medium text-sm uppercase tracking-widest mb-3">
-            Simulateur
+            {t('section_badge')}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-midnight">
-            Gaz ou endothermique — calculez votre économie
+            {t('section_title')}
           </h2>
           <p className="mt-4 text-foreground/60 max-w-2xl mx-auto">
-            Ajustez les paramètres selon votre atelier. Les calculs sont issus des données techniques
-            réelles de nos cabines.
+            {t('section_desc')}
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Inputs */}
           <div className="bg-white rounded-2xl p-8 shadow-sm space-y-7">
-            <h3 className="font-semibold text-midnight">Vos paramètres</h3>
+            <h3 className="font-semibold text-midnight">{t('params_label')}</h3>
 
             <InputRow
-              label="Cycles par jour"
+              label={t('cycles_label')}
               value={cyclesPerDay}
               onChange={setCyclesPerDay}
               min={1}
               max={12}
               step={1}
-              unit="cycles"
+              unit={t('unit_cycles')}
             />
             <InputRow
-              label="Jours travaillés par an"
+              label={t('days_label')}
               value={daysPerYear}
               onChange={setDaysPerYear}
               min={100}
               max={365}
               step={5}
-              unit="jours"
+              unit={t('unit_days')}
             />
             <InputRow
-              label="Prix du gaz naturel"
+              label={t('gas_price_label')}
               value={gasPrice}
               onChange={setGasPrice}
               min={0.03}
               max={0.20}
               step={0.005}
-              unit="€/kWh"
+              unit={t('unit_kwh')}
               decimals={3}
             />
             <InputRow
-              label="Prix de l'électricité"
+              label={t('elec_price_label')}
               value={elecPrice}
               onChange={setElecPrice}
               min={0.05}
               max={0.40}
               step={0.005}
-              unit="€/kWh"
+              unit={t('unit_kwh')}
               decimals={3}
             />
             <InputRow
-              label="Surcoût cabine endothermique"
+              label={t('price_diff_label')}
               value={priceDiff}
               onChange={setPriceDiff}
               min={0}
@@ -254,60 +255,54 @@ export default function EnergySimulator() {
           <div className="space-y-4">
             {/* Cost bars */}
             <div className="bg-white rounded-2xl p-6 shadow-sm space-y-4">
-              <h3 className="font-semibold text-midnight">Coût annuel de fonctionnement</h3>
+              <h3 className="font-semibold text-midnight">{t('results_label')}</h3>
               <CostBar
-                label="Cabine gaz"
+                label={t('gas_label')}
                 value={r.gasTotal}
                 max={Math.max(r.gasTotal, r.endoTotal)}
                 color="bg-red-400"
                 icon={<Flame size={14} />}
               />
               <CostBar
-                label="Cabine endothermique"
+                label={t('endo_label')}
                 value={r.endoTotal}
                 max={Math.max(r.gasTotal, r.endoTotal)}
                 color="bg-[var(--amber)]"
                 icon={<Zap size={14} />}
               />
-              <p className="text-xs text-foreground/40 pt-1">
-                Inclut abonnements réseau (gaz 300 mbar + électricité)
-              </p>
             </div>
 
             {/* Metric cards */}
             <div className="grid grid-cols-2 gap-4">
               <MetricCard
                 icon={<TrendingDown size={20} />}
-                label="Économie annuelle"
+                label={t('saving_label')}
                 value={`${r.annualSavings.toLocaleString('fr-FR')} €`}
                 highlight
               />
               <MetricCard
                 icon={<Clock size={20} />}
-                label="Retour sur investissement"
+                label={t('roi_label')}
                 value={roiLabel}
                 highlight={r.roiYears < 5}
               />
               <MetricCard
                 icon={<Leaf size={20} />}
-                label="CO₂ évité par an"
+                label={t('co2_label')}
                 value={`${r.co2Avoided} t`}
                 sub={`gaz: ${r.gasCO2} t · endo: ${r.endoCO2} t`}
               />
               <MetricCard
                 icon={<Trees size={20} />}
-                label="Équivalent arbres plantés"
+                label={t('trees_label')}
                 value={r.trees.toLocaleString('fr-FR')}
-                sub="par an"
               />
             </div>
           </div>
         </div>
 
         <p className="text-center text-xs text-foreground/30 mt-10">
-          Basé sur : gaz 220,8 kWh/cycle + élec 30,4 kWh/cycle · endothermique 21,9 kWh/cycle ·
-          CO₂ gaz 0,227 · CO₂ élec 0,147 kgCO₂e/kWh (réseau électrique français).
-          Abonnements : gaz 1 000 €/an · élec gaz 400 €/an · élec endo 2 650 €/an.
+          {t('disclaimer')}
         </p>
       </div>
     </section>

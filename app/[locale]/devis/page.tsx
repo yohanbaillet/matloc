@@ -7,7 +7,12 @@ export const metadata: Metadata = {
   description: 'Demandez votre étude de projet gratuite. Réponse sous 24h, sans engagement.',
 }
 
-export default function DevisPage() {
+type Props = {
+  searchParams: Promise<{ name?: string; company?: string; email?: string }>
+}
+
+export default async function DevisPage({ searchParams }: Props) {
+  const { name, company, email } = await searchParams
   return (
     <>
       <section className="bg-midnight pb-16 pt-32">
@@ -83,7 +88,7 @@ export default function DevisPage() {
 
             {/* Form */}
             <div className="rounded-xl border border-border bg-white p-8 lg:col-span-2">
-              <QuoteForm />
+              <QuoteForm defaultName={name} defaultCompany={company} defaultEmail={email} />
             </div>
           </div>
         </div>

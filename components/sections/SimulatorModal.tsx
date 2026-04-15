@@ -257,7 +257,8 @@ export default function SimulatorModal() {
           {phase === 'results' && (
             <div className="border-t border-border p-5 bg-surface/50 shrink-0">
               <p className="text-xs text-foreground/50 mb-3 text-center">{t('quote_teaser')}</p>
-              <Link href={`/${locale}/devis`}
+              <Link
+                href={`/${locale}/devis?name=${encodeURIComponent(name)}&company=${encodeURIComponent(company)}&email=${encodeURIComponent(email)}`}
                 className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--amber)] px-6 py-3 text-sm font-semibold text-white transition hover:brightness-105 hover:-translate-y-0.5">
                 {t('quote_cta')} <ArrowRight className="h-4 w-4" />
               </Link>

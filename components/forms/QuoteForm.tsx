@@ -20,12 +20,28 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-export default function QuoteForm() {
+type Props = {
+  defaultName?: string
+  defaultCompany?: string
+  defaultEmail?: string
+}
+
+export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }: Props) {
   const t = useTranslations('forms')
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
+  const nameParts = defaultName?.trim().split(/\s+/) ?? []
+  const defaultFirstName = nameParts[0] ?? ''
+  const defaultLastName = nameParts.slice(1).join(' ') ?? ''
+
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      firstName: defaultFirstName,
+      lastName: defaultLastName,
+      email: defaultEmail ?? '',
+      company: defaultCompany ?? '',
+    },
   })
 
   const onSubmit = async (data: FormData) => {

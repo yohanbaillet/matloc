@@ -14,7 +14,7 @@ export default async function ProofBar() {
     },
     {
       icon: Calendar,
-      value: 20,
+      value: 15,
       suffix: '+',
       label: t('proof_years'),
     },

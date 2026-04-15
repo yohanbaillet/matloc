@@ -9,6 +9,7 @@ import RealizationsPreview from '@/components/sections/RealizationsPreview'
 import ProcessTimeline from '@/components/sections/ProcessTimeline'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import ContactCta from '@/components/sections/ContactCta'
+import EnergySimulator from '@/components/sections/EnergySimulator'
 import StickyCtaBanner from '@/components/layout/StickyCtaBanner'
 
 type Props = {
@@ -33,6 +34,7 @@ export default function HomePage() {
       <SectorCards />
       <SolutionsGrid />
       <WhyUsFeatures />
+      <EnergySimulator />
       <RealizationsPreview />
       <ProcessTimeline />
       <TestimonialsSection />

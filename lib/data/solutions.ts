@@ -57,7 +57,7 @@ export const solutions: Solution[] = [
       { label: 'Hauteur', value: '2,8 à 4,5 m' },
       { label: 'Puissance thermique', value: '50 à 250 kW' },
       { label: 'Débit air', value: '15 000 à 60 000 m³/h' },
-      { label: 'Délai de mise en température', value: '12 à 20 min' },
+      { label: 'Délai de mise en température', value: '10 à 20 min (gaz) / 6 à 10 min (endothermique)' },
     ],
     sectors: ['automobile-carrosserie', 'industrie'],
     relatedSlugs: ['laboratoires-de-peinture', 'aires-de-preparation', 'gain-energetique'],
@@ -142,38 +142,50 @@ export const solutions: Solution[] = [
   {
     slug: 'gain-energetique',
     title: 'Solutions gain énergétique',
-    shortDesc: 'Panneaux endothermiques, récupération de chaleur, systèmes hybrides. ROI dès la 1ère année.',
+    shortDesc: "Cabines endothermiques 100 % électriques : -91 % d'énergie vs gaz, ROI moyen 13 mois, 51 t de CO₂ évitées par an.",
     longDesc:
-      "La cabine de peinture est l'un des postes les plus énergivores d'un atelier. MatLoc Indus propose des solutions de réduction de consommation documentées et mesurables : panneaux endothermiques, récupération de chaleur sur les rejets, pilotage intelligent des systèmes thermiques.",
+      "La cabine de peinture est l'un des postes les plus énergivores d'un atelier. Une cabine gaz consomme 251 kWh par cycle (dont 220,8 kWh de gaz + 30,4 kWh d'électricité). Une cabine endothermique MatLoc n'en consomme que 21,9 kWh — soit 91 % de moins. Sur 1 000 cycles/an, l'économie annuelle dépasse 13 000 € avec un retour sur investissement de l'ordre de 13 mois. En prime : zéro combustion, zéro émission directe, et une montée en température 2× plus rapide (6–10 min vs 10–20 min pour le gaz).",
     heroImage:
       'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1600&q=80',
     features: [
       {
-        title: 'Panneaux endothermiques',
+        title: '100 % électrique, zéro combustion',
         description:
-          "Technologie hybride alliant rayonnement infrarouge et convection. Montée en température jusqu'à 2× plus rapide, -30% de consommation.",
+          "Les panneaux endothermiques chauffent la surface directement par rayonnement. Aucun brûleur, aucune flamme, aucun rejet CO₂ direct — et une efficacité de 95 %.",
       },
       {
-        title: 'Récupération de chaleur',
+        title: 'Montée en température 2× plus rapide',
         description:
-          "Échangeur sur les flux d'air rejeté. L'énergie qui partait à l'extérieur réchauffe l'air entrant.",
+          "6 à 10 minutes pour atteindre 60 °C contre 10 à 20 minutes pour une cabine gaz. Chaque cycle gagné, c'est de la capacité de production en plus.",
       },
       {
-        title: 'Pilotage intelligent',
+        title: 'Sélection de zones',
         description:
-          "Régulation automatique selon la phase du cycle (chauffe, application, cuisson). Plus de gaspillage entre les passages.",
+          "10 zones de chauffe indépendantes : ne chauffez que la zone à peindre. Consommation réduite au strict nécessaire, cycle après cycle.",
       },
       {
-        title: 'Cabines 100% électriques',
+        title: 'ROI documenté : 13 mois',
         description:
-          "Modèle E7200 : zéro émission directe, éligible aux aides CEE et crédit d'impôt transition énergétique.",
+          "Économie annuelle moyenne de 13 250 € sur l'énergie et les abonnements. Le surcoût de la cabine endothermique est remboursé en moins de 14 mois dans la plupart des configurations.",
+      },
+      {
+        title: '51 tonnes de CO₂ évitées par an',
+        description:
+          "Basé sur 1 000 cycles/an : 54,6 kgCO₂e/cycle pour le gaz contre 3,2 kgCO₂e pour l'endothermique. Équivalent à 4 800 arbres plantés.",
+      },
+      {
+        title: 'Abonnement simplifié',
+        description:
+          "Un seul contrat d'énergie (électricité 63 kVA). Supprimez l'abonnement gaz 300 mbar et les contraintes ATEX associées.",
       },
     ],
     specs: [
-      { label: 'Réduction consommation', value: '30 à 55%' },
-      { label: 'Retour sur investissement', value: '1 à 3 ans' },
-      { label: 'CO₂ économisé', value: 'jusqu\'à 60%' },
-      { label: 'Aides disponibles', value: 'CEE, ADEME, région' },
+      { label: 'Énergie/cycle', value: '21,9 kWh (vs 251 kWh gaz)' },
+      { label: 'Réduction consommation', value: '−91 %' },
+      { label: 'Montée en température', value: '6 à 10 min (vs 10–20 min)' },
+      { label: 'Économie annuelle (1 000 cycles)', value: '≈ 13 250 €' },
+      { label: 'Retour sur investissement', value: '≈ 13 mois' },
+      { label: 'CO₂ évité/an', value: '≈ 51 tonnes' },
     ],
     sectors: ['automobile-carrosserie', 'industrie'],
     relatedSlugs: ['cabines-de-peinture'],

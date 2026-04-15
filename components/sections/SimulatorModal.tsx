@@ -103,8 +103,22 @@ export default function SimulatorModal() {
     fetch('/api/simulator-lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, company, email }),
-    }).catch(() => {})
+      body: JSON.stringify({
+        name, company, email,
+        cycles_per_day: cyclesPerDay,
+        days_per_year: daysPerYear,
+        gas_price: gasPrice,
+        elec_price: elecPrice,
+        price_diff: priceDiff,
+        annual_savings: r.annualSavings,
+        roi_months: r.roiMonths,
+      }),
+    })
+      .then(async (res) => {
+        const json = await res.json()
+        if (!res.ok) console.error('[simulator-lead] API error:', res.status, json)
+      })
+      .catch((err) => console.error('[simulator-lead] fetch error:', err))
     setFirstName(name.split(' ')[0] || name)
     setPhase('results')
   }

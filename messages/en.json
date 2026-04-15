@@ -159,6 +159,12 @@
     "section_badge": "Simulator",
     "section_title": "Gas or endothermic — calculate your savings",
     "section_desc": "Adjust the parameters to match your workshop. Calculations are based on real technical data from our cabins.",
-    "disclaimer": "Based on: gas 220.8 kWh/cycle · endothermic 21.9 kWh/cycle · CO₂ gas 0.227 · CO₂ elec 0.147 kgCO₂e/kWh (French grid)."
+    "disclaimer": "Based on: gas 220.8 kWh/cycle · endothermic 21.9 kWh/cycle · CO₂ gas 0.227 · CO₂ elec 0.147 kgCO₂e/kWh (French grid).",
+    "results_energy": "Energy",
+    "results_subscription": "Subscriptions",
+    "results_total": "Annual total",
+    "results_roi_section": "Return on investment",
+    "results_paid_back": "Paid back in",
+    "results_prices_note": "Prices used in this simulation: gas {gasPrice} €/kWh · electricity {elecPrice} €/kWh"
   }
 }

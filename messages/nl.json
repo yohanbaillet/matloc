@@ -159,6 +159,12 @@
     "section_badge": "Simulator",
     "section_title": "Gas of endothermisch — bereken uw besparing",
     "section_desc": "Pas de parameters aan op uw werkplaats. Berekeningen zijn gebaseerd op echte technische gegevens van onze cabines.",
-    "disclaimer": "Gebaseerd op: gas 220,8 kWh/cyclus · endothermisch 21,9 kWh/cyclus · CO₂ gas 0,227 · CO₂ elec 0,147 kgCO₂e/kWh (Frans net)."
+    "disclaimer": "Gebaseerd op: gas 220,8 kWh/cyclus · endothermisch 21,9 kWh/cyclus · CO₂ gas 0,227 · CO₂ elec 0,147 kgCO₂e/kWh (Frans net).",
+    "results_energy": "Energie",
+    "results_subscription": "Abonnementen",
+    "results_total": "Jaarlijks totaal",
+    "results_roi_section": "Terugverdientijd",
+    "results_paid_back": "Terugverdiend in",
+    "results_prices_note": "Gebruikte prijzen in deze simulatie: gas {gasPrice} €/kWh · elektriciteit {elecPrice} €/kWh"
   }
 }

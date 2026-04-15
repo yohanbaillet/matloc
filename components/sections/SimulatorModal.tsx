@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
-import { Calculator, ArrowRight, TrendingDown, Clock, Leaf, Trees, Flame, Zap, X } from 'lucide-react'
+import { Calculator, ArrowRight, TrendingDown, Clock, Leaf, Trees, Flame, Zap, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 
 // Technical constants from MatLoc Indus documentation
@@ -12,9 +12,19 @@ const GAS_ELEC_KWH_PER_CYCLE = 30.4
 const ENDO_ELEC_KWH_PER_CYCLE = 21.9
 const GAS_CO2_FACTOR = 0.227
 const ELEC_CO2_FACTOR = 0.147
-const GAS_SUBSCRIPTION = 1000
-const ELEC_SUBSCRIPTION_GAS = 400
-const ELEC_SUBSCRIPTION_ENDO = 2650
+const GAS_SUBSCRIPTION = 1000      // gas network subscription €/year
+const ELEC_SUBSCRIPTION_GAS = 400  // electricity subscription for gas booth €/year
+const ELEC_SUBSCRIPTION_ENDO = 2650 // electricity subscription for endo booth €/year
+
+// Average energy prices by locale (€/kWh, commercial/industrial rates)
+const LOCALE_PRICES: Record<string, { gasPrice: number; elecPrice: number }> = {
+  fr: { gasPrice: 0.06, elecPrice: 0.15 },
+  en: { gasPrice: 0.08, elecPrice: 0.24 },
+  de: { gasPrice: 0.07, elecPrice: 0.25 },
+  es: { gasPrice: 0.05, elecPrice: 0.14 },
+  nl: { gasPrice: 0.10, elecPrice: 0.22 },
+  zh: { gasPrice: 0.04, elecPrice: 0.09 },
+}
 
 function SliderRow({
   label, value, onChange, min, max, step, unit, decimals = 0,
@@ -47,6 +57,7 @@ export default function SimulatorModal() {
   const [open, setOpen] = useState(false)
   const [phase, setPhase] = useState<'sliders' | 'form' | 'results'>('sliders')
   const [firstName, setFirstName] = useState('')
+  const [showPriceSliders, setShowPriceSliders] = useState(false)
 
   // Form state
   const [name, setName] = useState('')
@@ -54,19 +65,22 @@ export default function SimulatorModal() {
   const [email, setEmail] = useState('')
   const [errors, setErrors] = useState<Record<string, string>>({})
 
-  // Slider state
+  // Slider state — gas/elec default to locale-specific averages
+  const defaultPrices = LOCALE_PRICES[locale] ?? LOCALE_PRICES.fr
   const [cyclesPerDay, setCyclesPerDay] = useState(4)
   const [daysPerYear, setDaysPerYear] = useState(250)
-  const [gasPrice, setGasPrice] = useState(0.06)
-  const [elecPrice, setElecPrice] = useState(0.15)
+  const [gasPrice, setGasPrice] = useState(defaultPrices.gasPrice)
+  const [elecPrice, setElecPrice] = useState(defaultPrices.elecPrice)
   const [priceDiff, setPriceDiff] = useState(10000)
 
   const r = useMemo(() => {
     const totalCycles = cyclesPerDay * daysPerYear
     const gasEnergyCost = (GAS_KWH_PER_CYCLE * gasPrice + GAS_ELEC_KWH_PER_CYCLE * elecPrice) * totalCycles
     const endoEnergyCost = ENDO_ELEC_KWH_PER_CYCLE * elecPrice * totalCycles
-    const gasTotal = gasEnergyCost + GAS_SUBSCRIPTION + ELEC_SUBSCRIPTION_GAS
-    const endoTotal = endoEnergyCost + ELEC_SUBSCRIPTION_ENDO
+    const gasSubscription = GAS_SUBSCRIPTION + ELEC_SUBSCRIPTION_GAS
+    const endoSubscription = ELEC_SUBSCRIPTION_ENDO
+    const gasTotal = gasEnergyCost + gasSubscription
+    const endoTotal = endoEnergyCost + endoSubscription
     const annualSavings = gasTotal - endoTotal
     const roiYears = annualSavings > 0 ? priceDiff / annualSavings : Infinity
     const roiMonths = Math.round(roiYears * 12)
@@ -74,6 +88,10 @@ export default function SimulatorModal() {
     const endoCO2 = ENDO_ELEC_KWH_PER_CYCLE * ELEC_CO2_FACTOR * totalCycles / 1000
     const co2Avoided = gasCO2 - endoCO2
     return {
+      gasEnergyCost: Math.round(gasEnergyCost),
+      endoEnergyCost: Math.round(endoEnergyCost),
+      gasSubscription,
+      endoSubscription,
       gasTotal: Math.round(gasTotal),
       endoTotal: Math.round(endoTotal),
       annualSavings: Math.round(annualSavings),
@@ -87,8 +105,6 @@ export default function SimulatorModal() {
   const roiLabel = r.roiYears === Infinity ? '—'
     : r.roiMonths < 24 ? t('roi_months', { months: r.roiMonths })
     : t('roi_years', { years: r.roiYears.toFixed(1).replace('.', ',') })
-
-  const barMax = Math.max(r.gasTotal, r.endoTotal)
 
   const validateForm = () => {
     const e: Record<string, string> = {}
@@ -127,7 +143,7 @@ export default function SimulatorModal() {
 
   const handleOpenChange = (next: boolean) => {
     setOpen(next)
-    if (!next) setTimeout(() => setPhase('sliders'), 300)
+    if (!next) setTimeout(() => { setPhase('sliders'); setShowPriceSliders(false) }, 300)
   }
 
   const fieldClass = (f: string) =>
@@ -143,7 +159,7 @@ export default function SimulatorModal() {
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent showCloseButton={false}
-          className="sm:max-w-lg p-0 gap-0 overflow-hidden max-h-[90vh] flex flex-col">
+          className="sm:max-w-lg p-0 gap-0 overflow-hidden max-h-[90dvh] flex flex-col">
 
           {/* Close */}
           <button onClick={() => setOpen(false)}
@@ -171,10 +187,29 @@ export default function SimulatorModal() {
                 <div className="space-y-5">
                   <SliderRow label={t('cycles_label')} value={cyclesPerDay} onChange={setCyclesPerDay} min={1} max={12} step={1} unit={t('unit_cycles')} />
                   <SliderRow label={t('days_label')} value={daysPerYear} onChange={setDaysPerYear} min={100} max={365} step={5} unit={t('unit_days')} />
-                  <SliderRow label={t('gas_price_label')} value={gasPrice} onChange={setGasPrice} min={0.03} max={0.20} step={0.005} unit={t('unit_kwh')} decimals={3} />
-                  <SliderRow label={t('elec_price_label')} value={elecPrice} onChange={setElecPrice} min={0.05} max={0.40} step={0.005} unit={t('unit_kwh')} decimals={3} />
                   <SliderRow label={t('price_diff_label')} value={priceDiff} onChange={setPriceDiff} min={0} max={50000} step={1000} unit="€" />
                 </div>
+
+                {/* Advanced: price sliders (collapsible) */}
+                <div className="border border-border rounded-lg overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setShowPriceSliders(!showPriceSliders)}
+                    className="w-full flex items-center justify-between px-4 py-3 text-xs font-semibold text-foreground/50 uppercase tracking-wider bg-gray-50 hover:bg-gray-100 transition">
+                    <span>{t('gas_price_label')} · {t('elec_price_label')}</span>
+                    {showPriceSliders ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                  </button>
+                  {showPriceSliders && (
+                    <div className="p-4 space-y-4 bg-white">
+                      <p className="text-[11px] text-foreground/40">
+                        {t('results_prices_note', { gasPrice: gasPrice.toFixed(3), elecPrice: elecPrice.toFixed(3) })}
+                      </p>
+                      <SliderRow label={t('gas_price_label')} value={gasPrice} onChange={setGasPrice} min={0.02} max={0.25} step={0.005} unit={t('unit_kwh')} decimals={3} />
+                      <SliderRow label={t('elec_price_label')} value={elecPrice} onChange={setElecPrice} min={0.05} max={0.45} step={0.005} unit={t('unit_kwh')} decimals={3} />
+                    </div>
+                  )}
+                </div>
+
                 <button onClick={() => setPhase('form')}
                   className="w-full flex items-center justify-center gap-2 rounded-lg bg-[var(--amber)] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-105 mt-2">
                   {t('reveal_cta')} <ArrowRight className="h-4 w-4" />
@@ -216,41 +251,107 @@ export default function SimulatorModal() {
 
             {/* Phase 3 — Results */}
             {phase === 'results' && (
-              <div className="p-6 space-y-5">
-                {/* Cost bars */}
-                <div className="space-y-3">
-                  {[
-                    { label: t('gas_label'), value: r.gasTotal, icon: <Flame size={13} />, color: 'bg-red-400' },
-                    { label: t('endo_label'), value: r.endoTotal, icon: <Zap size={13} />, color: 'bg-[var(--amber)]' },
-                  ].map((b) => (
-                    <div key={b.label}>
-                      <div className="flex justify-between text-sm mb-1.5">
-                        <span className="flex items-center gap-1.5 text-foreground/60">{b.icon}{b.label}</span>
-                        <span className="font-bold text-midnight tabular-nums">{b.value.toLocaleString('fr-FR')} €{t('per_year')}</span>
-                      </div>
-                      <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
-                        <div className={`h-full ${b.color} rounded-full transition-all duration-700`}
-                          style={{ width: `${Math.max(4, (b.value / barMax) * 100)}%` }} />
-                      </div>
+              <div className="p-6 space-y-4">
+
+                {/* Comparison table */}
+                <div className="rounded-xl overflow-hidden border border-border">
+                  {/* Table header */}
+                  <div className="grid grid-cols-3 bg-gray-50 px-4 py-2.5 border-b border-border">
+                    <div />
+                    <div className="text-center flex items-center justify-center gap-1 text-xs font-semibold text-foreground/60 uppercase tracking-wide">
+                      <Flame size={11} /> {t('gas_label')}
                     </div>
-                  ))}
+                    <div className="text-center flex items-center justify-center gap-1 text-xs font-semibold text-emerald-600 uppercase tracking-wide">
+                      <Zap size={11} /> {t('endo_label')}
+                    </div>
+                  </div>
+                  {/* Energy row */}
+                  <div className="grid grid-cols-3 px-4 py-3 border-b border-border items-center">
+                    <div className="text-xs text-foreground/50">{t('results_energy')}</div>
+                    <div className="text-center font-semibold tabular-nums text-sm text-midnight">
+                      {r.gasEnergyCost.toLocaleString('fr-FR')} €
+                    </div>
+                    <div className="text-center font-semibold tabular-nums text-sm text-emerald-600">
+                      {r.endoEnergyCost.toLocaleString('fr-FR')} €
+                    </div>
+                  </div>
+                  {/* Subscription row */}
+                  <div className="grid grid-cols-3 px-4 py-3 border-b border-border items-center bg-gray-50/50">
+                    <div className="text-xs text-foreground/50">{t('results_subscription')}</div>
+                    <div className="text-center font-semibold tabular-nums text-sm text-midnight">
+                      {r.gasSubscription.toLocaleString('fr-FR')} €
+                    </div>
+                    <div className="text-center font-semibold tabular-nums text-sm text-emerald-600">
+                      {r.endoSubscription.toLocaleString('fr-FR')} €
+                    </div>
+                  </div>
+                  {/* Total row */}
+                  <div className="grid grid-cols-3 px-4 py-3.5 items-center">
+                    <div className="text-xs font-bold text-midnight">{t('results_total')}</div>
+                    <div className="text-center font-black tabular-nums text-base text-midnight">
+                      {r.gasTotal.toLocaleString('fr-FR')} €
+                    </div>
+                    <div className="text-center font-black tabular-nums text-base text-emerald-600">
+                      {r.endoTotal.toLocaleString('fr-FR')} €
+                    </div>
+                  </div>
                 </div>
 
-                {/* Metric cards */}
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { icon: <TrendingDown size={14} />, label: t('saving_label'), value: `${r.annualSavings.toLocaleString('fr-FR')} €`, highlight: true },
-                    { icon: <Clock size={14} />, label: t('roi_label'), value: roiLabel, highlight: r.roiYears < 5 },
-                    { icon: <Leaf size={14} />, label: t('co2_label'), value: `${r.co2Avoided} t${t('per_year')}`, highlight: false },
-                    { icon: <Trees size={14} />, label: t('trees_label'), value: r.trees.toLocaleString('fr-FR'), highlight: false },
-                  ].map((m) => (
-                    <div key={m.label} className={`rounded-xl p-4 ${m.highlight ? 'bg-midnight text-white' : 'bg-gray-50'}`}>
-                      <div className={`mb-1 ${m.highlight ? 'text-[var(--amber)]' : 'text-foreground/40'}`}>{m.icon}</div>
-                      <p className={`text-[11px] ${m.highlight ? 'text-white/50' : 'text-foreground/50'}`}>{m.label}</p>
-                      <p className={`text-xl font-black tabular-nums ${m.highlight ? 'text-white' : 'text-midnight'}`}>{m.value}</p>
-                    </div>
-                  ))}
+                {/* Annual savings */}
+                <div className="rounded-xl bg-emerald-50 border border-emerald-200 px-5 py-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <TrendingDown size={16} className="text-emerald-600" />
+                    <p className="text-sm font-semibold text-emerald-800">{t('saving_label')}</p>
+                  </div>
+                  <p className="text-2xl font-black tabular-nums text-emerald-700">
+                    {r.annualSavings.toLocaleString('fr-FR')} €
+                  </p>
                 </div>
+
+                {/* ROI section */}
+                <div className="rounded-xl bg-midnight px-5 py-4 space-y-2">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-white/40">
+                    {t('results_roi_section')}
+                  </p>
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-white/50 text-xs">{t('price_diff_label')}</p>
+                      <p className="text-white font-bold tabular-nums text-lg">
+                        {priceDiff.toLocaleString('fr-FR')} €
+                      </p>
+                    </div>
+                    <ArrowRight size={18} className="text-white/20 shrink-0" />
+                    <div className="text-right">
+                      <p className="text-white/50 text-xs">{t('results_paid_back')}</p>
+                      <p className="text-[var(--amber)] font-black text-2xl tabular-nums">{roiLabel}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CO2 + Trees */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-xl bg-gray-50 p-4">
+                    <div className="mb-1 text-foreground/40"><Leaf size={14} /></div>
+                    <p className="text-[11px] text-foreground/50">{t('co2_label')}</p>
+                    <p className="text-xl font-black tabular-nums text-midnight">
+                      {r.co2Avoided} t{t('per_year')}
+                    </p>
+                  </div>
+                  <div className="rounded-xl bg-gray-50 p-4">
+                    <div className="mb-1 text-foreground/40"><Trees size={14} /></div>
+                    <p className="text-[11px] text-foreground/50">{t('trees_label')}</p>
+                    <p className="text-xl font-black tabular-nums text-midnight">
+                      {r.trees.toLocaleString('fr-FR')}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Disclaimer */}
+                <p className="text-[10px] text-foreground/40 text-center leading-relaxed">
+                  {t('disclaimer')}
+                  <br />
+                  {t('results_prices_note', { gasPrice: gasPrice.toFixed(3), elecPrice: elecPrice.toFixed(3) })}
+                </p>
               </div>
             )}
           </div>

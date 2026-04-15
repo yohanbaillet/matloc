@@ -159,6 +159,12 @@
     "section_badge": "Simulateur",
     "section_title": "Gaz ou endothermique — calculez votre économie",
     "section_desc": "Ajustez les paramètres selon votre atelier. Les calculs sont issus des données techniques réelles de nos cabines.",
-    "disclaimer": "Basé sur : gaz 220,8 kWh/cycle · endothermique 21,9 kWh/cycle · CO₂ gaz 0,227 · CO₂ élec 0,147 kgCO₂e/kWh (réseau français)."
+    "disclaimer": "Basé sur : gaz 220,8 kWh/cycle · endothermique 21,9 kWh/cycle · CO₂ gaz 0,227 · CO₂ élec 0,147 kgCO₂e/kWh (réseau français).",
+    "results_energy": "Énergie",
+    "results_subscription": "Abonnements",
+    "results_total": "Total annuel",
+    "results_roi_section": "Retour sur investissement",
+    "results_paid_back": "Remboursé en",
+    "results_prices_note": "Tarifs utilisés dans cette simulation : gaz {gasPrice} €/kWh · électricité {elecPrice} €/kWh"
   }
 }

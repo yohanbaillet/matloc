@@ -159,6 +159,12 @@
     "section_badge": "模拟器",
     "section_title": "燃气还是内热式 — 计算您的节省",
     "section_desc": "根据您的工作室调整参数。计算基于我们烤漆房的真实技术数据。",
-    "disclaimer": "基于：燃气220.8 kWh/循环 · 内热式21.9 kWh/循环 · CO₂燃气0.227 · CO₂电0.147 kgCO₂e/kWh（法国电网）。"
+    "disclaimer": "基于：燃气220.8 kWh/循环 · 内热式21.9 kWh/循环 · CO₂燃气0.227 · CO₂电0.147 kgCO₂e/kWh（法国电网）。",
+    "results_energy": "能源成本",
+    "results_subscription": "订阅费",
+    "results_total": "年度总计",
+    "results_roi_section": "投资回报率",
+    "results_paid_back": "回收期",
+    "results_prices_note": "本次模拟使用的价格：燃气 {gasPrice} €/kWh · 电力 {elecPrice} €/kWh"
   }
 }

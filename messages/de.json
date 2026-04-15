@@ -159,6 +159,12 @@
     "section_badge": "Simulator",
     "section_title": "Gas oder Endothermisch — Einsparungen berechnen",
     "section_desc": "Passen Sie die Parameter an Ihre Werkstatt an. Berechnungen basieren auf echten technischen Daten unserer Kabinen.",
-    "disclaimer": "Basierend auf: Gas 220,8 kWh/Zyklus · Endothermisch 21,9 kWh/Zyklus · CO₂ Gas 0,227 · CO₂ Strom 0,147 kgCO₂e/kWh (franz. Netz)."
+    "disclaimer": "Basierend auf: Gas 220,8 kWh/Zyklus · Endothermisch 21,9 kWh/Zyklus · CO₂ Gas 0,227 · CO₂ Strom 0,147 kgCO₂e/kWh (franz. Netz).",
+    "results_energy": "Energie",
+    "results_subscription": "Abonnements",
+    "results_total": "Jahresgesamtkosten",
+    "results_roi_section": "Kapitalrendite",
+    "results_paid_back": "Amortisiert in",
+    "results_prices_note": "In dieser Simulation verwendete Preise: Gas {gasPrice} €/kWh · Strom {elecPrice} €/kWh"
   }
 }

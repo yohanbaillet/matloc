@@ -159,6 +159,12 @@
     "section_badge": "Simulador",
     "section_title": "Gas o endotérmico — calcule su ahorro",
     "section_desc": "Ajuste los parámetros según su taller. Los cálculos se basan en datos técnicos reales de nuestras cabinas.",
-    "disclaimer": "Basado en: gas 220,8 kWh/ciclo · endotérmico 21,9 kWh/ciclo · CO₂ gas 0,227 · CO₂ elec 0,147 kgCO₂e/kWh (red francesa)."
+    "disclaimer": "Basado en: gas 220,8 kWh/ciclo · endotérmico 21,9 kWh/ciclo · CO₂ gas 0,227 · CO₂ elec 0,147 kgCO₂e/kWh (red francesa).",
+    "results_energy": "Energía",
+    "results_subscription": "Suscripciones",
+    "results_total": "Total anual",
+    "results_roi_section": "Retorno de la inversión",
+    "results_paid_back": "Amortizado en",
+    "results_prices_note": "Precios utilizados en esta simulación: gas {gasPrice} €/kWh · electricidad {elecPrice} €/kWh"
   }
 }

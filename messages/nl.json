@@ -7,6 +7,9 @@
     "cta_see_more": "Meer bekijken",
     "cta_see_all": "Alle projecten bekijken",
     "cta_download": "Datasheet downloaden",
+    "download_catalog": "Catalogus downloaden",
+    "brand_essence": "Verwarm het onderdeel. Niet de cabine.",
+    "call_us": "Bel ons",
     "loading": "Laden...",
     "back": "Terug",
     "read_more": "Meer lezen"
@@ -31,8 +34,10 @@
     "services_maintenance": "Onderhoud & Inspectie"
   },
   "home": {
-    "hero_headline": "Maatwerk spuitcabines voor veeleisende professionals",
-    "hero_subline": "Van carrosseriebedrijven tot industriële werkplaatsen — MatLoc Indus ontwerpt, installeert en onderhoudt uw oppervlaktebehandelingsapparatuur.",
+    "hero_eyebrow": "Industrial Painting. Reinvented.",
+    "hero_headline": "Innovatie in dienst van | precisie",
+    "hero_subline": "MAT INDUS ontwerpt, installeert en onderhoudt op maat gemaakte endotherme spuitcabines — voor carrosseriebedrijven en industriële werkplaatsen.",
+    "hero_cta": "Bereken mijn besparing",
     "hero_cta_primary": "Gratis projectstudie",
     "hero_cta_secondary": "Onze projecten bekijken",
     "hero_sector_auto": "Automotive sector",
@@ -51,7 +56,7 @@
     "sector_industry_cta": "Industriële oplossingen",
     "solutions_title": "Ons assortiment",
     "solutions_subtitle": "Compleet uitgerust, van verfsystemen tot energiebesparende oplossingen.",
-    "why_title": "Waarom MatLoc Indus",
+    "why_title": "Waarom MAT INDUS",
     "why_subtitle": "Wat ons onderscheidt in de praktijk.",
     "why_custom_title": "Altijd maatwerk",
     "why_custom_desc": "Elke installatie wordt ontworpen op basis van uw beperkingen: vloeroppervlak, hoogte, werkvolume, lokale regelgeving.",
@@ -86,7 +91,7 @@
     "legal": "Juridische mededeling",
     "sitemap": "Sitemap",
     "address": "Sulniac, Morbihan (56), Frankrijk",
-    "copyright": "© {year} MatLoc Indus. Alle rechten voorbehouden."
+    "copyright": "© {year} MAT INDUS. Alle rechten voorbehouden."
   },
   "forms": {
     "first_name": "Voornaam",

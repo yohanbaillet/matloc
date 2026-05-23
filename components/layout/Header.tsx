@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { Menu, X, ChevronDown, Phone } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import LocaleSwitcher from './LocaleSwitcher'
+import Logo from '@/components/shared/Logo'
 import { cn } from '@/lib/utils'
 
 type NavItem = {
@@ -72,16 +73,8 @@ export default function Header() {
       <div className="container-site">
         <div className="flex h-16 items-center justify-between gap-4 lg:h-[70px]">
           {/* Logo */}
-          <Link
-            href={`/${locale}`}
-            className="flex shrink-0 flex-col leading-none"
-          >
-            <span className="text-xl font-black tracking-tight text-midnight">
-              MatLoc<span className="text-amber-500">.</span>
-            </span>
-            <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-              Indus
-            </span>
+          <Link href={`/${locale}`} className="flex shrink-0 items-center" aria-label="MAT INDUS">
+            <Logo variant="dark" priority className="h-6 w-auto sm:h-7" />
           </Link>
 
           {/* Desktop nav */}
@@ -139,7 +132,7 @@ export default function Header() {
               className="flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               <Phone className="h-3.5 w-3.5" />
-              <span className="hidden xl:inline">Nous appeler</span>
+              <span className="hidden xl:inline">{tc('call_us')}</span>
             </a>
             <Link
               href={`${base}/devis`}
@@ -163,10 +156,7 @@ export default function Header() {
               <SheetContent side="right" className="w-80 p-0">
                 <div className="flex h-full flex-col">
                   <div className="border-b border-border p-4">
-                    <span className="text-lg font-black tracking-tight text-midnight">
-                      MatLoc<span className="text-amber-500">.</span>
-                      <span className="ml-0.5 text-sm font-medium text-muted-foreground">Indus</span>
-                    </span>
+                    <Logo variant="dark" className="h-6 w-auto" />
                   </div>
                   <nav className="flex-1 overflow-y-auto p-4">
                     {navItems.map((item) => (

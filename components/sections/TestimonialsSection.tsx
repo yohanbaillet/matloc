@@ -6,7 +6,7 @@ import SectionHeader from '@/components/shared/SectionHeader'
 const testimonials = [
   {
     quote:
-      "MatLoc Indus a su comprendre nos contraintes d'atelier dès la première visite. L'installation s'est faite en 3 jours, dans les délais. La cabine tourne impeccablement depuis 2 ans.",
+      "MAT INDUS a su comprendre nos contraintes d'atelier dès la première visite. L'installation s'est faite en 3 jours, dans les délais. La cabine tourne impeccablement depuis 2 ans.",
     author: 'Laurent M.',
     role: 'Directeur technique',
     company: 'Carrosserie du Sud-Ouest',

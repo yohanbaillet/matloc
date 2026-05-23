@@ -7,7 +7,7 @@ import ContactCta from '@/components/sections/ContactCta'
 export const metadata: Metadata = {
   title: 'À propos',
   description:
-    'MatLoc Indus, spécialiste des cabines de peinture sur-mesure basé à Sulniac (Morbihan). Expertise, proximité et accompagnement.',
+    'MAT INDUS, spécialiste des cabines de peinture sur-mesure basé à Sulniac (Morbihan). Expertise, proximité et accompagnement.',
 }
 
 const values = [
@@ -52,7 +52,7 @@ export default async function AboutPage() {
                 L'expertise terrain depuis plus de 20 ans
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-white/65">
-                MatLoc Indus est une entreprise spécialisée dans la conception, la vente, l'installation et la
+                MAT INDUS est une entreprise spécialisée dans la conception, la vente, l'installation et la
                 maintenance de cabines de peinture sur-mesure et d'équipements de traitement de surface, basée
                 à Sulniac, en Bretagne.
               </p>
@@ -88,7 +88,7 @@ export default async function AboutPage() {
             <h2 className="text-3xl font-bold">Notre histoire</h2>
             <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground">
               <p>
-                MatLoc Indus est né d'une conviction simple : les professionnels de la carrosserie et de l'industrie
+                MAT INDUS est né d'une conviction simple : les professionnels de la carrosserie et de l'industrie
                 méritent mieux que des équipements génériques mal adaptés à leurs réalités terrain. Trop souvent,
                 les ateliers se retrouvaient avec des cabines sous-dimensionnées, énergivores, ou simplement mal
                 installées faute d'un accompagnement technique sérieux.
@@ -100,7 +100,7 @@ export default async function AboutPage() {
                 une réputation solide en Bretagne et au-delà.
               </p>
               <p>
-                Aujourd'hui, MatLoc Indus accompagne des carrosseries indépendantes comme des groupes multi-sites,
+                Aujourd'hui, MAT INDUS accompagne des carrosseries indépendantes comme des groupes multi-sites,
                 des menuiseries artisanales comme des métalleries industrielles. Ce qui ne change pas, c'est
                 notre engagement : une réponse dans les 24h, une étude sérieuse, et une installation soignée.
               </p>

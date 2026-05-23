@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Logo from '@/components/shared/Logo'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react'
 
@@ -16,13 +17,8 @@ export default async function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <Link href={`/${locale}`} className="inline-flex flex-col leading-none">
-              <span className="text-2xl font-black tracking-tight">
-                MatLoc<span className="text-amber-500">.</span>
-              </span>
-              <span className="text-xs font-medium uppercase tracking-widest text-white/50">
-                Indus
-              </span>
+            <Link href={`/${locale}`} className="inline-flex items-center" aria-label="MAT INDUS">
+              <Logo variant="white" className="h-7 w-auto" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               {t('tagline')}

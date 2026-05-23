@@ -3,10 +3,8 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
-import { Calculator, ArrowRight, TrendingDown, TrendingUp, Leaf, Trees, Flame, Zap, X, ChevronDown, ChevronUp } from 'lucide-react'
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
+import { ArrowRight, TrendingDown, TrendingUp, Leaf, Trees, Flame, Zap, ChevronDown, ChevronUp } from 'lucide-react'
 
-// Technical constants from MatLoc Indus documentation
 const GAS_KWH_PER_CYCLE = 220.8
 const GAS_ELEC_KWH_PER_CYCLE = 30.4
 const ENDO_ELEC_KWH_PER_CYCLE = 21.9
@@ -44,16 +42,15 @@ function SliderRow({
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full h-1.5 rounded-full cursor-pointer"
-        style={{ background: `linear-gradient(to right, var(--amber) ${pct}%, #e5e7eb ${pct}%)` }}
+        style={{ background: `linear-gradient(to right, #111 ${pct}%, #d4d4d4 ${pct}%)` }}
       />
     </div>
   )
 }
 
-export default function SimulatorModal() {
+export default function SimulatorSection() {
   const t = useTranslations('simulator')
   const locale = useLocale()
-  const [open, setOpen] = useState(false)
   const [phase, setPhase] = useState<'sliders' | 'form' | 'results'>('sliders')
   const [firstName, setFirstName] = useState('')
   const [showPriceSliders, setShowPriceSliders] = useState(false)
@@ -107,7 +104,6 @@ export default function SimulatorModal() {
     : r.roiMonths < 24 ? t('roi_months', { months: r.roiMonths })
     : t('roi_years', { years: r.roiYears.toFixed(1).replace('.', ',') })
 
-  // Benefits over time
   const netBenefit = r.annualSavings * viewYears - priceDiff
   const isProfit = netBenefit >= 0
   const yearsPct = ((viewYears - 1) / (15 - 1)) * 100
@@ -147,289 +143,273 @@ export default function SimulatorModal() {
     setPhase('results')
   }
 
-  const handleOpenChange = (next: boolean) => {
-    setOpen(next)
-    if (!next) setTimeout(() => {
-      setPhase('sliders')
-      setShowPriceSliders(false)
-      setActiveTab('gas')
-      setViewYears(5)
-    }, 300)
-  }
-
   const fieldClass = (f: string) =>
     `w-full rounded-lg border px-3 py-2.5 text-sm text-midnight placeholder:text-foreground/40 outline-none transition focus:ring-2 focus:ring-[var(--amber)]/40 focus:border-[var(--amber)] ${errors[f] ? 'border-red-400' : 'border-border'}`
 
   return (
-    <>
-      <button onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-2 rounded-lg bg-[var(--amber)] px-8 py-3 text-base font-semibold text-white shadow-amber transition-all hover:brightness-105 hover:-translate-y-0.5">
-        <Calculator className="h-4 w-4" />
-        {t('hero_cta')}
-      </button>
+    <section id="simulator" className="section-padding bg-surface">
+      <div className="container-site">
 
-      <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent showCloseButton={false}
-          className="sm:max-w-lg p-0 gap-0 overflow-hidden max-h-[90dvh] flex flex-col">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <p className="text-[var(--amber)] font-medium text-sm uppercase tracking-widest mb-3">
+            {t('badge')}
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-midnight">
+            {phase === 'results' && firstName
+              ? t('modal_title_revealed', { name: firstName })
+              : t('modal_title_default')}
+          </h2>
+        </div>
 
-          <button onClick={() => setOpen(false)}
-            className="absolute top-3 right-3 z-30 flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-foreground/50 transition hover:bg-black/10 hover:text-foreground">
-            <X className="h-4 w-4" />
-          </button>
+        {/* Phase 1: Sliders */}
+        {phase === 'sliders' && (
+          <div className="grid lg:grid-cols-2 gap-8 items-start max-w-5xl mx-auto">
+            {/* Left: inputs */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm space-y-6">
+              <p className="text-xs font-semibold text-foreground/40 uppercase tracking-wider">{t('params_label')}</p>
+              <div className="space-y-5">
+                <SliderRow label={t('cycles_label')} value={cyclesPerDay} onChange={setCyclesPerDay} min={1} max={12} step={1} unit={t('unit_cycles')} />
+                <SliderRow label={t('days_label')} value={daysPerYear} onChange={setDaysPerYear} min={100} max={365} step={5} unit={t('unit_days')} />
+                <SliderRow label={t('gas_cabin_price_label')} value={gasCabinPrice} onChange={setGasCabinPrice} min={20000} max={120000} step={1000} unit="€" />
+                <SliderRow label={t('price_diff_label')} value={priceDiff} onChange={setPriceDiff} min={0} max={40000} step={500} unit="€" />
+              </div>
 
-          {/* Header */}
-          <div className="px-6 pt-6 pb-4 border-b border-border shrink-0">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--amber)] mb-1">{t('badge')}</p>
-            <DialogTitle className="text-lg font-black text-midnight">
-              {phase === 'results' && firstName
-                ? t('modal_title_revealed', { name: firstName })
-                : t('modal_title_default')}
-            </DialogTitle>
+              <div className="border border-border rounded-lg overflow-hidden">
+                <button type="button" onClick={() => setShowPriceSliders(!showPriceSliders)}
+                  className="w-full flex items-center justify-between px-4 py-3 text-xs font-semibold text-foreground/50 uppercase tracking-wider bg-gray-50 hover:bg-gray-100 transition">
+                  <span>{t('gas_price_label')} · {t('elec_price_label')}</span>
+                  {showPriceSliders ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                </button>
+                {showPriceSliders && (
+                  <div className="p-4 space-y-4 bg-white">
+                    <p className="text-[11px] text-foreground/40">
+                      {t('results_prices_note', { gasPrice: gasPrice.toFixed(3), elecPrice: elecPrice.toFixed(3) })}
+                    </p>
+                    <SliderRow label={t('gas_price_label')} value={gasPrice} onChange={setGasPrice} min={0.02} max={0.25} step={0.005} unit={t('unit_kwh')} decimals={3} />
+                    <SliderRow label={t('elec_price_label')} value={elecPrice} onChange={setElecPrice} min={0.05} max={0.45} step={0.005} unit={t('unit_kwh')} decimals={3} />
+                  </div>
+                )}
+              </div>
+
+              <button onClick={() => setPhase('form')}
+                className="w-full flex items-center justify-center gap-2 rounded-lg bg-[var(--amber)] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-105">
+                {t('reveal_cta')} <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Right: blurred preview */}
+            <div className="bg-midnight rounded-2xl p-8 text-white space-y-6">
+              <p className="text-xs font-semibold uppercase tracking-widest text-white/40">{t('results_label')}</p>
+              <div className="space-y-5">
+                <div className="flex justify-between items-center">
+                  <span className="text-white/60 text-sm flex items-center gap-2"><Flame size={14} /> {t('gas_label')}</span>
+                  <span className="text-2xl font-black tabular-nums blur-sm select-none">{r.gasTotal.toLocaleString('fr-FR')} €/an</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-white/60 text-sm flex items-center gap-2"><Zap size={14} /> {t('endo_label')}</span>
+                  <span className="text-2xl font-black tabular-nums blur-sm select-none">{r.endoTotal.toLocaleString('fr-FR')} €/an</span>
+                </div>
+                <div className="border-t border-white/10 pt-5 flex justify-between items-center">
+                  <span className="text-white/60 text-sm">{t('saving_label')}</span>
+                  <span className="text-2xl font-black tabular-nums text-[var(--amber)] blur-sm select-none">
+                    {r.annualSavings > 0 ? '+' : ''}{r.annualSavings.toLocaleString('fr-FR')} €/an
+                  </span>
+                </div>
+              </div>
+              <p className="text-xs text-white/30 text-center pt-2">{t('reveal_cta')}</p>
+            </div>
           </div>
+        )}
 
-          <div className="flex-1 overflow-y-auto">
-
-            {/* ── Phase 1: Sliders ── */}
-            {phase === 'sliders' && (
-              <div className="p-6 space-y-6">
-                <p className="text-xs font-semibold text-foreground/40 uppercase tracking-wider">{t('params_label')}</p>
-                <div className="space-y-5">
-                  <SliderRow label={t('cycles_label')} value={cyclesPerDay} onChange={setCyclesPerDay} min={1} max={12} step={1} unit={t('unit_cycles')} />
-                  <SliderRow label={t('days_label')} value={daysPerYear} onChange={setDaysPerYear} min={100} max={365} step={5} unit={t('unit_days')} />
-                  <SliderRow label={t('gas_cabin_price_label')} value={gasCabinPrice} onChange={setGasCabinPrice} min={20000} max={120000} step={1000} unit="€" />
-                  <SliderRow label={t('price_diff_label')} value={priceDiff} onChange={setPriceDiff} min={0} max={40000} step={500} unit="€" />
+        {/* Phase 2: Lead form */}
+        {phase === 'form' && (
+          <div className="max-w-md mx-auto">
+            <div className="bg-white rounded-2xl p-8 shadow-sm">
+              <div className="mb-6">
+                <p className="font-bold text-midnight text-base">{t('reveal_title')}</p>
+                <p className="text-sm text-foreground/50 mt-1">{t('reveal_subtitle')}</p>
+              </div>
+              <form onSubmit={handleFormSubmit} className="space-y-3">
+                <div>
+                  <input type="text" placeholder={`${t('form_name_label')} *`} value={name}
+                    onChange={(e) => setName(e.target.value)} className={fieldClass('name')} />
+                  {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
                 </div>
-
-                {/* Advanced energy prices */}
-                <div className="border border-border rounded-lg overflow-hidden">
-                  <button type="button" onClick={() => setShowPriceSliders(!showPriceSliders)}
-                    className="w-full flex items-center justify-between px-4 py-3 text-xs font-semibold text-foreground/50 uppercase tracking-wider bg-gray-50 hover:bg-gray-100 transition">
-                    <span>{t('gas_price_label')} · {t('elec_price_label')}</span>
-                    {showPriceSliders ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-                  </button>
-                  {showPriceSliders && (
-                    <div className="p-4 space-y-4 bg-white">
-                      <p className="text-[11px] text-foreground/40">
-                        {t('results_prices_note', { gasPrice: gasPrice.toFixed(3), elecPrice: elecPrice.toFixed(3) })}
-                      </p>
-                      <SliderRow label={t('gas_price_label')} value={gasPrice} onChange={setGasPrice} min={0.02} max={0.25} step={0.005} unit={t('unit_kwh')} decimals={3} />
-                      <SliderRow label={t('elec_price_label')} value={elecPrice} onChange={setElecPrice} min={0.05} max={0.45} step={0.005} unit={t('unit_kwh')} decimals={3} />
-                    </div>
-                  )}
+                <div>
+                  <input type="text" placeholder={`${t('form_company_label')} *`} value={company}
+                    onChange={(e) => setCompany(e.target.value)} className={fieldClass('company')} />
+                  {errors.company && <p className="text-xs text-red-500 mt-1">{errors.company}</p>}
                 </div>
-
-                <button onClick={() => setPhase('form')}
+                <div>
+                  <input type="email" placeholder={`${t('form_email_label')} *`} value={email}
+                    onChange={(e) => setEmail(e.target.value)} className={fieldClass('email')} />
+                  {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+                </div>
+                <button type="submit"
                   className="w-full flex items-center justify-center gap-2 rounded-lg bg-[var(--amber)] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-105">
-                  {t('reveal_cta')} <ArrowRight className="h-4 w-4" />
+                  {t('form_submit')} <ArrowRight className="h-4 w-4" />
+                </button>
+              </form>
+              <p className="mt-3 text-center text-[11px] text-foreground/40">{t('form_privacy')}</p>
+            </div>
+          </div>
+        )}
+
+        {/* Phase 3: Results */}
+        {phase === 'results' && (
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+
+            {/* Left: cost comparison */}
+            <div className="space-y-4">
+              <div className="flex rounded-xl border border-border overflow-hidden">
+                <button onClick={() => setActiveTab('gas')}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold transition ${
+                    activeTab === 'gas' ? 'bg-midnight text-white' : 'bg-gray-50 text-foreground/50 hover:text-foreground/80'
+                  }`}>
+                  <Flame size={14} /> {t('gas_label')}
+                </button>
+                <button onClick={() => setActiveTab('endo')}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold transition ${
+                    activeTab === 'endo' ? 'bg-emerald-600 text-white' : 'bg-gray-50 text-foreground/50 hover:text-foreground/80'
+                  }`}>
+                  <Zap size={14} /> {t('endo_label')}
                 </button>
               </div>
-            )}
 
-            {/* ── Phase 2: Lead form ── */}
-            {phase === 'form' && (
-              <div className="p-6">
-                <div className="mb-5">
-                  <p className="font-bold text-midnight text-base">{t('reveal_title')}</p>
-                  <p className="text-sm text-foreground/50 mt-1">{t('reveal_subtitle')}</p>
+              {activeTab === 'gas' && (
+                <div className="space-y-3">
+                  <div className="rounded-xl border border-border px-5 py-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <Flame size={15} className="text-foreground/40" />
+                      <p className="text-sm font-semibold text-midnight">{t('gas_cabin_label')}</p>
+                    </div>
+                    <p className="text-2xl font-black tabular-nums text-midnight">
+                      {gasCabinPrice.toLocaleString('fr-FR')} €
+                    </p>
+                  </div>
+                  <div className="rounded-xl border border-border overflow-hidden">
+                    <div className="px-4 py-3 border-b border-border flex justify-between items-center">
+                      <span className="text-sm text-foreground/60">{t('results_energy')}</span>
+                      <span className="font-bold tabular-nums text-midnight">{r.gasEnergyCost.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
+                    </div>
+                    <div className="px-4 py-3 border-b border-border flex justify-between items-center bg-gray-50/50">
+                      <span className="text-sm text-foreground/60">{t('results_subscription')}</span>
+                      <span className="font-bold tabular-nums text-midnight">{r.gasSubscription.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
+                    </div>
+                    <div className="px-4 py-4 flex justify-between items-center">
+                      <span className="text-sm font-bold text-midnight">{t('results_total')}</span>
+                      <span className="text-2xl font-black tabular-nums text-midnight">{r.gasTotal.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-sm">{t('per_year')}</span></span>
+                    </div>
+                  </div>
                 </div>
-                <form onSubmit={handleFormSubmit} className="space-y-3">
-                  <div>
-                    <input type="text" placeholder={`${t('form_name_label')} *`} value={name}
-                      onChange={(e) => setName(e.target.value)} className={fieldClass('name')} />
-                    {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
-                  </div>
-                  <div>
-                    <input type="text" placeholder={`${t('form_company_label')} *`} value={company}
-                      onChange={(e) => setCompany(e.target.value)} className={fieldClass('company')} />
-                    {errors.company && <p className="text-xs text-red-500 mt-1">{errors.company}</p>}
-                  </div>
-                  <div>
-                    <input type="email" placeholder={`${t('form_email_label')} *`} value={email}
-                      onChange={(e) => setEmail(e.target.value)} className={fieldClass('email')} />
-                    {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
-                  </div>
-                  <button type="submit"
-                    className="w-full flex items-center justify-center gap-2 rounded-lg bg-[var(--amber)] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-105">
-                    {t('form_submit')} <ArrowRight className="h-4 w-4" />
-                  </button>
-                </form>
-                <p className="mt-3 text-center text-[11px] text-foreground/40">{t('form_privacy')}</p>
-              </div>
-            )}
+              )}
 
-            {/* ── Phase 3: Results ── */}
-            {phase === 'results' && (
-              <div className="p-6 space-y-5">
-
-                {/* Tab toggle */}
-                <div className="flex rounded-xl border border-border overflow-hidden">
-                  <button
-                    onClick={() => setActiveTab('gas')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold transition ${
-                      activeTab === 'gas'
-                        ? 'bg-midnight text-white'
-                        : 'bg-gray-50 text-foreground/50 hover:text-foreground/80'
-                    }`}>
-                    <Flame size={14} /> {t('gas_label')}
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('endo')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold transition ${
-                      activeTab === 'endo'
-                        ? 'bg-emerald-600 text-white'
-                        : 'bg-gray-50 text-foreground/50 hover:text-foreground/80'
-                    }`}>
-                    <Zap size={14} /> {t('endo_label')}
-                  </button>
+              {activeTab === 'endo' && (
+                <div className="space-y-3">
+                  <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <Zap size={15} className="text-emerald-600" />
+                      <p className="text-sm font-semibold text-midnight">{t('endo_cabin_label')}</p>
+                    </div>
+                    <p className="text-2xl font-black tabular-nums text-emerald-700">
+                      {endoCabinPrice.toLocaleString('fr-FR')} €
+                    </p>
+                  </div>
+                  <div className="rounded-xl border border-border overflow-hidden">
+                    <div className="px-4 py-3 border-b border-border flex justify-between items-center">
+                      <span className="text-sm text-foreground/60">{t('results_energy')}</span>
+                      <span className="font-bold tabular-nums text-emerald-600">{r.endoEnergyCost.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
+                    </div>
+                    <div className="px-4 py-3 border-b border-border flex justify-between items-center bg-gray-50/50">
+                      <span className="text-sm text-foreground/60">{t('results_subscription')}</span>
+                      <span className="font-bold tabular-nums text-emerald-600">{r.endoSubscription.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
+                    </div>
+                    <div className="px-4 py-4 flex justify-between items-center">
+                      <span className="text-sm font-bold text-midnight">{t('results_total')}</span>
+                      <span className="text-2xl font-black tabular-nums text-emerald-600">{r.endoTotal.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-sm">{t('per_year')}</span></span>
+                    </div>
+                  </div>
                 </div>
-
-                {/* ── Gas tab ── */}
-                {activeTab === 'gas' && (
-                  <div className="space-y-3">
-                    {/* Cabin price */}
-                    <div className="rounded-xl border border-border px-5 py-4 flex items-center justify-between">
-                      <div className="flex items-center gap-2.5">
-                        <Flame size={15} className="text-foreground/40" />
-                        <p className="text-sm font-semibold text-midnight">{t('gas_cabin_label')}</p>
-                      </div>
-                      <p className="text-2xl font-black tabular-nums text-midnight">
-                        {gasCabinPrice.toLocaleString('fr-FR')} €
-                      </p>
-                    </div>
-                    {/* Annual costs */}
-                    <div className="rounded-xl border border-border overflow-hidden">
-                      <div className="px-4 py-3 border-b border-border flex justify-between items-center">
-                        <span className="text-sm text-foreground/60">{t('results_energy')}</span>
-                        <span className="font-bold tabular-nums text-midnight">{r.gasEnergyCost.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
-                      </div>
-                      <div className="px-4 py-3 border-b border-border flex justify-between items-center bg-gray-50/50">
-                        <span className="text-sm text-foreground/60">{t('results_subscription')}</span>
-                        <span className="font-bold tabular-nums text-midnight">{r.gasSubscription.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
-                      </div>
-                      <div className="px-4 py-4 flex justify-between items-center">
-                        <span className="text-sm font-bold text-midnight">{t('results_total')}</span>
-                        <span className="text-2xl font-black tabular-nums text-midnight">{r.gasTotal.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-sm">{t('per_year')}</span></span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* ── Endo tab ── */}
-                {activeTab === 'endo' && (
-                  <div className="space-y-3">
-                    {/* Cabin price */}
-                    <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 flex items-center justify-between">
-                      <div className="flex items-center gap-2.5">
-                        <Zap size={15} className="text-emerald-600" />
-                        <p className="text-sm font-semibold text-midnight">{t('endo_cabin_label')}</p>
-                      </div>
-                      <p className="text-2xl font-black tabular-nums text-emerald-700">
-                        {endoCabinPrice.toLocaleString('fr-FR')} €
-                      </p>
-                    </div>
-                    {/* Annual costs */}
-                    <div className="rounded-xl border border-border overflow-hidden">
-                      <div className="px-4 py-3 border-b border-border flex justify-between items-center">
-                        <span className="text-sm text-foreground/60">{t('results_energy')}</span>
-                        <span className="font-bold tabular-nums text-emerald-600">{r.endoEnergyCost.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
-                      </div>
-                      <div className="px-4 py-3 border-b border-border flex justify-between items-center bg-gray-50/50">
-                        <span className="text-sm text-foreground/60">{t('results_subscription')}</span>
-                        <span className="font-bold tabular-nums text-emerald-600">{r.endoSubscription.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-xs">{t('per_year')}</span></span>
-                      </div>
-                      <div className="px-4 py-4 flex justify-between items-center">
-                        <span className="text-sm font-bold text-midnight">{t('results_total')}</span>
-                        <span className="text-2xl font-black tabular-nums text-emerald-600">{r.endoTotal.toLocaleString('fr-FR')} €<span className="font-normal text-foreground/40 text-sm">{t('per_year')}</span></span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* ── Common section: benefits over time ── */}
-                <div className="rounded-xl border border-border p-5 space-y-4 bg-gray-50/40">
-                  <p className="text-xs font-semibold text-foreground/40 uppercase tracking-widest">
-                    {t('endo_benefits_title')}
-                  </p>
-
-                  {/* Years slider */}
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-foreground/60">{t('roi_over_time')}</span>
-                      <span className="text-base font-black text-midnight tabular-nums">
-                        {viewYears} {t('years_unit')}
-                      </span>
-                    </div>
-                    <input
-                      type="range" min={1} max={15} step={1} value={viewYears}
-                      onChange={(e) => setViewYears(Number(e.target.value))}
-                      className="w-full h-1.5 rounded-full cursor-pointer"
-                      style={{ background: `linear-gradient(to right, var(--amber) ${yearsPct}%, #e5e7eb ${yearsPct}%)` }}
-                    />
-                    <div className="flex justify-between text-[10px] text-foreground/30 mt-1">
-                      <span>1</span><span>15</span>
-                    </div>
-                  </div>
-
-                  {/* Net benefit */}
-                  <div className={`rounded-xl px-5 py-4 flex items-center justify-between transition-colors ${
-                    isProfit
-                      ? 'bg-emerald-50 border border-emerald-200'
-                      : 'bg-amber-50 border border-amber-200'
-                  }`}>
-                    <div>
-                      <p className={`text-xs font-semibold mb-0.5 ${isProfit ? 'text-emerald-700' : 'text-amber-700'}`}>
-                        {t('net_benefit_label')} — {viewYears} {t('years_unit')}
-                      </p>
-                      <p className="text-[11px] text-foreground/40">{t('results_paid_back')} : {roiLabel}</p>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      {isProfit
-                        ? <TrendingDown size={16} className="text-emerald-600" />
-                        : <TrendingUp size={16} className="text-amber-600" />
-                      }
-                      <p className={`text-2xl font-black tabular-nums ${isProfit ? 'text-emerald-700' : 'text-amber-700'}`}>
-                        {isProfit ? '+' : ''}{netBenefit.toLocaleString('fr-FR')} €
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* CO2 + Trees */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-white border border-border p-3.5">
-                      <Leaf size={13} className="text-foreground/30 mb-1" />
-                      <p className="text-[11px] text-foreground/50">{t('co2_label')}</p>
-                      <p className="text-lg font-black tabular-nums text-midnight">{r.co2Avoided} t{t('per_year')}</p>
-                    </div>
-                    <div className="rounded-xl bg-white border border-border p-3.5">
-                      <Trees size={13} className="text-foreground/30 mb-1" />
-                      <p className="text-[11px] text-foreground/50">{t('trees_label')}</p>
-                      <p className="text-lg font-black tabular-nums text-midnight">{r.trees.toLocaleString('fr-FR')}</p>
-                    </div>
-                  </div>
-
-                  {/* Disclaimer */}
-                  <p className="text-[10px] text-foreground/35 text-center leading-relaxed">
-                    {t('disclaimer')}<br />
-                    {t('results_prices_note', { gasPrice: gasPrice.toFixed(3), elecPrice: elecPrice.toFixed(3) })}
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Quote CTA */}
-          {phase === 'results' && (
-            <div className="border-t border-border p-5 bg-surface/50 shrink-0">
-              <p className="text-xs text-foreground/50 mb-3 text-center">{t('quote_teaser')}</p>
-              <Link
-                href={`/${locale}/devis?name=${encodeURIComponent(name)}&company=${encodeURIComponent(company)}&email=${encodeURIComponent(email)}`}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--amber)] px-6 py-3 text-sm font-semibold text-white transition hover:brightness-105 hover:-translate-y-0.5">
-                {t('quote_cta')} <ArrowRight className="h-4 w-4" />
-              </Link>
+              )}
             </div>
-          )}
-        </DialogContent>
-      </Dialog>
-    </>
+
+            {/* Right: ROI + env + CTA */}
+            <div className="space-y-4">
+              <div className="bg-white rounded-2xl p-6 shadow-sm space-y-5">
+                <p className="text-xs font-semibold text-foreground/40 uppercase tracking-widest">
+                  {t('endo_benefits_title')}
+                </p>
+
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-foreground/60">{t('roi_over_time')}</span>
+                    <span className="text-base font-black text-midnight tabular-nums">
+                      {viewYears} {t('years_unit')}
+                    </span>
+                  </div>
+                  <input
+                    type="range" min={1} max={15} step={1} value={viewYears}
+                    onChange={(e) => setViewYears(Number(e.target.value))}
+                    className="w-full h-1.5 rounded-full cursor-pointer"
+                    style={{ background: `linear-gradient(to right, #111 ${yearsPct}%, #d4d4d4 ${yearsPct}%)` }}
+                  />
+                  <div className="flex justify-between text-[10px] text-foreground/30 mt-1">
+                    <span>1</span><span>15</span>
+                  </div>
+                </div>
+
+                <div className={`rounded-xl px-5 py-4 flex items-center justify-between transition-colors ${
+                  isProfit ? 'bg-emerald-50 border border-emerald-200' : 'bg-amber-50 border border-amber-200'
+                }`}>
+                  <div>
+                    <p className={`text-xs font-semibold mb-0.5 ${isProfit ? 'text-emerald-700' : 'text-amber-700'}`}>
+                      {t('net_benefit_label')} — {viewYears} {t('years_unit')}
+                    </p>
+                    <p className="text-[11px] text-foreground/40">{t('results_paid_back')} : {roiLabel}</p>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    {isProfit
+                      ? <TrendingDown size={16} className="text-emerald-600" />
+                      : <TrendingUp size={16} className="text-amber-600" />
+                    }
+                    <p className={`text-2xl font-black tabular-nums ${isProfit ? 'text-emerald-700' : 'text-amber-700'}`}>
+                      {isProfit ? '+' : ''}{netBenefit.toLocaleString('fr-FR')} €
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-xl bg-gray-50 border border-border p-3.5">
+                    <Leaf size={13} className="text-foreground/30 mb-1" />
+                    <p className="text-[11px] text-foreground/50">{t('co2_label')}</p>
+                    <p className="text-lg font-black tabular-nums text-midnight">{r.co2Avoided} t{t('per_year')}</p>
+                  </div>
+                  <div className="rounded-xl bg-gray-50 border border-border p-3.5">
+                    <Trees size={13} className="text-foreground/30 mb-1" />
+                    <p className="text-[11px] text-foreground/50">{t('trees_label')}</p>
+                    <p className="text-lg font-black tabular-nums text-midnight">{r.trees.toLocaleString('fr-FR')}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl p-5 shadow-sm">
+                <p className="text-xs text-foreground/50 mb-3 text-center">{t('quote_teaser')}</p>
+                <Link
+                  href={`/${locale}/devis?name=${encodeURIComponent(name)}&company=${encodeURIComponent(company)}&email=${encodeURIComponent(email)}`}
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--amber)] px-6 py-3 text-sm font-semibold text-white transition hover:brightness-105 hover:-translate-y-0.5 shadow-amber">
+                  {t('quote_cta')} <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+
+              <p className="text-[10px] text-foreground/30 text-center leading-relaxed">
+                {t('disclaimer')}<br />
+                {t('results_prices_note', { gasPrice: gasPrice.toFixed(3), elecPrice: elecPrice.toFixed(3) })}
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
   )
 }

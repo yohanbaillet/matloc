@@ -27,7 +27,12 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brand tokens */
+  /* Brand tokens — v2 (MAT INDUS rebrand) */
+  --color-ink: var(--ink);
+  --color-coral: var(--coral);
+  --color-coral-dark: var(--coral-dark);
+
+  /* Brand tokens — v1 (kept as aliases during rebrand) */
   --color-midnight: var(--midnight);
   --color-navy: var(--navy);
   --color-slate-dark: var(--slate-dark);
@@ -38,7 +43,32 @@
 
   /* Typography */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter-tight), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* ── Tailwind palette overrides — repaint amber/orange/yellow to coral ──
+   * Site uses bg-amber-500, text-amber-600, etc. liberally; remap them all
+   * to the MAT INDUS coral so the rebrand cascades without per-file churn. */
+  --color-amber-50:  #FFF1ED;
+  --color-amber-100: #FFE0D6;
+  --color-amber-200: #FFC2AE;
+  --color-amber-300: #FF9C7A;
+  --color-amber-400: #FF7A55;
+  --color-amber-500: #FF5931;
+  --color-amber-600: #E64A24;
+  --color-amber-700: #C03B1B;
+  --color-amber-800: #962E15;
+  --color-amber-900: #6B2110;
+  --color-orange-50:  #FFF1ED;
+  --color-orange-100: #FFE0D6;
+  --color-orange-200: #FFC2AE;
+  --color-orange-300: #FF9C7A;
+  --color-orange-400: #FF7A55;
+  --color-orange-500: #FF5931;
+  --color-orange-600: #E64A24;
+  --color-orange-700: #C03B1B;
+  --color-yellow-400: #FF7A55;
+  --color-yellow-500: #FF5931;
 
   /* Radius */
   --radius-sm: calc(var(--radius) * 0.6);
@@ -58,35 +88,40 @@
 }
 
 :root {
-  /* ── Brand Palette ── */
-  --midnight: #0F1923;
+  /* ── Brand Palette v2 — MAT INDUS ── */
+  --ink: #000000;
+  --coral: #FF5931;
+  --coral-dark: #E64A24;
+
+  /* ── Brand Palette v1 — legacy (aliased to v2 during transition) ── */
+  --midnight: #000000;       /* was #0F1923 — now resolves to ink */
   --navy: #1C2B3A;
   --slate-dark: #2E4057;
-  --amber: #E8881F;
-  --amber-light: #FAA94D;
+  --amber: #FF5931;          /* was #E8881F — now resolves to coral */
+  --amber-light: #FF7A55;
   --surface: #F4F5F7;
   --surface-alt: #EAECEF;
 
   /* ── Semantic (light mode) ── */
   --background: #ffffff;
-  --foreground: #111827;
+  --foreground: #0A0A0A;
   --card: #ffffff;
-  --card-foreground: #111827;
+  --card-foreground: #0A0A0A;
   --popover: #ffffff;
-  --popover-foreground: #111827;
-  --primary: #0F1923;
+  --popover-foreground: #0A0A0A;
+  --primary: #000000;
   --primary-foreground: #ffffff;
   --secondary: #F4F5F7;
-  --secondary-foreground: #111827;
+  --secondary-foreground: #0A0A0A;
   --muted: #F4F5F7;
   --muted-foreground: #6B7280;
-  --accent: #E8881F;
+  --accent: #FF5931;
   --accent-foreground: #ffffff;
   --destructive: #DC2626;
   --border: #E2E5E9;
   --input: #E2E5E9;
-  --ring: #E8881F;
-  --radius: 0.5rem;
+  --ring: #FF5931;
+  --radius: 0.25rem;
 
   /* Sidebar */
   --sidebar: #F4F5F7;
@@ -126,9 +161,10 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
     letter-spacing: -0.025em;
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.05;
   }
 
   /* Prevent layout breaks on translated text */
@@ -155,27 +191,37 @@ input[type='range']::-webkit-slider-runnable-track {
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: var(--amber);
-  margin-top: -6px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  background: #fff;
+  border: 2px solid #111;
+  margin-top: -5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  outline: none;
+}
+
+input[type='range']:focus {
+  outline: none;
+}
+
+input[type='range']:focus-visible {
+  outline: none;
 }
 
 input[type='range']::-moz-range-track {
   height: 6px;
   border-radius: 9999px;
-  background: #e5e7eb;
+  background: #d4d4d4;
 }
 
 input[type='range']::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #111;
   border-radius: 50%;
-  background: var(--amber);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 /* ─── Utilities ───────────────────────────────────────────────────────── */
@@ -203,13 +249,33 @@ input[type='range']::-moz-range-thumb {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
-  /* Amber glow for CTA buttons */
+  /* Coral glow for CTA buttons (also exported as legacy .shadow-amber) */
+  .shadow-coral,
   .shadow-amber {
-    box-shadow: 0 4px 24px -4px rgba(232, 136, 31, 0.35);
+    box-shadow: 0 4px 24px -4px rgba(255, 89, 49, 0.40);
   }
 
+  .shadow-coral-hover,
   .shadow-amber-hover {
-    box-shadow: 0 6px 32px -4px rgba(232, 136, 31, 0.5);
+    box-shadow: 0 6px 32px -4px rgba(255, 89, 49, 0.55);
+  }
+
+  /* Display headline — Inter Tight, condensed feel */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Numbered eyebrow — "01 — INDUSTRIAL PAINTING. REINVENTED." */
+  .eyebrow-numbered {
+    @apply inline-flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.18em];
+  }
+  .eyebrow-numbered::before {
+    content: attr(data-num);
+    @apply font-semibold text-[var(--coral)];
+  }
+  .eyebrow-numbered::after {
+    content: '';
+    @apply h-px w-8 bg-current opacity-40;
   }
 
   /* Card hover lift */

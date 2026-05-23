@@ -9,7 +9,7 @@ import RealizationsPreview from '@/components/sections/RealizationsPreview'
 import ProcessTimeline from '@/components/sections/ProcessTimeline'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import ContactCta from '@/components/sections/ContactCta'
-import EnergySimulator from '@/components/sections/EnergySimulator'
+import SimulatorSection from '@/components/sections/SimulatorModal'
 import StickyCtaBanner from '@/components/layout/StickyCtaBanner'
 
 type Props = {
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'home' })
 
   return {
-    title: 'MatLoc Indus | Cabines de peinture sur-mesure',
+    title: 'MAT INDUS | Cabines de peinture endothermiques sur-mesure',
     description: t('hero_subline'),
   }
 }
@@ -34,7 +34,7 @@ export default function HomePage() {
       <SectorCards />
       <SolutionsGrid />
       <WhyUsFeatures />
-      <EnergySimulator />
+      <SimulatorSection />
       <RealizationsPreview />
       <ProcessTimeline />
       <TestimonialsSection />

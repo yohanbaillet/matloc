@@ -9,7 +9,7 @@ import ContactCta from '@/components/sections/ContactCta'
 export const metadata: Metadata = {
   title: 'Nos réalisations',
   description:
-    'Découvrez les installations MatLoc Indus réalisées pour des professionnels de la carrosserie et de l\'industrie partout en France.',
+    'Découvrez les installations MAT INDUS réalisées pour des professionnels de la carrosserie et de l\'industrie partout en France.',
 }
 
 export default async function RealisationsPage() {

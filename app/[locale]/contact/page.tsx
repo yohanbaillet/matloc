@@ -4,7 +4,7 @@ import ContactForm from '@/components/forms/ContactForm'
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Contactez MatLoc Indus — réponse sous 24h. Sulniac, Morbihan.',
+  description: 'Contactez MAT INDUS — réponse sous 24h. Sulniac, Morbihan.',
 }
 
 export default function ContactPage() {

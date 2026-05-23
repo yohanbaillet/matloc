@@ -6,7 +6,7 @@ import ContactCta from '@/components/sections/ContactCta'
 
 export const metadata: Metadata = {
   title: 'Nos services',
-  description: 'Conseil, installation, maintenance et contrôle — MatLoc Indus vous accompagne de A à Z.',
+  description: 'Conseil, installation, maintenance et contrôle — MAT INDUS vous accompagne de A à Z.',
 }
 
 const icons = [Handshake, Wrench, ShieldCheck]
@@ -45,7 +45,7 @@ export default async function ServicesPage() {
             Accompagnement de A à Z
           </h1>
           <p className="mt-4 text-lg text-white/65">
-            MatLoc Indus n'est pas un simple fournisseur d'équipement. Nous sommes partenaires sur la durée.
+            MAT INDUS n'est pas un simple fournisseur d'équipement. Nous sommes partenaires sur la durée.
           </p>
         </div>
       </section>

@@ -7,6 +7,9 @@
     "cta_see_more": "See more",
     "cta_see_all": "See all our projects",
     "cta_download": "Download datasheet",
+    "download_catalog": "Download the catalog",
+    "brand_essence": "Heat the part. Not the room.",
+    "call_us": "Call us",
     "loading": "Loading...",
     "back": "Back",
     "read_more": "Read more"
@@ -31,8 +34,10 @@
     "services_maintenance": "Maintenance & Inspection"
   },
   "home": {
-    "hero_headline": "Custom paint booths for demanding professionals",
-    "hero_subline": "From automotive body shops to industrial workshops — MatLoc Indus designs, installs and maintains your surface treatment equipment.",
+    "hero_eyebrow": "Industrial Painting. Reinvented.",
+    "hero_headline": "Innovation in the service of | precision",
+    "hero_subline": "MAT INDUS designs, installs and maintains custom endothermic paint booths — for automotive body shops and industrial workshops alike.",
+    "hero_cta": "Calculate my savings",
     "hero_cta_primary": "Free project study",
     "hero_cta_secondary": "See our projects",
     "hero_sector_auto": "Automotive sector",
@@ -51,7 +56,7 @@
     "sector_industry_cta": "Industrial solutions",
     "solutions_title": "Our range",
     "solutions_subtitle": "Complete equipment, from painting systems to energy-saving solutions.",
-    "why_title": "Why MatLoc Indus",
+    "why_title": "Why MAT INDUS",
     "why_subtitle": "What sets us apart in the field.",
     "why_custom_title": "Always custom-built",
     "why_custom_desc": "Every installation is designed to your constraints: floor space, height, workload, local regulations.",
@@ -86,7 +91,7 @@
     "legal": "Legal notice",
     "sitemap": "Sitemap",
     "address": "Sulniac, Morbihan (56), France",
-    "copyright": "© {year} MatLoc Indus. All rights reserved."
+    "copyright": "© {year} MAT INDUS. All rights reserved."
   },
   "forms": {
     "first_name": "First name",

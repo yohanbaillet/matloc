@@ -7,6 +7,9 @@
     "cta_see_more": "查看更多",
     "cta_see_all": "查看全部项目",
     "cta_download": "下载产品手册",
+    "download_catalog": "下载完整目录",
+    "brand_essence": "加热工件，而非整间。",
+    "call_us": "致电我们",
     "loading": "加载中...",
     "back": "返回",
     "read_more": "阅读更多"
@@ -31,8 +34,10 @@
     "services_maintenance": "维护与检测"
   },
   "home": {
-    "hero_headline": "为专业人士量身定制的喷漆房",
-    "hero_subline": "从汽车车身修复到工业车间 — MatLoc Indus 为您设计、安装并维护表面处理设备。",
+    "hero_eyebrow": "Industrial Painting. Reinvented.",
+    "hero_headline": "以创新 | 成就精准",
+    "hero_subline": "MAT INDUS 为车身修复车间与工业生产线设计、安装并维护定制内热式喷漆房。",
+    "hero_cta": "计算节省费用",
     "hero_cta_primary": "免费项目分析",
     "hero_cta_secondary": "查看我们的项目",
     "hero_sector_auto": "汽车行业",
@@ -51,7 +56,7 @@
     "sector_industry_cta": "工业解决方案",
     "solutions_title": "我们的产品系列",
     "solutions_subtitle": "完整设备，从涂装系统到节能解决方案。",
-    "why_title": "为什么选择 MatLoc Indus",
+    "why_title": "为什么选择 MAT INDUS",
     "why_subtitle": "我们在实践中的与众不同之处。",
     "why_custom_title": "始终量身定制",
     "why_custom_desc": "每次安装都根据您的限制条件设计：占地面积、高度、工作量、当地法规。",
@@ -86,7 +91,7 @@
     "legal": "法律声明",
     "sitemap": "网站地图",
     "address": "法国莫尔比昂省苏尔尼亚克（56）",
-    "copyright": "© {year} MatLoc Indus。保留所有权利。"
+    "copyright": "© {year} MAT INDUS。保留所有权利。"
   },
   "forms": {
     "first_name": "名",

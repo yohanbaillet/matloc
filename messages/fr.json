@@ -7,6 +7,9 @@
     "cta_see_more": "Voir plus",
     "cta_see_all": "Voir toutes nos réalisations",
     "cta_download": "Télécharger la fiche",
+    "download_catalog": "Télécharger le catalogue",
+    "brand_essence": "Chauffez la pièce. Pas la cabine.",
+    "call_us": "Nous appeler",
     "loading": "Chargement...",
     "back": "Retour",
     "read_more": "Lire la suite"
@@ -31,8 +34,10 @@
     "services_maintenance": "Maintenance & Contrôle"
   },
   "home": {
-    "hero_headline": "Cabines de peinture sur-mesure pour les professionnels exigeants",
-    "hero_subline": "De la carrosserie automobile à l'atelier industriel — MatLoc Indus conçoit, installe et maintient vos équipements de traitement de surface.",
+    "hero_eyebrow": "Industrial Painting. Reinvented.",
+    "hero_headline": "L'innovation au service de la | précision",
+    "hero_subline": "MAT INDUS conçoit, installe et maintient des cabines de peinture endothermiques sur-mesure — pour la carrosserie automobile comme pour l'atelier industriel.",
+    "hero_cta": "Calculer mes économies",
     "hero_cta_primary": "Étude de projet gratuite",
     "hero_cta_secondary": "Voir nos réalisations",
     "hero_sector_auto": "Secteur automobile",
@@ -51,7 +56,7 @@
     "sector_industry_cta": "Solutions industrie",
     "solutions_title": "Notre gamme",
     "solutions_subtitle": "Des équipements complets, du matériel de peinture aux solutions de gain énergétique.",
-    "why_title": "Pourquoi MatLoc Indus",
+    "why_title": "Pourquoi MAT INDUS",
     "why_subtitle": "Ce qui nous distingue sur le terrain.",
     "why_custom_title": "Sur-mesure systématique",
     "why_custom_desc": "Chaque installation est conçue selon vos contraintes : surface, hauteur, volume de travail, réglementation locale.",
@@ -86,7 +91,7 @@
     "legal": "Mentions légales",
     "sitemap": "Plan du site",
     "address": "Sulniac, Morbihan (56), France",
-    "copyright": "© {year} MatLoc Indus. Tous droits réservés."
+    "copyright": "© {year} MAT INDUS. Tous droits réservés."
   },
   "forms": {
     "first_name": "Prénom",

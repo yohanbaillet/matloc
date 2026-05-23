@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Inter_Tight } from 'next/font/google'
 import { routing } from '@/lib/i18n/routing'
 import { cjkLocales } from '@/lib/i18n/config'
 import type { Locale } from '@/lib/i18n/config'
@@ -20,6 +20,12 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+const interTight = Inter_Tight({
+  variable: '--font-inter-tight',
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800', '900'],
+})
+
 type Props = {
   children: React.ReactNode
   params: Promise<{ locale: string }>
@@ -35,8 +41,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: {
-      default: 'MatLoc Indus | Cabines de peinture sur-mesure',
-      template: '%s | MatLoc Indus',
+      default: 'MAT INDUS | Cabines de peinture endothermiques sur-mesure',
+      template: '%s | MAT INDUS',
     },
     description: t('hero_subline'),
     metadataBase: new URL('https://matlocindus.fr'),
@@ -52,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     },
     openGraph: {
-      siteName: 'MatLoc Indus',
+      siteName: 'MAT INDUS',
       locale,
       type: 'website',
     },
@@ -76,7 +82,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} ${isCJK ? 'font-cjk' : ''}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} ${isCJK ? 'font-cjk' : ''}`}
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
         <NextIntlClientProvider messages={messages}>

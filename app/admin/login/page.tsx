@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-sm">
         <div className="mb-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-orange-500 mb-1">MatLoc Indus</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-orange-500 mb-1">MAT INDUS</p>
           <h1 className="text-xl font-bold text-gray-900">Accès administrateur</h1>
         </div>
 

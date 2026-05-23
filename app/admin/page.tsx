@@ -43,7 +43,7 @@ export default async function AdminPage() {
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-orange-500 mb-0.5">MatLoc Indus</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-orange-500 mb-0.5">MAT INDUS</p>
           <h1 className="text-lg font-bold text-gray-900">Leads simulateur</h1>
         </div>
         <LogoutButton />

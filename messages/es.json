@@ -7,6 +7,9 @@
     "cta_see_more": "Ver más",
     "cta_see_all": "Ver todos nuestros proyectos",
     "cta_download": "Descargar ficha técnica",
+    "download_catalog": "Descargar el catálogo",
+    "brand_essence": "Calienta la pieza. No la cabina.",
+    "call_us": "Llámanos",
     "loading": "Cargando...",
     "back": "Volver",
     "read_more": "Leer más"
@@ -31,8 +34,10 @@
     "services_maintenance": "Mantenimiento e inspección"
   },
   "home": {
-    "hero_headline": "Cabinas de pintura a medida para profesionales exigentes",
-    "hero_subline": "Desde talleres de carrocería hasta plantas industriales — MatLoc Indus diseña, instala y mantiene sus equipos de tratamiento de superficies.",
+    "hero_eyebrow": "Industrial Painting. Reinvented.",
+    "hero_headline": "Innovación al servicio de la | precisión",
+    "hero_subline": "MAT INDUS diseña, instala y mantiene cabinas de pintura endotérmicas a medida — para talleres de carrocería y plantas industriales.",
+    "hero_cta": "Calcular mi ahorro",
     "hero_cta_primary": "Estudio de proyecto gratuito",
     "hero_cta_secondary": "Ver nuestros proyectos",
     "hero_sector_auto": "Sector automoción",
@@ -51,7 +56,7 @@
     "sector_industry_cta": "Soluciones industriales",
     "solutions_title": "Nuestra gama",
     "solutions_subtitle": "Equipos completos, desde sistemas de pintura hasta soluciones de ahorro energético.",
-    "why_title": "Por qué MatLoc Indus",
+    "why_title": "Por qué MAT INDUS",
     "why_subtitle": "Lo que nos distingue sobre el terreno.",
     "why_custom_title": "Siempre a medida",
     "why_custom_desc": "Cada instalación se diseña según sus limitaciones: superficie, altura, carga de trabajo, normativa local.",
@@ -86,7 +91,7 @@
     "legal": "Aviso legal",
     "sitemap": "Mapa del sitio",
     "address": "Sulniac, Morbihan (56), Francia",
-    "copyright": "© {year} MatLoc Indus. Todos los derechos reservados."
+    "copyright": "© {year} MAT INDUS. Todos los derechos reservados."
   },
   "forms": {
     "first_name": "Nombre",

@@ -99,7 +99,7 @@ export default async function SectorPage({ params }: Props) {
         <div className="container-site">
           <SectionHeader
             eyebrow="Notre réponse"
-            title="Ce que MatLoc Indus apporte à votre secteur"
+            title="Ce que MAT INDUS apporte à votre secteur"
             titleClassName="text-white"
             align="left"
             className="mb-10"

@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { TrendingDown, Clock, Leaf, Trees, Flame, Zap } from 'lucide-react'
 
-// Technical constants from MatLoc Indus documentation
+// Technical constants from MAT INDUS documentation
 const GAS_KWH_PER_CYCLE = 220.8       // kWh of gas per cycle
 const GAS_ELEC_KWH_PER_CYCLE = 30.4   // kWh electricity (fans) per cycle
 const ENDO_ELEC_KWH_PER_CYCLE = 21.9  // kWh electricity per cycle (panels + fans)
@@ -50,7 +50,7 @@ function InputRow({
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full h-2 rounded-full cursor-pointer"
-        style={{ background: `linear-gradient(to right, var(--amber) ${pct}%, #e5e7eb ${pct}%)` }}
+        style={{ background: `linear-gradient(to right, #111 ${pct}%, #d4d4d4 ${pct}%)` }}
       />
       <div className="flex justify-between text-xs text-foreground/30 mt-1">
         <span>{decimals > 0 ? min.toFixed(decimals) : min.toLocaleString('fr-FR')} {unit}</span>

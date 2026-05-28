@@ -31,19 +31,19 @@ export default async function Footer() {
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 shrink-0 text-amber-500" />
                 <a
-                  href="mailto:contact@matlocindus.fr"
+                  href="mailto:contact@matindus.fr"
                   className="transition-colors hover:text-white"
                 >
-                  contact@matlocindus.fr
+                  contact@matindus.fr
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4 shrink-0 text-amber-500" />
                 <a
-                  href="tel:+33XXXXXXXXX"
+                  href="tel:+33658394516"
                   className="transition-colors hover:text-white"
                 >
-                  +33 (0)X XX XX XX XX
+                  +33 6 58 39 45 16
                 </a>
               </div>
             </div>

@@ -44,8 +44,8 @@ export default function ContactPage() {
                     <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                     <div>
                       <p className="font-medium">Email</p>
-                      <a href="mailto:contact@matlocindus.fr" className="text-amber-600 hover:underline">
-                        contact@matlocindus.fr
+                      <a href="mailto:contact@matindus.fr" className="text-amber-600 hover:underline">
+                        contact@matindus.fr
                       </a>
                     </div>
                   </div>
@@ -53,8 +53,8 @@ export default function ContactPage() {
                     <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                     <div>
                       <p className="font-medium">Téléphone</p>
-                      <a href="tel:+33XXXXXXXXX" className="text-amber-600 hover:underline">
-                        +33 (0)X XX XX XX XX
+                      <a href="tel:+33658394516" className="text-amber-600 hover:underline">
+                        +33 6 58 39 45 16
                       </a>
                     </div>
                   </div>

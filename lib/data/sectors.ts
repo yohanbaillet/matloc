@@ -15,7 +15,7 @@ export const sectors: Sector[] = [
     title: 'Automobile & Carrosserie',
     headline: 'L\'équipement qu\'attendent les ateliers de carrosserie modernes',
     description:
-      "Les ateliers de carrosserie font face à des exigences croissantes : agréments constructeurs, normes environnementales, rentabilité par poste, attractivité pour les techniciens. MatLoc Indus conçoit des cabines et équipements qui répondent à toutes ces contraintes.",
+      "Les ateliers de carrosserie font face à des exigences croissantes : agréments constructeurs, normes environnementales, rentabilité par poste, attractivité pour les techniciens. MAT INDUS conçoit des cabines et équipements qui répondent à toutes ces contraintes.",
     heroImage:
       'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80',
     painPoints: [
@@ -27,7 +27,7 @@ export const sectors: Sector[] = [
       {
         title: 'Coûts énergétiques',
         description:
-          "La cabine de peinture représente souvent 40% de la facture énergétique d'un atelier. Nos solutions réduisent ce poste de 30 à 55%.",
+          "La cabine de peinture représente souvent 40 % de la facture énergétique d'un atelier. La cabine endothermique MI-E réduit ce poste de jusqu'à 50 % vs gaz.",
       },
       {
         title: 'Réglementation ICPE',
@@ -71,7 +71,7 @@ export const sectors: Sector[] = [
     title: 'Industrie',
     headline: 'Des cabines industrielles pour des process exigeants',
     description:
-      "Traitement du bois, métallurgie, plasturgie, équipements agricoles — les besoins industriels ne ressemblent pas à ceux de la carrosserie automobile. MatLoc Indus conçoit des cabines adaptées à vos pièces, vos volumes et vos contraintes de production.",
+      "Carrosserie industrielle, maintenance ferroviaire, industrie lourde, construction métallique, peinture de pièces volumineuses, poids lourds et bus — les besoins industriels ne ressemblent pas à ceux de la carrosserie automobile. MAT INDUS conçoit des cabines adaptées à vos pièces, vos volumes et vos contraintes de production.",
     heroImage:
       'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1600&q=80',
     painPoints: [
@@ -99,7 +99,7 @@ export const sectors: Sector[] = [
     benefits: [
       {
         title: 'Dimensions sur-mesure',
-        description: 'Cabines allant jusqu\'à 15m de longueur et 5m de hauteur.',
+        description: 'Cabine MI-PL jusqu\'à 23 m de long, 5 m de large et 5 m de haut. Débit jusqu\'à 60 000 m³/h.',
       },
       {
         title: 'Adaptées à vos produits',

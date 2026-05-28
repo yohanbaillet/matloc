@@ -14,217 +14,230 @@ export const solutions: Solution[] = [
   {
     slug: 'cabines-de-peinture',
     title: 'Cabines de peinture',
-    shortDesc: 'Des cabines thermiques, électriques et hybrides dimensionnées pour votre atelier.',
+    shortDesc:
+      'Cabines endothermiques MI-E, gaz/fioul MI-FG, rétractables MI-CR ou poids lourds MI-PL — dimensionnées pour votre atelier.',
     longDesc:
-      "Chaque cabine MatLoc Indus est conçue sur-mesure à partir de votre cahier des charges : dimensions de l'espace, type de véhicules ou de pièces traités, volume journalier, contraintes réglementaires locales. Nous proposons des modèles à chauffage thermique classique, électrique 100% ou hybride à panneaux endothermiques.",
-    heroImage:
-      'https://images.unsplash.com/photo-1611651338412-8403fa6e3599?auto=format&fit=crop&w=1600&q=80',
+      "MAT INDUS conçoit chaque cabine sur-mesure à partir de votre cahier des charges : surface disponible, type de véhicules ou de pièces traités, volume journalier, contraintes réglementaires. Quatre familles sont disponibles : cabine endothermique MI-E (100 % électrique, rendement ≈ 95 %), cabine gaz/fioul MI-FG (technologie éprouvée), cabine rétractable MI-CR (mobile sur rails) et cabine poids lourds MI-PL (jusqu'à 23 m de long).",
+    heroImage: '/brand/MatIndus-3.png',
     features: [
       {
         title: 'Sur-mesure systématique',
         description:
-          'Dimensionnement exact selon votre espace, vos pièces et vos volumes. Aucune solution standard imposée.',
+          "Dimensionnement exact selon votre espace, vos pièces et vos volumes. Étude approfondie en amont, conception clé en main.",
       },
       {
-        title: 'Homologation garantie',
+        title: 'Conformité CE et normes industrielles',
         description:
-          'Toutes nos cabines sont conformes aux réglementations françaises et européennes en vigueur (ICPE, code du travail).',
+          "CE, ISO 9001, directives 2006/42/CE, 2014/30/UE, 2014/35/UE, RoHS II, EN 12100, EN 60204-1, INRS ED 839.",
       },
       {
-        title: 'Éclairage LED 360°',
+        title: 'Éclairage LED haute luminosité',
         description:
-          "Éclairage à haute efficacité lumineuse et rendu de couleur optimal pour un travail de finition irréprochable.",
+          "≥ 1 000 lux sur le modèle MI-E (1 296 W plafond incliné + parois). Rendu couleur optimal pour les finitions.",
       },
       {
-        title: 'Filtration haute performance',
+        title: 'Filtration multi-étages',
         description:
-          "Filtres plafond EU5 et filtres sol EU3 assurant une atmosphère de peinture contrôlée, sans poussière.",
+          "Préfiltre EU5 plafond, filtre sol EU3 paint-stop, plénum isolé auto-extinguible F1 — atmosphère propre et homogène.",
       },
       {
-        title: 'Systèmes thermiques adaptés',
+        title: 'Ventilation maîtrisée',
         description:
-          "Au gaz, électrique ou hybride — nous choisissons avec vous la source d'énergie la plus adaptée à vos besoins.",
+          "32 000 m³/h sur le modèle MI-E (11 kW soufflage + 11 kW extraction sol). Vitesse ≥ 0,3 m/s, dépression contrôlée.",
       },
       {
         title: 'Installation et mise en service',
         description:
-          "Nos techniciens prennent en charge l'intégralité de l'installation, du raccordement à la mise en service et la formation.",
+          "Nos techniciens prennent en charge le raccordement, la mise en service, la programmation et la formation des opérateurs.",
       },
     ],
     specs: [
-      { label: 'Largeur standard', value: '4 à 8 m' },
-      { label: 'Longueur', value: '6 à 14 m' },
-      { label: 'Hauteur', value: '2,8 à 4,5 m' },
-      { label: 'Puissance thermique', value: '50 à 250 kW' },
-      { label: 'Débit air', value: '15 000 à 60 000 m³/h' },
-      { label: 'Délai de mise en température', value: '10 à 20 min (gaz) / 6 à 10 min (endothermique)' },
+      { label: 'Modèle référence', value: 'MI-E 6900 × 4000 × 2850' },
+      { label: 'Dimensions intérieures', value: '6 900 × 4 000 × H 2 800 mm' },
+      { label: 'Dimensions extérieures', value: '7 100 × 4 000 × H 3 400 mm' },
+      { label: 'Débit air (soufflage)', value: '32 000 m³/h — 11 kW' },
+      { label: 'Puissance cabine (MI-E)', value: '52 kW' },
+      { label: 'Alimentation', value: '380 V — 50 Hz — Triphasé + N + T' },
+      { label: 'Temps de chauffe', value: '5–10 min (MI-E) / 15–20 min (MI-FG)' },
     ],
     sectors: ['automobile-carrosserie', 'industrie'],
     relatedSlugs: ['laboratoires-de-peinture', 'aires-de-preparation', 'gain-energetique'],
   },
   {
     slug: 'laboratoires-de-peinture',
-    title: 'Laboratoires de peinture',
-    shortDesc: 'Postes de mélange et d\'analyse couleur pour carrosseries et ateliers industriels.',
+    title: 'Laboratoire de peinture MI-LAB',
+    shortDesc:
+      "Zone dédiée au mélange peinture : ventilation sécurisée des solvants, options ATEX et charbon actif.",
     longDesc:
-      "Un laboratoire de peinture bien conçu réduit les pertes de matière, les erreurs de teinte et le temps de préparation. MatLoc Indus conçoit des espaces dédiés au mélange et au contrôle couleur, ergonomiques et conformes aux normes de sécurité (ventilation, stockage produits inflammables).",
-    heroImage:
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80',
+      "Le laboratoire de peinture MI-LAB est un espace compact et efficace dédié au mélange et à la préparation. La ventilation sécurise l'exposition aux solvants, l'éclairage est calibré pour un rendu couleur fidèle, et l'organisation simplifie le travail quotidien des opérateurs. Options ATEX, filtration au charbon actif, plan de travail intégré et système de pesée selon vos besoins.",
+    heroImage: '/illustrations/lab.png',
     features: [
       {
-        title: 'Poste de mélange haute précision',
+        title: 'Environnement sécurisé pour l\'opérateur',
         description:
-          "Balance analytique, éclairage D65 simulant la lumière du jour, plan de travail ergonomique anti-renversement.",
+          "Ventilation sécurisée des solvants, captation des particules, faible consommation énergétique.",
       },
       {
-        title: 'Stockage organisé et sécurisé',
+        title: 'Qualité de préparation optimisée',
         description:
-          "Armoires ventilées ATEX pour produits inflammables, rangement optimisé par famille de teintes.",
+          "Zone dédiée au mélange peinture, plan de travail intégré (option), système de pesée disponible.",
       },
       {
-        title: 'Hotte d\'aspiration dédiée',
+        title: 'Options ATEX et charbon actif',
         description:
-          "Extraction des vapeurs au plus près du poste de travail pour la santé des opérateurs.",
+          "Éclairage ATEX, filtration charbon actif et configuration sur mesure selon votre atelier.",
       },
       {
-        title: 'Gestion des déchets intégrée',
+        title: 'Installation simple',
         description:
-          "Zone de rinçage et collecte des effluents conforme à la réglementation sur les déchets industriels.",
+          "Panneaux acier double face 50 mm, emboîtables, alimentation monophasée 220 V. Conforme environnement atelier.",
       },
     ],
     specs: [
-      { label: 'Surface type', value: '8 à 20 m²' },
-      { label: 'Stockage teintes', value: 'jusqu\'à 1 200 références' },
-      { label: 'Éclairage', value: 'LED D65 IRC > 95' },
-      { label: 'Débit aspiration', value: '800 à 2 000 m³/h' },
+      { label: 'Modèle référence', value: 'MI-LAB 3600 × 2500' },
+      { label: 'Dimensions intérieures', value: '4 000 × 2 500 × H 2 550 mm' },
+      { label: 'Débit extraction', value: '3 500 m³/h — 0,55 kW' },
+      { label: 'Éclairage', value: '12 tubes LED 18 W — ≥ 600 lux' },
+      { label: 'Filtration', value: 'Préfiltre G3 + fibre de verre' },
+      { label: 'Alimentation', value: '220 V — 50 Hz — monophasée' },
+      { label: 'Puissance totale', value: '1 kW' },
     ],
-    sectors: ['automobile-carrosserie'],
+    sectors: ['automobile-carrosserie', 'industrie'],
     relatedSlugs: ['cabines-de-peinture', 'aires-de-preparation'],
   },
   {
     slug: 'aires-de-preparation',
-    title: 'Aires de préparation',
-    shortDesc: 'Zones de ponçage et de préparation surface intégrées à votre flux de production.',
+    title: 'Aire de préparation MI-AP',
+    shortDesc:
+      "Aires de ponçage et de préparation surface — soufflage plafond, extraction sol, captation efficace.",
     longDesc:
-      "L'aire de préparation est souvent le goulot d'étranglement d'un atelier de peinture. MatLoc Indus conçoit des postes de ponçage et de masticage optimisés pour accélérer vos cycles sans sacrifier la qualité de préparation surface.",
-    heroImage:
-      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80',
+      "L'aire de préparation MI-AP réduit le goulot d'étranglement avant la cabine de peinture. Soufflage plafond + extraction sol (full-fall) assurent une captation efficace des poussières et des résidus de ponçage. 40 tubes LED inclinés à 10° pour révéler les défauts de surface avant application. Compatible avec les flux automobile, ferroviaire et industriels.",
+    heroImage: '/illustrations/prep.png',
     features: [
       {
-        title: 'Extraction basse centralisée',
+        title: 'Soufflage plafond / extraction sol',
         description:
-          "Captation des poussières au plus près de la source pour une qualité d'air maximale et zéro contamination de la cabine.",
+          "Système full-fall : 28 000 m³/h, vitesse ≥ 0,28 m/s, niveau sonore ≤ 72 dB. Captation au plus près des sources.",
       },
       {
-        title: 'Éclairage haute luminosité',
+        title: 'Éclairage révélateur de défauts',
         description:
-          "LED 5 000K pour révéler tous les défauts de surface avant application. Jusqu'à 1 200 lux au poste.",
+          "40 tubes LED 18 W (10 rampes × 4) inclinés à 10°, verre trempé 5 mm, ≥ 800 lux au poste de travail.",
       },
       {
-        title: 'Sol antistatique',
+        title: 'Plateforme robuste 600 kg/roue',
         description:
-          "Résine époxy antistatique évitant l'accumulation de poussières et facilitant le nettoyage.",
+          "Caillebotis acier 30 × 4 mm sur structure 300 mm. Charge admissible 600 kg/roue, compatible véhicules lourds.",
       },
       {
-        title: 'Bras aspirants mobiles',
+        title: 'Filtration plafond + sol',
         description:
-          "Flexibilité maximale pour le traitement de pièces de toutes tailles.",
+          "Plafond F5 (560 g/m², > 5 µm), sol fibre de verre, traitement coton filtrant. Air propre maintenu en continu.",
       },
     ],
     specs: [
-      { label: 'Nombre de postes', value: '1 à 4' },
-      { label: 'Débit extraction', value: '4 000 à 20 000 m³/h' },
-      { label: 'Éclairement', value: '800 à 1 200 lux' },
+      { label: 'Modèle référence', value: 'MI-AP 6900 × 4000' },
+      { label: 'Dimensions intérieures', value: '6 900 × 4 000 × H 3 000 mm' },
+      { label: 'Dimensions extérieures', value: '8 406 × 4 100 × H 3 500 mm' },
+      { label: 'Débit air', value: '28 000 m³/h' },
+      { label: 'Vitesse air à vide', value: '≥ 0,28 m/s' },
+      { label: 'Moteur', value: '7,5 kW — 380 V — 50 Hz — Triphasé' },
+      { label: 'Puissance totale', value: '8,5 kW' },
     ],
     sectors: ['automobile-carrosserie', 'industrie'],
     relatedSlugs: ['cabines-de-peinture', 'laboratoires-de-peinture'],
   },
   {
     slug: 'gain-energetique',
-    title: 'Solutions gain énergétique',
-    shortDesc: "Cabines endothermiques 100 % électriques : -91 % d'énergie vs gaz, ROI moyen 13 mois, 51 t de CO₂ évitées par an.",
+    title: 'Panneaux endothermiques',
+    shortDesc:
+      "Cabine endothermique MI-E : jusqu'à 50 % d'énergie en moins vs gaz, ROI ≈ 13 mois, 49 t de CO₂ évitées par an.",
     longDesc:
-      "La cabine de peinture est l'un des postes les plus énergivores d'un atelier. Une cabine gaz consomme 251 kWh par cycle (dont 220,8 kWh de gaz + 30,4 kWh d'électricité). Une cabine endothermique MatLoc n'en consomme que 21,9 kWh — soit 91 % de moins. Sur 1 000 cycles/an, l'économie annuelle dépasse 13 000 € avec un retour sur investissement de l'ordre de 13 mois. En prime : zéro combustion, zéro émission directe, et une montée en température 2× plus rapide (6–10 min vs 10–20 min pour le gaz).",
-    heroImage:
-      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1600&q=80',
+      "La cabine de peinture est l'un des postes les plus énergivores d'un atelier. La cabine endothermique MAT INDUS MI-E consomme ≈ 52 kWh par cycle contre ≈ 272 kWh pour une cabine gaz équivalente. Sur l'année, cela représente jusqu'à 9 250 € d'économie et 49 tonnes de CO₂ évitées. Les 10 panneaux endothermiques (5 × 2 kW + 5 × 4 kW) chauffent par rayonnement infrarouge long : montée en température en 3 à 6 minutes, rendement > 95 %, zéro combustion.",
+    heroImage: '/illustrations/endo-panel.png',
     features: [
       {
         title: '100 % électrique, zéro combustion',
         description:
-          "Les panneaux endothermiques chauffent la surface directement par rayonnement. Aucun brûleur, aucune flamme, aucun rejet CO₂ direct — et une efficacité de 95 %.",
+          "Aucun brûleur, aucune flamme, aucun rejet CO₂ direct. Rendement énergétique ≈ 95 %, sécurité incendie renforcée.",
       },
       {
-        title: 'Montée en température 2× plus rapide',
+        title: 'Montée en température 5 à 10 min',
         description:
-          "6 à 10 minutes pour atteindre 60 °C contre 10 à 20 minutes pour une cabine gaz. Chaque cycle gagné, c'est de la capacité de production en plus.",
+          "Temps de chauffe 5–10 minutes contre 15–20 minutes pour le gaz. Plus de cycles par jour, meilleure productivité.",
       },
       {
-        title: 'Sélection de zones',
+        title: '10 panneaux modulaires — 30 kW total',
         description:
-          "10 zones de chauffe indépendantes : ne chauffez que la zone à peindre. Consommation réduite au strict nécessaire, cycle après cycle.",
+          "5 panneaux 2 kW (2380 × 490 × 39 mm) + 5 panneaux 4 kW (2380 × 890 × 39 mm). Implantation murale sur supports isolants.",
       },
       {
-        title: 'ROI documenté : 13 mois',
+        title: 'ROI moyen ≈ 13 mois',
         description:
-          "Économie annuelle moyenne de 13 250 € sur l'énergie et les abonnements. Le surcoût de la cabine endothermique est remboursé en moins de 14 mois dans la plupart des configurations.",
+          "Économie annuelle estimée à ≈ 9 250 € (coût annuel d'exploitation MI-E ≈ 10 450 € vs MI-FG ≈ 19 700 €).",
       },
       {
-        title: '51 tonnes de CO₂ évitées par an',
+        title: '49 tonnes de CO₂ évitées par an',
         description:
-          "Basé sur 1 000 cycles/an : 54,6 kgCO₂e/cycle pour le gaz contre 3,2 kgCO₂e pour l'endothermique. Équivalent à 4 800 arbres plantés.",
+          "≈ 7,8 kg CO₂/cycle (MI-E) contre ≈ 52,87 kg CO₂/cycle (MI-FG). Zéro émission directe, conformité environnementale.",
       },
       {
-        title: 'Abonnement simplifié',
+        title: 'Compatible neuf ou rétrofit',
         description:
-          "Un seul contrat d'énergie (électricité 63 kVA). Supprimez l'abonnement gaz 300 mbar et les contraintes ATEX associées.",
+          "Alimentation 400 V triphasé + N + T, 50 Hz, protection IP55, aluminium anodisé. Compatible cabines neuves ou existantes.",
       },
     ],
     specs: [
-      { label: 'Énergie/cycle', value: '21,9 kWh (vs 251 kWh gaz)' },
-      { label: 'Réduction consommation', value: '−91 %' },
-      { label: 'Montée en température', value: '6 à 10 min (vs 10–20 min)' },
-      { label: 'Économie annuelle (1 000 cycles)', value: '≈ 13 250 €' },
+      { label: 'Énergie / cycle', value: '≈ 52 kWh (vs ≈ 272 kWh gaz)' },
+      { label: 'Réduction énergétique', value: 'jusqu\'à 50 %' },
+      { label: 'Temps de chauffe', value: '5–10 min (vs 15–20 min gaz)' },
+      { label: 'Économie annuelle', value: '≈ 9 250 €' },
       { label: 'Retour sur investissement', value: '≈ 13 mois' },
-      { label: 'CO₂ évité/an', value: '≈ 51 tonnes' },
+      { label: 'CO₂ évité / an', value: '≈ 49 tonnes' },
+      { label: 'Rendement', value: '≈ 95 %' },
+      { label: 'Conformité', value: 'CE — Basse Tension 2014/35/UE & CEM 2014/30/UE' },
     ],
     sectors: ['automobile-carrosserie', 'industrie'],
     relatedSlugs: ['cabines-de-peinture'],
   },
   {
     slug: 'location',
-    title: 'Location de cabines',
-    shortDesc: 'Besoin ponctuel ou pic d\'activité ? Nos cabines en location, sans investissement lourd.',
+    title: 'Cabine rétractable MI-CR',
+    shortDesc:
+      "Cabine télescopique mobile sur rails — jusqu'à 8 × 6 m. Flexibilité industrielle, déploiement assisté.",
     longDesc:
-      "Travaux, pic saisonnier, sinistre, démarrage d'activité — MatLoc Indus propose des solutions de location de cabines de peinture mobiles ou fixes. Livraison, installation et reprise incluses. Une solution flexible pour ne pas immobiliser du capital sur un équipement non permanent.",
-    heroImage:
-      'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1600&q=80',
+      "La cabine rétractable MI-CR est une solution flexible pour ateliers à activité ponctuelle ou à fort besoin d'espace libéré entre les cycles. Elle se déploie ou se rétracte sur rails, libérant complètement l'espace de travail lorsqu'elle n'est pas en service. Structure tubes acier galvanisé 80 × 40 × 2 mm, toile PVC ignifugée, éclairage ATEX, ventilation 55 000 m³/h.",
+    heroImage: '/illustrations/retracable.png',
     features: [
       {
-        title: 'Location courte durée',
+        title: 'Cabine télescopique mobile',
         description:
-          "De 1 semaine à 3 mois. Idéal pour un remplacement d'urgence ou une période de pointe.",
+          "Mécanisme à ciseaux 50 × 30 × 1,8 mm. Vitesse d'extension 8–12 m/min, déploiement assisté par 2 moteurs 2,2 kW.",
       },
       {
-        title: 'Location longue durée',
+        title: 'Libération complète de l\'espace',
         description:
-          "De 6 mois à 5 ans. Alternative à l'investissement, préservez votre trésorerie.",
+          "La cabine se rétracte → la pièce est positionnée → la cabine s'étend. Installation intérieure ou extérieure sur sol plat.",
       },
       {
-        title: 'Livraison et installation incluses',
+        title: 'Ventilation 55 000 m³/h',
         description:
-          "Nos techniciens livrent, installent et mettent en service. Vous n'avez qu'à peindre.",
+          "Ventilateur 30 kW, filtration papier labyrinthe + évacuation extérieure. Vitesse d'air minimale ≥ 0,50 m/s.",
       },
       {
-        title: 'Maintenance comprise',
+        title: 'Éclairage et sécurité ATEX',
         description:
-          "Entretien préventif et curatif inclus dans le contrat de location. Zéro surprise.",
+          "24 lampes LED antidéflagrantes 22 W, ≥ 800 lux. Armoire Schneider Electric + télécommande, options anti-explosion.",
       },
     ],
     specs: [
-      { label: 'Durée minimum', value: '1 semaine' },
-      { label: 'Délai de livraison', value: '3 à 5 jours ouvrés' },
-      { label: 'Modèles disponibles', value: 'A7200, E7200' },
-      { label: 'Maintenance', value: 'Incluse' },
+      { label: 'Modèle référence', value: 'MAT-RET 4000 × 6000' },
+      { label: 'Dimensions intérieures', value: '8 000 × 6 000 × H 5 000 mm' },
+      { label: 'Dimensions extérieures déployée', value: '10 228 × 6 680 × H 5 260 mm' },
+      { label: 'Débit air', value: '55 000 m³/h' },
+      { label: 'Vitesse d\'extension', value: '8 à 12 m/min' },
+      { label: 'Alimentation', value: '3 × 380 V — 50 Hz' },
+      { label: 'Puissance totale', value: '36 kW' },
     ],
     sectors: ['automobile-carrosserie', 'industrie'],
     relatedSlugs: ['cabines-de-peinture'],

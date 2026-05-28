@@ -128,7 +128,7 @@ export default function Header() {
           <div className="hidden items-center gap-2 lg:flex">
             <LocaleSwitcher />
             <a
-              href="tel:+33XXXXXXXXX"
+              href="tel:+33658394516"
               className="flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               <Phone className="h-3.5 w-3.5" />

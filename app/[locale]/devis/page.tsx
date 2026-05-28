@@ -77,11 +77,11 @@ export default async function DevisPage({ searchParams }: Props) {
               <div className="rounded-xl bg-midnight p-6">
                 <p className="text-sm font-semibold text-white">Besoin d'un échange rapide ?</p>
                 <a
-                  href="tel:+33XXXXXXXXX"
+                  href="tel:+33658394516"
                   className="mt-3 flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 transition-colors"
                 >
                   <Phone className="h-4 w-4" />
-                  +33 (0)X XX XX XX XX
+                  +33 6 58 39 45 16
                 </a>
               </div>
             </div>

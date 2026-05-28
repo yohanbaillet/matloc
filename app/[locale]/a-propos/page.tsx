@@ -150,14 +150,14 @@ export default async function AboutPage() {
                 </div>
                 <div className="flex items-center gap-3 text-white/70">
                   <Mail className="h-5 w-5 shrink-0 text-amber-400" />
-                  <a href="mailto:contact@matlocindus.fr" className="hover:text-white transition-colors">
-                    contact@matlocindus.fr
+                  <a href="mailto:contact@matindus.fr" className="hover:text-white transition-colors">
+                    contact@matindus.fr
                   </a>
                 </div>
                 <div className="flex items-center gap-3 text-white/70">
                   <Phone className="h-5 w-5 shrink-0 text-amber-400" />
-                  <a href="tel:+33XXXXXXXXX" className="hover:text-white transition-colors">
-                    +33 (0)X XX XX XX XX
+                  <a href="tel:+33658394516" className="hover:text-white transition-colors">
+                    +33 6 58 39 45 16
                   </a>
                 </div>
               </div>

@@ -83,7 +83,7 @@ export const services: Service[] = [
     title: 'Maintenance & Contrôle',
     shortDesc: 'Entretien préventif, contrôles réglementaires, interventions SAV sous 48h.',
     longDesc:
-      "Une cabine bien entretenue dure plus longtemps, consomme moins et produit une meilleure qualité. MatLoc Indus propose des contrats d'entretien annuels adaptés à votre régime d'utilisation, ainsi que des contrôles de conformité réglementaires obligatoires.",
+      "Une cabine bien entretenue dure plus longtemps, consomme moins et produit une meilleure qualité. MAT INDUS propose des contrats d'entretien annuels adaptés à votre régime d'utilisation, ainsi que des contrôles de conformité réglementaires obligatoires.",
     heroImage:
       'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80',
     steps: [

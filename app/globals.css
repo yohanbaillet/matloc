@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ─── MatLoc Indus Design System ──────────────────────────────────────── */
+/* ─── MAT INDUS Design System ─────────────────────────────────────────── */
 
 @theme inline {
   /* Semantic tokens → CSS vars */

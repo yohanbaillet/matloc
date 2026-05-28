@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       template: '%s | MAT INDUS',
     },
     description: t('hero_subline'),
-    metadataBase: new URL('https://matlocindus.fr'),
+    metadataBase: new URL('https://matindus.fr'),
     alternates: {
       canonical: `/${locale}`,
       languages: {

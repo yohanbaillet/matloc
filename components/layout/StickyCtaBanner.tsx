@@ -26,7 +26,7 @@ export default function StickyCtaBanner() {
     >
       <div className="flex gap-2">
         <a
-          href="tel:+33XXXXXXXXX"
+          href="tel:+33658394516"
           className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-border py-3 text-sm font-semibold text-foreground transition-colors hover:bg-surface"
         >
           <Phone className="h-4 w-4" />

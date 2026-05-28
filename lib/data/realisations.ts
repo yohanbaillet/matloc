@@ -36,8 +36,8 @@ export const realisations: Realization[] = [
       { label: 'Capacité journalière', value: '+25%' },
     ],
     images: [
-      'https://images.unsplash.com/photo-1611651338412-8403fa6e3599?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80',
+      '/installations/Cabine A7200 Interieur.png',
+      '/installations/Bruz 35.png',
     ],
     testimonial: {
       quote:
@@ -66,8 +66,8 @@ export const realisations: Realization[] = [
       { label: 'Réduction consommation gaz', value: '-40%' },
     ],
     images: [
-      'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
+      '/installations/Cabines de Peinture.png',
+      '/installations/Orvault 44.png',
     ],
     testimonial: {
       quote:
@@ -96,8 +96,8 @@ export const realisations: Realization[] = [
       { label: 'Retour sur investissement', value: '2,8 ans' },
     ],
     images: [
-      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80',
+      '/installations/Cabine E7200.png',
+      '/installations/Lille 59 MatLoc Indus.png',
     ],
     testimonial: {
       quote:
@@ -126,8 +126,8 @@ export const realisations: Realization[] = [
       { label: 'Incidents sécurité', value: '0 depuis installation' },
     ],
     images: [
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1200&q=80',
+      '/installations/Custom Paint Booth.png',
+      '/installations/Pose from MatLoc Indus.png',
     ],
   },
   {
@@ -150,8 +150,8 @@ export const realisations: Realization[] = [
       { label: 'Erreurs de teinte', value: '-90%' },
     ],
     images: [
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80',
+      '/installations/Vannes MatLoc Indus.png',
+      '/installations/Vannes Painting Cabin.png',
     ],
   },
   {
@@ -174,8 +174,8 @@ export const realisations: Realization[] = [
       { label: 'Retouches après peinture', value: '-55%' },
     ],
     images: [
-      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1611651338412-8403fa6e3599?auto=format&fit=crop&w=1200&q=80',
+      '/installations/Aire Preparation Mat Loc.png',
+      '/installations/Chantepie 35.png',
     ],
   },
 ]

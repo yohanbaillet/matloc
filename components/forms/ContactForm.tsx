@@ -43,10 +43,10 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="flex flex-col items-center gap-4 rounded-xl border border-green-200 bg-green-50 p-10 text-center">
-        <CheckCircle2 className="h-12 w-12 text-green-500" />
-        <h3 className="text-xl font-bold">{t('success_title')}</h3>
-        <p className="text-muted-foreground">{t('success_desc')}</p>
+      <div className="flex flex-col items-center gap-4 rounded-xl border border-[var(--border-v2)] bg-[var(--surface)] p-10 text-center">
+        <CheckCircle2 className="h-12 w-12 text-green-400" />
+        <h3 className="text-xl font-bold text-white">{t('success_title')}</h3>
+        <p className="text-white/70">{t('success_desc')}</p>
       </div>
     )
   }

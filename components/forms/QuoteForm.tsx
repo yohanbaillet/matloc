@@ -62,10 +62,10 @@ export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }:
 
   if (status === 'success') {
     return (
-      <div className="flex flex-col items-center gap-4 rounded-xl border border-green-200 bg-green-50 p-12 text-center">
-        <CheckCircle2 className="h-14 w-14 text-green-500" />
-        <h3 className="text-2xl font-bold">{t('success_title')}</h3>
-        <p className="max-w-sm text-muted-foreground">{t('success_desc')}</p>
+      <div className="flex flex-col items-center gap-4 rounded-xl border border-[var(--border-v2)] bg-[var(--surface)] p-12 text-center">
+        <CheckCircle2 className="h-14 w-14 text-green-400" />
+        <h3 className="text-2xl font-bold text-white">{t('success_title')}</h3>
+        <p className="max-w-sm text-white/70">{t('success_desc')}</p>
       </div>
     )
   }

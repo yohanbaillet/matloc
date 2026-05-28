@@ -30,7 +30,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
             {/* Contact info */}
             <div className="space-y-6">
-              <div className="rounded-xl border border-border bg-white p-6">
+              <div className="rounded-xl border border-border bg-card p-6">
                 <h2 className="mb-5 text-lg font-bold">Nos coordonnées</h2>
                 <div className="space-y-4 text-sm">
                   <div className="flex items-start gap-3">
@@ -77,7 +77,7 @@ export default function ContactPage() {
             </div>
 
             {/* Form */}
-            <div className="rounded-xl border border-border bg-white p-8 lg:col-span-2">
+            <div className="rounded-xl border border-border bg-card p-8 lg:col-span-2">
               <h2 className="mb-6 text-xl font-bold">Envoyer un message</h2>
               <ContactForm />
             </div>

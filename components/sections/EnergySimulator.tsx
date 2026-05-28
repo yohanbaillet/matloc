@@ -185,7 +185,7 @@ export default function EnergySimulator() {
       : t('roi_years', { years: r.roiYears.toFixed(1).replace('.', ',') })
 
   return (
-    <section className="section-padding bg-surface">
+    <section className="theme-light section-padding bg-surface">
       <div className="container-site">
         <div className="text-center mb-12">
           <p className="text-[var(--amber)] font-medium text-sm uppercase tracking-widest mb-3">

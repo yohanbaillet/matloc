@@ -58,7 +58,7 @@ export default function ContactForm() {
           <label className="mb-1.5 block text-sm font-medium">{t('first_name')} *</label>
           <input
             {...register('firstName')}
-            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+            className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
             placeholder="Jean"
           />
           {errors.firstName && <p className="mt-1 text-xs text-red-500">{errors.firstName.message}</p>}
@@ -67,7 +67,7 @@ export default function ContactForm() {
           <label className="mb-1.5 block text-sm font-medium">{t('last_name')} *</label>
           <input
             {...register('lastName')}
-            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+            className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
             placeholder="Dupont"
           />
           {errors.lastName && <p className="mt-1 text-xs text-red-500">{errors.lastName.message}</p>}
@@ -79,7 +79,7 @@ export default function ContactForm() {
         <input
           {...register('email')}
           type="email"
-          className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+          className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
           placeholder="jean.dupont@entreprise.fr"
         />
         {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
@@ -90,7 +90,7 @@ export default function ContactForm() {
         <input
           {...register('phone')}
           type="tel"
-          className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+          className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
           placeholder="+33 6 00 00 00 00"
         />
       </div>
@@ -100,7 +100,7 @@ export default function ContactForm() {
         <textarea
           {...register('message')}
           rows={5}
-          className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 resize-none"
+          className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 resize-none"
           placeholder="Votre question ou votre demande..."
         />
         {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>}

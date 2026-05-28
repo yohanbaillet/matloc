@@ -66,15 +66,15 @@ export default function Header() {
       className={cn(
         'fixed top-0 z-50 w-full transition-all duration-300',
         scrolled
-          ? 'border-b border-border bg-white/95 shadow-sm backdrop-blur-sm'
-          : 'bg-white/90 backdrop-blur-sm'
+          ? 'border-b border-border bg-card/95 shadow-sm backdrop-blur-sm'
+          : 'bg-card/90 backdrop-blur-sm'
       )}
     >
       <div className="container-site">
         <div className="flex h-16 items-center justify-between gap-4 lg:h-[70px]">
           {/* Logo */}
           <Link href={`/${locale}`} className="flex shrink-0 items-center" aria-label="MAT INDUS">
-            <Logo variant="dark" priority className="h-6 w-auto sm:h-7" />
+            <Logo variant="white" priority className="h-6 w-auto sm:h-7" />
           </Link>
 
           {/* Desktop nav */}
@@ -98,7 +98,7 @@ export default function Header() {
                   </button>
                   {openDropdown === item.labelKey && (
                     <div className="absolute left-0 top-full z-50 pt-1">
-                      <div className="min-w-[200px] rounded-lg border border-border bg-white py-1.5 shadow-lg">
+                      <div className="min-w-[200px] rounded-lg border border-border bg-card py-1.5 shadow-lg">
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
@@ -156,7 +156,7 @@ export default function Header() {
               <SheetContent side="right" className="w-80 p-0">
                 <div className="flex h-full flex-col">
                   <div className="border-b border-border p-4">
-                    <Logo variant="dark" className="h-6 w-auto" />
+                    <Logo variant="white" className="h-6 w-auto" />
                   </div>
                   <nav className="flex-1 overflow-y-auto p-4">
                     {navItems.map((item) => (

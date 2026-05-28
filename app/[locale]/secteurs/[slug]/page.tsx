@@ -72,7 +72,7 @@ export default async function SectorPage({ params }: Props) {
       </section>
 
       {/* Pain points */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-card">
         <div className="container-site">
           <SectionHeader
             eyebrow="Vos enjeux"
@@ -132,7 +132,7 @@ export default async function SectorPage({ params }: Props) {
               <Link
                 key={s.slug}
                 href={`${base}/solutions/${s.slug}`}
-                className="group overflow-hidden rounded-xl border border-border bg-white card-lift"
+                className="group overflow-hidden rounded-xl border border-border bg-card card-lift"
               >
                 <div className="aspect-video overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -157,7 +157,7 @@ export default async function SectorPage({ params }: Props) {
 
       {/* Realizations */}
       {sectorRealizations.length > 0 && (
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-card">
           <div className="container-site">
             <div className="mb-10 flex items-end justify-between">
               <SectionHeader
@@ -177,7 +177,7 @@ export default async function SectorPage({ params }: Props) {
                 <Link
                   key={r.slug}
                   href={`${base}/realisations/${r.slug}`}
-                  className="group overflow-hidden rounded-xl border border-border bg-white card-lift"
+                  className="group overflow-hidden rounded-xl border border-border bg-card card-lift"
                 >
                   <div className="aspect-video overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}

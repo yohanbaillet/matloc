@@ -44,7 +44,7 @@ export default async function RealizationsPreview() {
   const base = `/${locale}`
 
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-card">
       <div className="container-site">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <SectionHeader
@@ -67,7 +67,7 @@ export default async function RealizationsPreview() {
             <Link
               key={item.id}
               href={`${base}/realisations/${item.slug}`}
-              className="group overflow-hidden rounded-xl border border-border bg-white card-lift"
+              className="group overflow-hidden rounded-xl border border-border bg-card card-lift"
             >
               {/* Image */}
               <div className="relative aspect-[4/3] overflow-hidden">

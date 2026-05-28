@@ -59,7 +59,7 @@ export default async function ServicesPage() {
                 <Link
                   key={s.slug}
                   href={`${base}/services/${s.slug}`}
-                  className="group rounded-xl border border-border bg-white p-8 card-lift hover:border-amber-200"
+                  className="group rounded-xl border border-border bg-card p-8 card-lift hover:border-amber-200"
                 >
                   <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-amber-600 transition-colors group-hover:bg-amber-500 group-hover:text-white">
                     <Icon className="h-6 w-6" />

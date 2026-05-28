@@ -82,7 +82,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-card">
         <div className="container-site">
           <div className="mx-auto max-w-3xl">
             <h2 className="text-3xl font-bold">Notre histoire</h2>
@@ -117,7 +117,7 @@ export default async function AboutPage() {
             {values.map((v, i) => {
               const Icon = v.icon
               return (
-                <div key={i} className="rounded-xl border border-border bg-white p-7">
+                <div key={i} className="rounded-xl border border-border bg-card p-7">
                   <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-amber-50 text-amber-600">
                     <Icon className="h-5 w-5" />
                   </div>

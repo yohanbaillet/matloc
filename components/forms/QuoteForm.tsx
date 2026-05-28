@@ -82,7 +82,7 @@ export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }:
             <label className="mb-1.5 block text-sm font-medium">{t('first_name')} *</label>
             <input
               {...register('firstName')}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+              className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
               placeholder="Jean"
             />
             {errors.firstName && <p className="mt-1 text-xs text-red-500">{errors.firstName.message}</p>}
@@ -91,7 +91,7 @@ export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }:
             <label className="mb-1.5 block text-sm font-medium">{t('last_name')} *</label>
             <input
               {...register('lastName')}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+              className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
               placeholder="Dupont"
             />
             {errors.lastName && <p className="mt-1 text-xs text-red-500">{errors.lastName.message}</p>}
@@ -101,7 +101,7 @@ export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }:
             <input
               {...register('email')}
               type="email"
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+              className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
               placeholder="jean.dupont@entreprise.fr"
             />
             {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
@@ -111,7 +111,7 @@ export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }:
             <input
               {...register('phone')}
               type="tel"
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+              className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
               placeholder="+33 6 00 00 00 00"
             />
             {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone.message}</p>}
@@ -121,7 +121,7 @@ export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }:
           <label className="mb-1.5 block text-sm font-medium">{t('company')} *</label>
           <input
             {...register('company')}
-            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+            className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
             placeholder="Carrosserie Martin"
           />
           {errors.company && <p className="mt-1 text-xs text-red-500">{errors.company.message}</p>}
@@ -138,7 +138,7 @@ export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }:
             <label className="mb-1.5 block text-sm font-medium">{t('sector')} *</label>
             <select
               {...register('sector')}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+              className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
             >
               <option value="">Sélectionner...</option>
               <option value="automobile">{t('sector_auto')}</option>
@@ -151,7 +151,7 @@ export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }:
             <label className="mb-1.5 block text-sm font-medium">{t('project_type')} *</label>
             <select
               {...register('projectType')}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
+              className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20"
             >
               <option value="">Sélectionner...</option>
               <option value="nouvelle-installation">{t('project_new')}</option>
@@ -168,7 +168,7 @@ export default function QuoteForm({ defaultName, defaultCompany, defaultEmail }:
           <textarea
             {...register('message')}
             rows={5}
-            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 resize-none"
+            className="w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 resize-none"
             placeholder={t('message_placeholder')}
           />
           {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>}

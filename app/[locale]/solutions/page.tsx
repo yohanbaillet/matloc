@@ -42,7 +42,7 @@ export default async function SolutionsPage() {
               <Link
                 key={s.slug}
                 href={`${base}/solutions/${s.slug}`}
-                className="group overflow-hidden rounded-xl border border-border bg-white card-lift"
+                className="group overflow-hidden rounded-xl border border-border bg-card card-lift"
               >
                 <div className="aspect-video overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

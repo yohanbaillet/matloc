@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
-import { Geist, Geist_Mono, Inter_Tight } from 'next/font/google'
+import { Geist, Geist_Mono, Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google'
 import { routing } from '@/lib/i18n/routing'
 import { cjkLocales } from '@/lib/i18n/config'
 import type { Locale } from '@/lib/i18n/config'
@@ -24,6 +24,18 @@ const interTight = Inter_Tight({
   variable: '--font-inter-tight',
   subsets: ['latin'],
   weight: ['500', '600', '700', '800', '900'],
+})
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
 })
 
 type Props = {
@@ -82,9 +94,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} ${isCJK ? 'font-cjk' : ''}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} ${inter.variable} ${jetbrainsMono.variable} ${isCJK ? 'font-cjk' : ''}`}
     >
-      <body className="min-h-screen bg-background text-foreground antialiased">
+      <body className="theme-v2 min-h-screen bg-background text-foreground antialiased">
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main>{children}</main>

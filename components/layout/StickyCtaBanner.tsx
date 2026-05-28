@@ -20,7 +20,7 @@ export default function StickyCtaBanner() {
   return (
     <div
       className={cn(
-        'fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-white/95 p-3 backdrop-blur-sm shadow-lg transition-transform duration-300 lg:hidden',
+        'fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 p-3 backdrop-blur-sm shadow-lg transition-transform duration-300 lg:hidden',
         visible ? 'translate-y-0' : 'translate-y-full'
       )}
     >

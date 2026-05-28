@@ -34,7 +34,7 @@ export default async function TestimonialsSection() {
   const t = await getTranslations('home')
 
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-card">
       <div className="container-site">
         <SectionHeader
           eyebrow="Témoignages"
@@ -46,7 +46,7 @@ export default async function TestimonialsSection() {
           {testimonials.map((item, i) => (
             <div
               key={i}
-              className="group relative rounded-xl border border-border bg-white p-7 transition-all duration-300 card-lift hover:border-amber-200"
+              className="group relative rounded-xl border border-border bg-card p-7 transition-all duration-300 card-lift hover:border-amber-200"
             >
               {/* Accent top bar */}
               <div className="absolute inset-x-0 top-0 h-0.5 w-0 rounded-t-xl bg-amber-500 transition-all duration-500 group-hover:w-full" />

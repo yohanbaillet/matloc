@@ -76,7 +76,7 @@ export default async function SolutionPage({ params }: Props) {
       </section>
 
       {/* Description + specs */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-card">
         <div className="container-site">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
@@ -123,7 +123,7 @@ export default async function SolutionPage({ params }: Props) {
                   </Link>
                   <Link
                     href={`${base}/contact`}
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-white px-5 py-3 text-sm font-medium transition-colors hover:bg-surface"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-card px-5 py-3 text-sm font-medium transition-colors hover:bg-surface"
                   >
                     Nous contacter
                   </Link>
@@ -150,7 +150,7 @@ export default async function SolutionPage({ params }: Props) {
                 <Link
                   key={r.slug}
                   href={`${base}/realisations/${r.slug}`}
-                  className="group overflow-hidden rounded-xl border border-border bg-white card-lift"
+                  className="group overflow-hidden rounded-xl border border-border bg-card card-lift"
                 >
                   <div className="aspect-video overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}

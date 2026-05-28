@@ -71,7 +71,7 @@ export default async function RealizationDetailPage({ params }: Props) {
       </section>
 
       {/* Content */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-card">
         <div className="container-site">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
             {/* Main content */}
@@ -144,7 +144,7 @@ export default async function RealizationDetailPage({ params }: Props) {
               </div>
 
               {/* Project info */}
-              <div className="rounded-xl border border-border bg-white p-6">
+              <div className="rounded-xl border border-border bg-card p-6">
                 <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
                   Détails projet
                 </h3>
@@ -199,7 +199,7 @@ export default async function RealizationDetailPage({ params }: Props) {
                 <Link
                   key={other.slug}
                   href={`${base}/realisations/${other.slug}`}
-                  className="group overflow-hidden rounded-xl border border-border bg-white card-lift"
+                  className="group overflow-hidden rounded-xl border border-border bg-card card-lift"
                 >
                   <div className="aspect-video overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}

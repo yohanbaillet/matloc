@@ -53,7 +53,7 @@ export default async function ProcessTimeline() {
                 return (
                   <div key={step.number} className="flex flex-col items-center text-center">
                     {/* Step circle */}
-                    <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-amber-400 bg-white shadow-sm">
+                    <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-amber-400 bg-card shadow-sm">
                       <Icon className="h-5 w-5 text-amber-600" />
                     </div>
                     {/* Number */}
@@ -82,7 +82,7 @@ export default async function ProcessTimeline() {
               <div key={step.number} className="relative flex gap-6">
                 {/* Left column — icon + connector */}
                 <div className="flex flex-col items-center">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-amber-400 bg-white shadow-sm">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-amber-400 bg-card shadow-sm">
                     <Icon className="h-4 w-4 text-amber-600" />
                   </div>
                   {!isLast && (

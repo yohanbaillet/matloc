@@ -1,15 +1,12 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import HeroSection from '@/components/sections/HeroSection'
-import ProofBar from '@/components/sections/ProofBar'
-import SectorCards from '@/components/sections/SectorCards'
-import SolutionsGrid from '@/components/sections/SolutionsGrid'
-import WhyUsFeatures from '@/components/sections/WhyUsFeatures'
-import RealizationsPreview from '@/components/sections/RealizationsPreview'
-import ProcessTimeline from '@/components/sections/ProcessTimeline'
-import TestimonialsSection from '@/components/sections/TestimonialsSection'
-import ContactCta from '@/components/sections/ContactCta'
-import SimulatorSection from '@/components/sections/SimulatorModal'
+import HeroV2 from '@/components/sections/v2/HeroV2'
+import ProductArchitectureGrid from '@/components/sections/v2/ProductArchitectureGrid'
+import EndothermicTech from '@/components/sections/v2/EndothermicTech'
+import EcologicalTransition from '@/components/sections/v2/EcologicalTransition'
+import AutomationAI from '@/components/sections/v2/AutomationAI'
+import TechnicalValidation from '@/components/sections/v2/TechnicalValidation'
+import AboutMatIndus from '@/components/sections/v2/AboutMatIndus'
 import StickyCtaBanner from '@/components/layout/StickyCtaBanner'
 
 type Props = {
@@ -29,16 +26,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default function HomePage() {
   return (
     <>
-      <HeroSection />
-      <ProofBar />
-      <SectorCards />
-      <SolutionsGrid />
-      <WhyUsFeatures />
-      <SimulatorSection />
-      <RealizationsPreview />
-      <ProcessTimeline />
-      <TestimonialsSection />
-      <ContactCta />
+      <HeroV2 />
+      <ProductArchitectureGrid />
+      <EndothermicTech />
+      <EcologicalTransition />
+      <AutomationAI />
+      <TechnicalValidation />
+      <AboutMatIndus />
       <StickyCtaBanner />
     </>
   )

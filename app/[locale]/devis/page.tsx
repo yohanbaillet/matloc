@@ -50,7 +50,7 @@ export default async function DevisPage({ searchParams }: Props) {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
             {/* Process sidebar */}
             <div className="space-y-5 lg:order-last">
-              <div className="rounded-xl border border-border bg-white p-6">
+              <div className="rounded-xl border border-border bg-card p-6">
                 <h3 className="mb-5 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
                   Ce qui se passe ensuite
                 </h3>
@@ -87,7 +87,7 @@ export default async function DevisPage({ searchParams }: Props) {
             </div>
 
             {/* Form */}
-            <div className="rounded-xl border border-border bg-white p-8 lg:col-span-2">
+            <div className="rounded-xl border border-border bg-card p-8 lg:col-span-2">
               <QuoteForm defaultName={name} defaultCompany={company} defaultEmail={email} />
             </div>
           </div>

@@ -147,7 +147,7 @@ export default function SimulatorSection() {
     `w-full rounded-lg border px-3 py-2.5 text-sm text-midnight placeholder:text-foreground/40 outline-none transition focus:ring-2 focus:ring-[var(--amber)]/40 focus:border-[var(--amber)] ${errors[f] ? 'border-red-400' : 'border-border'}`
 
   return (
-    <section id="simulator" className="section-padding bg-surface">
+    <section id="simulator" className="theme-light section-padding bg-surface">
       <div className="container-site">
 
         {/* Header */}

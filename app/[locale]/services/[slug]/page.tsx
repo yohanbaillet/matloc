@@ -65,7 +65,7 @@ export default async function ServicePage({ params }: Props) {
       </section>
 
       {/* Description */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-card">
         <div className="container-site">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
             <div className="lg:col-span-2">
@@ -111,7 +111,7 @@ export default async function ServicePage({ params }: Props) {
                   </Link>
                   <Link
                     href={`${base}/contact`}
-                    className="flex w-full items-center justify-center rounded-lg border border-border bg-white px-5 py-3 text-sm font-medium transition-colors hover:bg-surface"
+                    className="flex w-full items-center justify-center rounded-lg border border-border bg-card px-5 py-3 text-sm font-medium transition-colors hover:bg-surface"
                   >
                     Poser une question
                   </Link>

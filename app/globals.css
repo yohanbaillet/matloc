@@ -44,6 +44,8 @@
   /* Typography */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-inter-tight), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body-v2: var(--font-inter), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-tech: var(--font-jetbrains-mono), var(--font-geist-mono), ui-monospace, monospace;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   /* ── Tailwind palette overrides — repaint amber/orange/yellow to coral ──
@@ -69,6 +71,27 @@
   --color-orange-700: #C03B1B;
   --color-yellow-400: #FF7A55;
   --color-yellow-500: #FF5931;
+
+  /* Gray palette overrides — flip to dark surface tints so legacy components
+   * using bg-gray-50, bg-gray-100, text-gray-500 etc. read well on the dark
+   * theme without per-file churn. Light grays become dark surfaces; mid grays
+   * become muted text colors. */
+  --color-gray-50:  #111111;
+  --color-gray-100: #171717;
+  --color-gray-200: #1F1F1F;
+  --color-gray-300: #2A2A2A;
+  --color-gray-400: #5A5A5A;
+  --color-gray-500: #7A7A7A;
+  --color-gray-600: #9A9A9A;
+  --color-gray-700: #B3B3B3;
+  --color-gray-800: #D4D4D4;
+  --color-gray-900: #EBEBEB;
+  --color-neutral-50:  #111111;
+  --color-neutral-100: #171717;
+  --color-neutral-200: #1F1F1F;
+  --color-neutral-900: #EBEBEB;
+  --color-slate-50:  #111111;
+  --color-slate-100: #171717;
 
   /* Radius */
   --radius-sm: calc(var(--radius) * 0.6);
@@ -102,36 +125,40 @@
   --surface: #F4F5F7;
   --surface-alt: #EAECEF;
 
-  /* ── Semantic (light mode) ── */
-  --background: #ffffff;
-  --foreground: #0A0A0A;
-  --card: #ffffff;
-  --card-foreground: #0A0A0A;
-  --popover: #ffffff;
-  --popover-foreground: #0A0A0A;
-  --primary: #000000;
-  --primary-foreground: #ffffff;
-  --secondary: #F4F5F7;
-  --secondary-foreground: #0A0A0A;
-  --muted: #F4F5F7;
-  --muted-foreground: #6B7280;
-  --accent: #FF5931;
-  --accent-foreground: #ffffff;
-  --destructive: #DC2626;
-  --border: #E2E5E9;
-  --input: #E2E5E9;
-  --ring: #FF5931;
+  /* ── Semantic — flipped to dark (matindus-industrial-premium-v1 site-wide) ── */
+  --background: #050505;
+  --foreground: #FFFFFF;
+  --card: #111111;
+  --card-foreground: #FFFFFF;
+  --popover: #111111;
+  --popover-foreground: #FFFFFF;
+  --primary: #FF6A00;
+  --primary-foreground: #FFFFFF;
+  --secondary: #171717;
+  --secondary-foreground: #FFFFFF;
+  --muted: #171717;
+  --muted-foreground: #B3B3B3;
+  --accent: #FF6A00;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --border: #2A2A2A;
+  --input: #2A2A2A;
+  --ring: #FF6A00;
   --radius: 0.25rem;
 
+  /* Surface aliases — used by .bg-surface utility class */
+  --surface: #111111;
+  --surface-alt: #171717;
+
   /* Sidebar */
-  --sidebar: #F4F5F7;
-  --sidebar-foreground: #111827;
-  --sidebar-primary: #0F1923;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #E2E5E9;
-  --sidebar-accent-foreground: #111827;
-  --sidebar-border: #E2E5E9;
-  --sidebar-ring: #E8881F;
+  --sidebar: #111111;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #FF6A00;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #1F1F1F;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #2A2A2A;
+  --sidebar-ring: #FF6A00;
 }
 
 /* ─── Base Layer ──────────────────────────────────────────────────────── */
@@ -285,5 +312,208 @@ input[type='range']::-moz-range-thumb {
   .card-lift:hover {
     @apply -translate-y-1;
     box-shadow: 0 12px 40px -8px rgba(15, 25, 35, 0.15);
+  }
+}
+
+/* ─── Theme v2 — matindus-industrial-premium-v1 ───────────────────────────
+ * Scoped to `.theme-v2` so the preview route can paint dark without
+ * disturbing the live site. See docs/design.md for the full spec. */
+
+.theme-v2 {
+  --bg: #050505;
+  --surface: #111111;
+  --surface-alt: #171717;
+  --surface-elevated: #1F1F1F;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3B3;
+  --text-muted: #7A7A7A;
+  --border-v2: #2A2A2A;
+  --accent-v2: #FF6A00;
+  --accent-soft: #FF8A3D;
+  --radius-card: 24px;
+  --radius-control: 14px;
+  --shadow-glow: 0 0 60px rgba(255, 106, 0, 0.12);
+  --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --shadow-subtle: 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.theme-v2 ::selection {
+  background: var(--accent-v2);
+  color: #fff;
+}
+
+/* ─── Theme light — opt-out island for components that need a light surface
+ * (e.g. embedded EnergySimulator with its careful internal contrast). Wrap
+ * the component in `<div className="theme-light">…</div>` to reset semantic
+ * tokens locally. */
+.theme-light {
+  --background: #ffffff;
+  --foreground: #0A0A0A;
+  --card: #ffffff;
+  --card-foreground: #0A0A0A;
+  --popover: #ffffff;
+  --popover-foreground: #0A0A0A;
+  --secondary: #F4F5F7;
+  --secondary-foreground: #0A0A0A;
+  --muted: #F4F5F7;
+  --muted-foreground: #6B7280;
+  --border: #E2E5E9;
+  --input: #E2E5E9;
+  --surface: #F4F5F7;
+  --surface-alt: #EAECEF;
+
+  --color-gray-50:  #FAFAFA;
+  --color-gray-100: #F4F4F5;
+  --color-gray-200: #E4E4E7;
+  --color-gray-300: #D4D4D8;
+  --color-gray-400: #A1A1AA;
+  --color-gray-500: #71717A;
+
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@layer utilities {
+  /* Tech label — JetBrains Mono, technical metadata */
+  .tech-label {
+    font-family: var(--font-tech);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Big metric headline — the "22 kWh" treatment */
+  .metric-xl {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 9vw, 6rem);
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+  }
+
+  /* Display sizes per design.md */
+  .display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+  }
+  .display-lg {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+  .heading-lg-v2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .heading-md-v2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  /* Card — dark surface, soft border, gentle hover lift + thermal glow */
+  .card-v2 {
+    background-color: var(--surface);
+    border: 1px solid var(--border-v2);
+    border-radius: var(--radius-card);
+    transition: background-color 300ms ease, border-color 300ms ease, transform 400ms ease, box-shadow 400ms ease;
+  }
+  .card-v2:hover {
+    background-color: var(--surface-alt);
+    border-color: rgba(255, 106, 0, 0.25);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium), var(--shadow-glow);
+  }
+
+  /* Primary CTA — coral fill per decision (keep coral primary) */
+  .btn-primary-v2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.75rem;
+    background-color: var(--accent-v2);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: var(--radius-control);
+    transition: background-color 200ms ease, transform 200ms ease, box-shadow 300ms ease;
+  }
+  .btn-primary-v2:hover {
+    background-color: var(--accent-soft);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-1px);
+  }
+
+  /* Secondary CTA — transparent + thin border, coral hover */
+  .btn-secondary-v2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.75rem;
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-v2);
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: var(--radius-control);
+    transition: border-color 200ms ease, color 200ms ease, background-color 200ms ease;
+  }
+  .btn-secondary-v2:hover {
+    border-color: var(--accent-v2);
+    color: var(--accent-v2);
+    background-color: rgba(255, 106, 0, 0.06);
+  }
+
+  /* Section padding per design.md (140px) — responsive */
+  .section-v2 {
+    padding-top: clamp(4rem, 10vw, 8.75rem);
+    padding-bottom: clamp(4rem, 10vw, 8.75rem);
+  }
+
+  /* Wider container per design.md (1440px) */
+  .container-v2 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 1440px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container-v2 { padding-left: 2.5rem; padding-right: 2.5rem; }
+  }
+
+  /* Thin grid divider line */
+  .divider-v2 {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-v2) 50%, transparent);
+  }
+
+  /* Ambient thermal glow (radial behind hero sections) */
+  .thermal-glow {
+    background: radial-gradient(circle at center, rgba(255, 106, 0, 0.30) 0%, rgba(255, 106, 0, 0.08) 35%, transparent 65%);
   }
 }

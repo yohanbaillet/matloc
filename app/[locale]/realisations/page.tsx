@@ -56,7 +56,7 @@ export default async function RealisationsPage() {
                 className={`cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                   s.value === 'all'
                     ? 'bg-midnight text-white'
-                    : 'border border-border bg-white text-foreground hover:bg-surface'
+                    : 'border border-border bg-card text-foreground hover:bg-surface'
                 }`}
               >
                 {s.label}
@@ -69,7 +69,7 @@ export default async function RealisationsPage() {
               <Link
                 key={item.slug}
                 href={`${base}/realisations/${item.slug}`}
-                className="group overflow-hidden rounded-xl border border-border bg-white card-lift"
+                className="group overflow-hidden rounded-xl border border-border bg-card card-lift"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

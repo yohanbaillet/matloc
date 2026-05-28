@@ -30,7 +30,7 @@ export default async function SectorCards() {
   ]
 
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-card">
       <div className="container-site">
         <SectionHeader
           eyebrow="Secteurs"

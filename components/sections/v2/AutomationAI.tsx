@@ -19,11 +19,11 @@ export default function AutomationAI() {
           <div className="lg:col-span-5 relative order-2 lg:order-1">
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-card)] bg-[var(--surface-elevated)]">
               <Image
-                src="/products/automation.png"
+                src="/brand/MatIndus-1.png"
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-contain p-6"
+                className="object-cover"
               />
             </div>
           </div>

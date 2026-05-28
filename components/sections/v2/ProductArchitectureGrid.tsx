@@ -46,7 +46,7 @@ export default function ProductArchitectureGrid() {
               className={`card-v2 group relative flex flex-col overflow-hidden p-6 ${span}`}
             >
               {image && (
-                <div className="relative -mx-2 -mt-2 mb-6 h-44 w-[calc(100%+1rem)] overflow-hidden rounded-2xl bg-[var(--surface-elevated)]">
+                <div className="relative -mx-2 -mt-2 mb-6 flex-1 min-h-[11rem] w-[calc(100%+1rem)] overflow-hidden rounded-2xl bg-[var(--surface-elevated)]">
                   <Image
                     src={image}
                     alt=""

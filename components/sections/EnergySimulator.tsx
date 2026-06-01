@@ -303,7 +303,10 @@ export default function EnergySimulator() {
           </div>
         </div>
 
-        <p className="text-center text-xs text-foreground/30 mt-10">
+        <p className="text-center text-xs text-foreground/60 mt-10">
+          Simulation faite pour une surface de 28 m²
+        </p>
+        <p className="text-center text-xs text-foreground/30 mt-2">
           {t('disclaimer')}
         </p>
       </div>

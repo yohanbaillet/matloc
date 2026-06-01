@@ -18,7 +18,7 @@ const cards: Card[] = [
   { key: 'truck',       image: '/products/poids-lourds.jpg',         span: 'md:col-span-2',               href: '/solutions/cabines-de-peinture' },
   { key: 'prep',        image: '/products/air-preparation.jpg',      span: 'md:col-span-2',               href: '/solutions/aires-de-preparation' },
   { key: 'mixing',      image: '/products/laboratoire-peinture.jpg', span: 'md:col-span-2',               href: '/solutions/laboratoires-de-peinture' },
-  { key: 'automation',  image: '/products/sur-mesure.jpg',           span: 'md:col-span-2',               href: '/solutions/cabines-de-peinture' },
+  { key: 'automation',  image: '/products/sur-mesure.jpg',           span: 'md:col-span-2',               href: '/devis' },
 ]
 
 export default function ProductArchitectureGrid() {

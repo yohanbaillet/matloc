@@ -39,13 +39,6 @@ export default async function SolutionsGrid() {
         'Panneaux endothermiques, systèmes de récupération de chaleur. Réduisez votre consommation de 30 à 50 %.',
       href: `${base}/solutions/gain-energetique`,
     },
-    {
-      image: '/illustrations/retracable.png',
-      title: tn('solutions_rental'),
-      description:
-        'Besoin ponctuel ou pic d\'activité ? Location de cabines et équipements sans investissement lourd.',
-      href: `${base}/solutions/location`,
-    },
   ]
 
   return (

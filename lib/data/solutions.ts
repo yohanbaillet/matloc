@@ -15,9 +15,9 @@ export const solutions: Solution[] = [
     slug: 'cabines-de-peinture',
     title: 'Cabines de peinture',
     shortDesc:
-      'Cabines endothermiques MI-E, gaz/fioul MI-FG, rétractables MI-CR ou poids lourds MI-PL — dimensionnées pour votre atelier.',
+      'Cabines endothermiques MI-E ou poids lourds MI-PL — dimensionnées pour votre atelier.',
     longDesc:
-      "MAT INDUS conçoit chaque cabine sur-mesure à partir de votre cahier des charges : surface disponible, type de véhicules ou de pièces traités, volume journalier, contraintes réglementaires. Quatre familles sont disponibles : cabine endothermique MI-E (100 % électrique, rendement ≈ 95 %), cabine gaz/fioul MI-FG (technologie éprouvée), cabine rétractable MI-CR (mobile sur rails) et cabine poids lourds MI-PL (jusqu'à 23 m de long).",
+      "MAT INDUS conçoit chaque cabine sur-mesure à partir de votre cahier des charges : surface disponible, type de véhicules ou de pièces traités, volume journalier, contraintes réglementaires. Deux familles principales : cabine endothermique MI-E (100 % électrique, rendement ≈ 95 %, montée en température 5–10 min) et cabine poids lourds MI-PL (jusqu'à 23 m de long, débit jusqu'à 60 000 m³/h).",
     heroImage: '/brand/MatIndus-3.png',
     features: [
       {
@@ -58,7 +58,7 @@ export const solutions: Solution[] = [
       { label: 'Débit air (soufflage)', value: '32 000 m³/h — 11 kW' },
       { label: 'Puissance cabine (MI-E)', value: '52 kW' },
       { label: 'Alimentation', value: '380 V — 50 Hz — Triphasé + N + T' },
-      { label: 'Temps de chauffe', value: '5–10 min (MI-E) / 15–20 min (MI-FG)' },
+      { label: 'Temps de chauffe', value: '5–10 min (MI-E)' },
     ],
     sectors: ['automobile-carrosserie', 'industrie'],
     relatedSlugs: ['laboratoires-de-peinture', 'aires-de-preparation', 'gain-energetique'],
@@ -174,12 +174,12 @@ export const solutions: Solution[] = [
       {
         title: 'ROI moyen ≈ 13 mois',
         description:
-          "Économie annuelle estimée à ≈ 9 250 € (coût annuel d'exploitation MI-E ≈ 10 450 € vs MI-FG ≈ 19 700 €).",
+          "Économie annuelle estimée à ≈ 9 250 € (coût annuel d'exploitation MI-E ≈ 10 450 € vs cabine gaz équivalente ≈ 19 700 €).",
       },
       {
         title: '49 tonnes de CO₂ évitées par an',
         description:
-          "≈ 7,8 kg CO₂/cycle (MI-E) contre ≈ 52,87 kg CO₂/cycle (MI-FG). Zéro émission directe, conformité environnementale.",
+          "≈ 7,8 kg CO₂/cycle (MI-E) contre ≈ 52,87 kg CO₂/cycle pour une cabine gaz équivalente. Zéro émission directe, conformité environnementale.",
       },
       {
         title: 'Compatible neuf ou rétrofit',
@@ -196,48 +196,6 @@ export const solutions: Solution[] = [
       { label: 'CO₂ évité / an', value: '≈ 49 tonnes' },
       { label: 'Rendement', value: '≈ 95 %' },
       { label: 'Conformité', value: 'CE — Basse Tension 2014/35/UE & CEM 2014/30/UE' },
-    ],
-    sectors: ['automobile-carrosserie', 'industrie'],
-    relatedSlugs: ['cabines-de-peinture'],
-  },
-  {
-    slug: 'location',
-    title: 'Cabine rétractable MI-CR',
-    shortDesc:
-      "Cabine télescopique mobile sur rails — jusqu'à 8 × 6 m. Flexibilité industrielle, déploiement assisté.",
-    longDesc:
-      "La cabine rétractable MI-CR est une solution flexible pour ateliers à activité ponctuelle ou à fort besoin d'espace libéré entre les cycles. Elle se déploie ou se rétracte sur rails, libérant complètement l'espace de travail lorsqu'elle n'est pas en service. Structure tubes acier galvanisé 80 × 40 × 2 mm, toile PVC ignifugée, éclairage ATEX, ventilation 55 000 m³/h.",
-    heroImage: '/illustrations/retracable.png',
-    features: [
-      {
-        title: 'Cabine télescopique mobile',
-        description:
-          "Mécanisme à ciseaux 50 × 30 × 1,8 mm. Vitesse d'extension 8–12 m/min, déploiement assisté par 2 moteurs 2,2 kW.",
-      },
-      {
-        title: 'Libération complète de l\'espace',
-        description:
-          "La cabine se rétracte → la pièce est positionnée → la cabine s'étend. Installation intérieure ou extérieure sur sol plat.",
-      },
-      {
-        title: 'Ventilation 55 000 m³/h',
-        description:
-          "Ventilateur 30 kW, filtration papier labyrinthe + évacuation extérieure. Vitesse d'air minimale ≥ 0,50 m/s.",
-      },
-      {
-        title: 'Éclairage et sécurité ATEX',
-        description:
-          "24 lampes LED antidéflagrantes 22 W, ≥ 800 lux. Armoire Schneider Electric + télécommande, options anti-explosion.",
-      },
-    ],
-    specs: [
-      { label: 'Modèle référence', value: 'MAT-RET 4000 × 6000' },
-      { label: 'Dimensions intérieures', value: '8 000 × 6 000 × H 5 000 mm' },
-      { label: 'Dimensions extérieures déployée', value: '10 228 × 6 680 × H 5 260 mm' },
-      { label: 'Débit air', value: '55 000 m³/h' },
-      { label: 'Vitesse d\'extension', value: '8 à 12 m/min' },
-      { label: 'Alimentation', value: '3 × 380 V — 50 Hz' },
-      { label: 'Puissance totale', value: '36 kW' },
     ],
     sectors: ['automobile-carrosserie', 'industrie'],
     relatedSlugs: ['cabines-de-peinture'],

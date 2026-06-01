@@ -63,7 +63,6 @@ export const sectors: Sector[] = [
       'laboratoires-de-peinture',
       'aires-de-preparation',
       'gain-energetique',
-      'location',
     ],
   },
   {
@@ -118,7 +117,6 @@ export const sectors: Sector[] = [
       'cabines-de-peinture',
       'aires-de-preparation',
       'gain-energetique',
-      'location',
     ],
   },
 ]

@@ -33,7 +33,6 @@ export default function Header() {
         { labelKey: 'solutions_labs', href: `${base}/solutions/laboratoires-de-peinture` },
         { labelKey: 'solutions_prep', href: `${base}/solutions/aires-de-preparation` },
         { labelKey: 'solutions_energy', href: `${base}/solutions/gain-energetique` },
-        { labelKey: 'solutions_rental', href: `${base}/solutions/location` },
       ],
     },
     {

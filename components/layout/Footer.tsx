@@ -60,7 +60,6 @@ export default async function Footer() {
                 { key: 'solutions_labs', href: `${base}/solutions/laboratoires-de-peinture` },
                 { key: 'solutions_prep', href: `${base}/solutions/aires-de-preparation` },
                 { key: 'solutions_energy', href: `${base}/solutions/gain-energetique` },
-                { key: 'solutions_rental', href: `${base}/solutions/location` },
               ].map((item) => (
                 <li key={item.key}>
                   <Link

@@ -1,30 +1,29 @@
 'use client'
 
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+import { Link } from '@/lib/i18n/navigation'
+import { ArrowUpRight } from 'lucide-react'
 import TechLabel from '@/components/shared/TechLabel'
 
 type Card = {
   key: string
   image: string | null
   span: string
+  href: string
 }
 
-const PLACEHOLDER = '/brand/MatIndus-3.png'
-
 const cards: Card[] = [
-  { key: 'endothermic', image: PLACEHOLDER, span: 'md:col-span-2 md:row-span-2' },
-  { key: 'gas',         image: PLACEHOLDER, span: 'md:col-span-2' },
-  { key: 'truck',       image: PLACEHOLDER, span: 'md:col-span-2' },
-  { key: 'prep',        image: PLACEHOLDER, span: 'md:col-span-2' },
-  { key: 'mixing',      image: PLACEHOLDER, span: 'md:col-span-2' },
-  { key: 'automation',  image: PLACEHOLDER, span: 'md:col-span-2 md:row-span-2' },
-  { key: 'retractable', image: PLACEHOLDER, span: 'md:col-span-2' },
-  { key: 'energy',      image: PLACEHOLDER, span: 'md:col-span-2' },
+  { key: 'endothermic', image: '/brand/MatIndus-3.png',              span: 'md:col-span-2 md:row-span-2', href: '/solutions/gain-energetique' },
+  { key: 'truck',       image: '/products/poids-lourds.jpg',         span: 'md:col-span-2',               href: '/solutions/cabines-de-peinture' },
+  { key: 'prep',        image: '/products/air-preparation.jpg',      span: 'md:col-span-2',               href: '/solutions/aires-de-preparation' },
+  { key: 'mixing',      image: '/products/laboratoire-peinture.jpg', span: 'md:col-span-2',               href: '/solutions/laboratoires-de-peinture' },
+  { key: 'automation',  image: '/products/sur-mesure.jpg',           span: 'md:col-span-2',               href: '/solutions/cabines-de-peinture' },
 ]
 
 export default function ProductArchitectureGrid() {
   const t = useTranslations('v2')
+  const locale = useLocale()
 
   return (
     <section id="products" className="section-v2 bg-[var(--bg)]">
@@ -40,10 +39,11 @@ export default function ProductArchitectureGrid() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 md:auto-rows-[18rem]">
-          {cards.map(({ key, image, span }) => (
-            <article
+          {cards.map(({ key, image, span, href }) => (
+            <Link
               key={key}
-              className={`card-v2 group relative flex flex-col overflow-hidden p-6 ${span}`}
+              href={`/${locale}${href}`}
+              className={`card-v2 group relative flex flex-col overflow-hidden p-6 transition-transform hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline-none ${span}`}
             >
               {image && (
                 <div className="relative -mx-2 -mt-2 mb-6 flex-1 min-h-[11rem] w-[calc(100%+1rem)] overflow-hidden rounded-2xl bg-[var(--surface-elevated)]">
@@ -54,6 +54,9 @@ export default function ProductArchitectureGrid() {
                     sizes="(min-width: 768px) 25vw, 100vw"
                     className="object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
                   />
+                  <span className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
+                    <ArrowUpRight className="h-4 w-4" />
+                  </span>
                 </div>
               )}
 
@@ -68,7 +71,7 @@ export default function ProductArchitectureGrid() {
                   {t(`product_${key}_metric`)}
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

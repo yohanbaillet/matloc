@@ -15,7 +15,7 @@ type Card = {
 
 const cards: Card[] = [
   { key: 'endothermic', image: '/brand/MatIndus-3.png',              span: 'md:col-span-2 md:row-span-2', href: '/solutions/gain-energetique' },
-  { key: 'truck',       image: '/products/poids-lourds.jpg',         span: 'md:col-span-2',               href: '/solutions/cabines-de-peinture' },
+  { key: 'truck',       image: '/products/poids-lourds.png',         span: 'md:col-span-2',               href: '/solutions/cabines-de-peinture' },
   { key: 'prep',        image: '/products/air-preparation.jpg',      span: 'md:col-span-2',               href: '/solutions/aires-de-preparation' },
   { key: 'mixing',      image: '/products/laboratoire-peinture.jpg', span: 'md:col-span-2',               href: '/solutions/laboratoires-de-peinture' },
   { key: 'automation',  image: '/products/sur-mesure.jpg',           span: 'md:col-span-2',               href: '/devis' },
